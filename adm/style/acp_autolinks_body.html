@@ -1,0 +1,53 @@
+<!-- INCLUDE overall_header.html -->
+
+<a name="maincontent"></a>
+<h1>{L_ACP_AUTOLINKS_TITLE}</h1>
+<!-- IF S_CONFIG_PAGE -->
+<p><a href="{U_ADD}">{L_AUTOLINK_ADD_A_NEW_WORD}</a></p>
+<table cellspacing="1">
+	<thead>
+		<tr>
+			<th>{L_AUTOLINK_NAME}</th>
+			<th>{L_AUTOLINK_URL}</th>
+			<th>{L_AUTOLINK_RATE}</th>
+			<th>{L_AUTOLINK_LANG}</th>
+			<th>{L_ACTION}</th>
+		</tr>
+	</thead>
+	<tbody>
+	<!-- BEGIN al -->
+		<!-- IF al.S_ROW_COUNT is even --><tr class="row1"><!-- ELSE --><tr class="row2"><!-- ENDIF -->
+			<td>{al.NAME}</td>
+			<td>{al.URL}</td>
+			<td>{al.RATE}</td>
+			<td>{al.LANG}</td>
+			<td>&nbsp;<a href="{al.U_EDIT}">{ICON_EDIT}</a>&nbsp;&nbsp;<a href="{al.U_DELETE}">{ICON_DELETE}</a>&nbsp;</td>
+		</tr>
+	<!-- END al -->
+	</tbody>
+</table>
+<!-- ENDIF -->
+<!-- IF S_ADD_PAGE -->
+<form id="acp_alword" method="post" action="{U_W_ACTION}">
+	<fieldset>
+		<legend>{L_ACP_AUTOLINK_WORDS}</legend>
+		<!-- IF S_ERROR_FORM --><p class="error"><ul><!-- BEGIN error --><li>{error.ERROR_MSG}</li><!-- END error --></ul></p><!-- ENDIF -->
+		<dl>
+			<dt><label for="al_word">{L_ACP_AUTOLINK_WORD}{L_COLON}</label><br />{L_ACP_AUTOLINK_WORD_NOTE}</dt>
+			<dd><input type="text" name="al_word" id="al_word" value="{S_WORD}" /></dd>
+		</dl>
+		<dl>
+			<dt><label for="al_url">{L_ACP_AUTOLINK_URL}{L_COLON}</label><br />{L_ACP_AUTOLINK_URL_NOTE}</dt>
+			<dd><input type="text" name="al_url" id="al_url" value="{S_URL}" /></dd>
+		</dl>
+		<p class="submit-buttons">
+			<input class="button1" type="submit" id="submit" name="submit" value="{L_SUBMIT}" />&nbsp;
+			<input class="button2" type="reset" id="reset" name="reset" value="{L_RESET}" />
+		</p>
+	</fieldset>
+	{S_FORM_TOKEN}
+</form>
+<!-- ENDIF -->
+
+
+<!-- INCLUDE overall_footer.html -->

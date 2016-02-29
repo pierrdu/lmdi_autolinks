@@ -1,0 +1,35 @@
+imports:
+    - { resource: tables.yml }
+
+services:
+     lmdi.autolinks.listener:
+        class: lmdi\autolinks\event\listener
+        arguments:
+            - '@dbal.conn'
+            - '@config'
+            - '@controller.helper'
+            - '@template'
+            - '@cache'
+            - '@user'
+            - '%lmdi.autolinks.tables.autolinks%'
+        tags:
+            - { name: event.listener }
+
+     lmdi.autolinks.controller:
+        class: lmdi\autolinks\controller\main
+        arguments:
+            - '@template'
+            - '@user'
+            - '@request'
+            - '@controller.helper'
+            - '%core.root_path%'
+            - '%core.php_ext%'
+
+     lmdi.autolinks.core.helper:
+        class: lmdi\autolinks\core\helper
+        arguments:
+            - '@dbal.conn'
+            - '%core.table_prefix%'
+            - '%lmdi.autolinks.tables.autolinks%'
+            - '%core.root_path%'
+            - '%core.php_ext%'

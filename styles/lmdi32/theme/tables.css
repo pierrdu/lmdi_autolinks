@@ -1,0 +1,101 @@
+/* table.css */
+/* Feuille de style pour les tables du glossaire */
+/* Stylesheet for the glossary tables */
+/* lmdi31 */
+/* (c) Pierre Duhem 2015-2016 */
+
+table.deg {
+    border-collapse:collapse;
+    border:1px solid #576357;
+    width:90%;
+    padding:3px;
+    margin-left:auto;
+    margin-right:auto;
+    }
+tr.deg, th.deg, td.deg {
+    border:1px solid #576357;
+    padding:3px 5px;
+    color:#576357;
+    }
+    
+/*	Série des titres */   
+th.deg0 {
+	border:1px solid #576357;
+	text-align:left;
+	padding:3px 5px;
+	color:#576357;
+	font-weight: bold;
+	font-size: 120%;
+	}
+/*  Alignement centré */
+th.deg1 {
+	border:1px solid #576357;
+	text-align:center;
+	padding:3px 5px;
+	color:#576357;
+	font-weight: bold;
+	font-size: 120%;
+	}
+/*  Alignement à droite */
+th.deg2 {
+	border:1px solid #576357;
+	text-align:right;
+	padding:3px 5px;
+	width: 40px;
+	color:#576357;
+	font-weight: bold;
+	font-size: 120%;
+	}
+    
+/*	Série des cases de données */   
+/*  Alignement à gauche */
+td.deg0 {
+	border:1px solid #576357;
+	text-align:left;
+	padding:3px 5px;
+	color:#576357;
+	font-size: 120%;
+	}
+/*  Alignement centré */
+td.deg1 {
+	border:1px solid #576357;
+	text-align:center;
+	padding:3px 5px;
+	color:#576357;
+	font-size: 120%;
+	}
+/*  Alignement à droite */
+td.deg2 {
+	border:1px solid #576357;
+	text-align:right;
+	padding:3px 5px;
+	width: 40px;
+	color:#576357;
+	font-size: 120%;
+	}
+.glossi {
+	padding: 5px 0 5px 0;
+	background-color: #2A5515;
+	color: white;
+	font-size: 140%;
+	font-weight: bold;
+	}
+.haut {
+	padding: 0;
+	background-color: #2A5515;
+	text-align: center;
+	vertical-align: bottom;
+	}
+.glossa  {
+	padding: 25px 0 5px 0;
+	color: #576357;
+	font-size: 300%;
+	font-weight: bold;
+	}
+.cap  {
+	padding: 5px 5px 5px 5x;
+	color: #576357;
+	font-size: 200%;
+	font-weight: bold;
+	}
+

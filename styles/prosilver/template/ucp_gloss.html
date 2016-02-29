@@ -1,0 +1,31 @@
+<!-- INCLUDE ucp_header.html -->
+
+<div class="panel">
+	<div class="inner">
+
+	<form id="ucp" method="post" action="{S_UCP_ACTION}">
+
+	<h3>{L_UCP_GLOSS_TITLE}</h3>
+	<fieldset>
+		<dl>
+		<dt><label for="gloss0">{L_UCP_ENABLE}{L_COLON}</label><br :>
+		<span>{L_UCP_ENABLE_EXPLAIN}</span></dt>
+		<dd>
+			<label for="gloss1"><input type="radio" name="gloss" id="gloss1" value="1" {ALLOW_FEATURE_YES}/> {L_YES}</label>
+			<label for="gloss0"><input type="radio" name="gloss" id="gloss0" value="0" {ALLOW_FEATURE_NO} /> {L_NO}</label>
+		</dd>
+		</dl>
+	</fieldset>
+
+	<fieldset class="submit-buttons">
+		{S_HIDDEN_FIELDS}
+		<input type="reset" value="{L_RESET}" name="reset" class="button2" />&nbsp;
+		<input type="submit" name="submit" value="{L_SUBMIT}" class="button1" />
+		{S_FORM_TOKEN}
+	</fieldset>
+
+	</form>
+	</div>
+</div>
+
+<!-- INCLUDE ucp_footer.html -->

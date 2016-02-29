@@ -1,0 +1,41 @@
+{
+	"name": "lmdi/autolinks",
+	"type": "phpbb-extension",
+	"description": "Autolinks for phpBB 3.1",
+	"homepage": "http://www.insecte.org/ext/readme.txt",
+	"version": "1.0.0",
+	"time": "2016-2-29",
+	"license": "GPL-2.0",
+	"authors": 
+	[	{
+			"name": "Pierre Duhem",
+			"email": "pierre@duhem.com",
+			"homepage": "http://www.insecte.org/ext/readme.txt",
+			"role": "Developer of Autolinks extension"
+		},
+		{
+			"name": "Máté Bartus (CHItA)",
+			"email": "bartus.mate@root.hu",
+			"homepage": "http://bartusmate.hu",
+			"role": "MOD Autolink 1.0.3"
+		},
+		{
+			"name":	"Thorsten Hartmann",
+			"email":	"dev@th23.net",
+			"homepage": "http://dev.th23.net/",
+			"role":	"MOD Th23 Autolinks"
+		}
+	],
+	"require": {
+		"php": ">=5.3.3"
+	},
+	"require-dev": {
+		"phpbb/epv": "dev-master"
+	},
+	"extra": {
+		"display-name": "LMDI Autolinks",
+		"soft-require": {
+			"phpbb/phpbb": ">=3.1.0-RC2,<3.3.*@dev"
+		}
+	}
+}

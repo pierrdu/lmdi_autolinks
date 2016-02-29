@@ -1,0 +1,3 @@
+lmdi_autolinks_controller:
+    path: /autolinks
+    defaults: { _controller: lmdi.autolinks.controller:handle_autolinks }
