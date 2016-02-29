@@ -34,8 +34,8 @@ $lang = array_merge($lang, array(
 	
 	// Logs
 	'LOG_AUTOLINK_WORD_ADDED'			=> 'A new word (%s) was successfully added to the Autolink database!',
-	'LOG_AUTOLINK_WORD_EDIT'			=> 'The details of "%s" word was updated in the Autolink database!',
-	'LOG_AUTOLIMK_WORD_DELETE'			=> '"%s" word was removed from the Autolink database!',
+	'LOG_AUTOLINK_WORD_EDIT'			=> 'The details of “%s” word was updated in the Autolink database!',
+	'LOG_AUTOLIMK_WORD_DELETE'			=> '“%s” word was removed from the Autolink database!',
 	'LOG_AUTOLINK_CONFIG_UPDATED'		=> 'The Autolink MOD config settings were updated.',	
 	
 	// ACP table heading words
@@ -51,7 +51,5 @@ $lang = array_merge($lang, array(
 	'INVALID_FORM_KEY'					=> 'The form’s token key is invalid!',
 	'AUTOLINK_EMPTY_WORD_FIELD'			=> 'You have to fill the word input field!',
 	'AUTOLINK_EMPTY_URL_FIELD'			=> 'You have to fill the URL input field!',
-	'AUTOLINK_WORD_ALREADY_EXIST'			=> 'This word already exists!')
-);
-
-?>
+	'AUTOLINK_WORD_ALREADY_EXIST'			=> 'This word already exists!',
+));
