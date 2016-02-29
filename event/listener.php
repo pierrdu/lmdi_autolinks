@@ -62,14 +62,6 @@ class listener implements EventSubscriberInterface
 
 	public function load_language_on_setup($event)
 	{
-		// Initial reset of the module_display row in the module table
-		if (!$this->config['lmdi_glossary_ucp'])
-		{
-			$sql  = "UPDATE " . MODULES_TABLE;
-			$sql .= " SET module_display = 0 ";
-			$sql .= "WHERE module_langname = 'UCP_GLOSS'";
-			$this->db->sql_query($sql);
-		}
 		$lang_set_ext = $event['lang_set_ext'];
 		$lang_set_ext[] = array(
 			'ext_name' => 'lmdi/autolinks',

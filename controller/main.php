@@ -64,7 +64,7 @@ class main
 		// var_dump ($action);
 
 		// String loading
-		$this->user->add_lang_ext('lmdi/gloss', 'edit_gloss');
+		$this->user->add_lang_ext('lmdi/autolinks', 'autolinks');
 
 		// Add the base entry into the breadcrump at top
 		$this->template->assign_block_vars('navlinks', array(
@@ -73,20 +73,5 @@ class main
 			// 'code'		=> $code,
 		));
 
-		switch ($mode)
-		{
-			case 'glossclean':
-				$this->glossclean->main();
-			break;
-			case 'glosspict':
-				$this->glosspict->main();
-			break;
-			case 'glossedit':
-				$this->glossedit->main();
-			break;
-			default:
-				$this->glossaire->main();
-			break;
-		}
 	}
 }

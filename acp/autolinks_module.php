@@ -10,7 +10,6 @@ namespace lmdi\autolinks\acp;
 
 class autolinks_module {
 
-	protected $gloss_helper;
 	var $u_action;
 	var $action;
 	var $table;
@@ -30,8 +29,7 @@ class autolinks_module {
 		$this->table = $table_prefix . 'autolinks';
 		$table = $this->table;
 
-		// $this->gloss_helper = $phpbb_container->get('lmdi.gloss.core.helper');
-
+		
 		$action = $request->variable ('action', '');
 		// $action_config = $this->u_action . "&action=config";
 		$update_action = false;
