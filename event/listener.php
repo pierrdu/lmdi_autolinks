@@ -78,7 +78,7 @@ class listener implements EventSubscriberInterface
 		$rowset_data = $event['rowset_data'];
 		// var_dump ($rowset_data);
 		$post_text = $rowset_data['post_text'];
-		
+
 		// var_dump ($post_text);
 		$post_text = $this->autolinks_pass ($post_text);
 

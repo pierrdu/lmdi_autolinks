@@ -31,7 +31,7 @@ class migration_1 extends \phpbb\db\migration\migration
 			'add_tables'   => array(
 				$this->table_prefix . 'autolinks'   => array(
 					'COLUMNS' => array(
-						'al_id' => array('UINT:12', NULL, 'auto_increment'),
+						'al_id' => array('UINT:12', null, 'auto_increment'),
 						'al_word' => array('VCHAR', ''),
 						'al_url' => array('VCHAR', ''),
 						),

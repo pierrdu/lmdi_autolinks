@@ -8,7 +8,7 @@
  * @license http://opensource.org/licenses/gpl-license.php GNU Public License
  *
  **/
- 
+
 if (!defined('IN_PHPBB'))
 {
 	exit;
@@ -21,7 +21,6 @@ if (empty($lang) || !is_array($lang))
 $lang = array_merge($lang, array(
 
 	// Menu's text and titles
-	'AUTOLINK_MOD_MENU_NAME'		=> 'Autolink-MOD',
 	'ACP_AUTOLINKS_TITLE'			=> 'Autolink-Administration',
 	'AUTOLINK_ADD_A_NEW_WORD'		=> 'Neuen Autolink hinzufügen',
 
@@ -43,7 +42,7 @@ $lang = array_merge($lang, array(
 	// ACP table heading words
 	'AUTOLINK_NAME'				=> 'Begriff',
 	'AUTOLINK_URL'				=> 'URL',
-	
+
 	// Error messages
 	'AUTOLINK_NOT_ADDED'			=> 'Der neue Begriff "%s" wurde NICHT in die Datenbank übernommen!',
 	'AUTOLINK_NOT_REMOVED'			=> 'Der Begriff "%s" wurde NICHT aus der Datenbank entfernt!',
@@ -54,5 +53,3 @@ $lang = array_merge($lang, array(
 	'AUTOLINK_EMPTY_URL_FIELD'		=> 'Es muß eine URL angegeben werden!',
 	'AUTOLINK_WORD_ALREADY_EXIST'		=> 'Dieser Begriff existiert bereits!')
 );
-
-?>

@@ -20,16 +20,15 @@ class autolinks_module {
 		global $config, $phpbb_root_path, $phpbb_admin_path, $phpEx;
 		global $table_prefix, $phpbb_container;
 
-		// $id = string(36) "\lmdi\autolinks\acp\autolinks_module" 
-		// $mode = string(8) "settings" 
-		
+		// $id = string(36) "\lmdi\autolinks\acp\autolinks_module"
+		// $mode = string(8) "settings"
+
 		$user->add_lang_ext ('lmdi/autolinks', 'autolinks');
 		$this->tpl_name = 'acp_autolinks_body';
 		$this->page_title = $user->lang('ACP_AUTOLINKS_TITLE');
 		$this->table = $table_prefix . 'autolinks';
 		$table = $this->table;
 
-		
 		$action = $request->variable ('action', '');
 		// $action_config = $this->u_action . "&action=config";
 		$update_action = false;
@@ -44,7 +43,7 @@ class autolinks_module {
 				{
 					trigger_error($user->lang['AUTOLINK_INVALID_ID'] . adm_back_link($this->u_action), E_USER_WARNING);
 				}
-				
+
 				// Query the data of the item
 				$sql = 'SELECT * FROM ' . $table . ' WHERE al_id = ' . $word_id;
 				$result = $db->sql_query($sql);
@@ -70,27 +69,27 @@ class autolinks_module {
 						);
 				}
 				$db->sql_freeresult($result);
-				
+
 				$template->assign_vars(array(
 					'U_W_ACTION'	=> ( ($action == 'edit') ? $this->u_action . '&amp;action=edit&amp;edit_id=' . $word_id : $this->u_action . '&amp;action=add'),
 					'S_ADD_PAGE'	=> true)
 					);
-				
+
 				add_form_key('acp_autolinkword');
-				
+
 				if (isset($_POST['submit']))
 				{
 					$sql_array = array(
 						'al_word'		=> utf8_normalize_nfc(request_var('al_word', '', true)),
 						'al_url'		=> request_var('al_url', '', true)
 						);
-						
+
 					if ($action == 'edit')
 					{
 						$sql = 'UPDATE ' . $table . ' SET '
 							. $db->sql_build_array('UPDATE', $sql_array) . " 
 							WHERE al_id = $word_id";
-						
+
 						$log_msg = sprintf($user->lang['LOG_AUTOLINK_WORD_EDIT'], $sql_array['al_word']);
 					}
 					else
@@ -99,7 +98,7 @@ class autolinks_module {
 
 						$log_msg = sprintf($user->lang['LOG_AUTOLINK_WORD_ADDED'], $sql_array['al_word']);
 					}
-					
+
 					$errors = $this->input_check($sql_array, check_form_key('acp_autolinkword'), $update_action);
 					if ($errors === true)
 					{
@@ -116,14 +115,14 @@ class autolinks_module {
 								'ERROR_MSG' => $errors[$i])
 								);
 						}
-						
+
 						$template->assign_var('S_ERROR_FORM', true);
 					}
 				}
 			break;
 			case 'delete':
 				$word_id = request_var('delete_id', 0);
-				
+
 				if ($word_id == 0)
 				{
 					trigger_error($user->lang['AUTOLINK_INVALID_ID'] . adm_back_link($this->u_action), E_USER_WARNING);
@@ -136,9 +135,9 @@ class autolinks_module {
 						$result = $db->sql_query($sql);
 						$row = $db->sql_fetchrow($result);
 						$db->sql_freeresult($result);
-						
+
 						$log_msg = sprintf($user->lang['LOG_AUTOLIMK_WORD_DELETE'], $row['al_word']);
-						
+
 						$sql = 'DELETE FROM ' . $table . ' WHERE al_id = ' . $word_id;
 						$db->sql_query($sql);
 						add_log('admin', $log_msg);
@@ -174,13 +173,13 @@ class autolinks_module {
 					);
 				}
 				$db->sql_freeresult($result);
-				
+
 				$template->assign_vars(array(
 					'S_CONFIG_PAGE'		=> true)
 					);				
 			break;
 		}
-		
+
 		$template->assign_vars(array(
 			'U_ADD'				=> $this->u_action . '&amp;action=add',
 			'U_ACTION'			=> $this->u_action)
@@ -192,12 +191,12 @@ class autolinks_module {
 	{
 		global $db, $user;
 		$table = $this->table;
-		
+
 		if (!$key_error)
 		{
 			$errors[] = $user->lang['INVALID_FORM_KEY'];
 		}
-		
+
 		if (empty($input_array['al_word']))
 		{
 			$errors[] = $user->lang['AUTOLINK_EMPTY_WORD_FIELD'];
@@ -216,13 +215,12 @@ class autolinks_module {
 				$errors[] = $user->lang['AUTOLINK_WORD_ALREADY_EXIST'];
 			}
 		}
-		
+
 		if (empty($input_array['al_url']))
 		{
 			$errors[] = $user->lang['AUTOLINK_EMPTY_URL_FIELD'];
 		}
-		
-		
+
 		$ret = (empty($errors)) ? true : $errors;
 		return ($ret);
 	}

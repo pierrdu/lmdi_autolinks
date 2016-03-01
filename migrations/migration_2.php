@@ -45,7 +45,7 @@ class migration_2 extends \phpbb\db\migration\migration
 
 			// Configuration entry
 			array('config.add', array('lmdi_autolinks', 1)),
-			
+
 			// Modify collation setting of the autolinks table
 			array('custom', array(array(&$this, 'utf8_unicode_ci'))),
 
@@ -53,7 +53,7 @@ class migration_2 extends \phpbb\db\migration\migration
 	}
 
 
-		public function utf8_unicode_ci()
+	public function utf8_unicode_ci()
 	{
 		global $table_prefix;
 		$sql = "alter table ${table_prefix}autolinks convert to character set utf8 collate utf8_unicode_ci";
@@ -66,7 +66,7 @@ class migration_2 extends \phpbb\db\migration\migration
 
 		return array(
 			array('config.remove', array('lmdi_autolinks')),
-			
+
 			array('module.remove', array(
 				'acp',
 				'ACP_CAT_DOT_MODS',
