@@ -22,7 +22,7 @@ $lang = array_merge($lang, array(
 
 	// Menu's text and titles
 	'AUTOLINK_MOD_MENU_NAME'		=> 'Autolink-MOD',
-	'ACP_AUTOLINK'					=> 'Autolink-MOD-Administration',
+	'ACP_AUTOLINKS_TITLE'			=> 'Autolink-Administration',
 	'AUTOLINK_ADD_A_NEW_WORD'		=> 'Neuen Autolink hinzufügen',
 
 	// Main form's words
