@@ -3,7 +3,7 @@
 ## Install
 
 1. Download the latest release.
-2. Unzip the downloaded release, and change the name of the folder to `gloss`.
+2. Unzip the downloaded release, and change the name of the folder to `autolinks`.
 3. In the `ext` directory of your phpBB board, create a new directory named `lmdi` (if it does not already exist).
 4. Copy the `autolinks` folder to `/ext/lmdi/`.
 5. Navigate in the ACP to `Customise -> Manage extensions`.
