@@ -82,9 +82,7 @@ class autolinks_module {
 				{
 					$sql_array = array(
 						'al_word'		=> utf8_normalize_nfc(request_var('al_word', '', true)),
-						'al_url'		=> request_var('al_url', '', true),
-						'al_rate'		=> request_var('al_rate', '', true),
-						'al_word_lang'	=> request_var('al_lang', 0)
+						'al_url'		=> request_var('al_url', '', true)
 						);
 						
 					if ($action == 'edit')
@@ -161,24 +159,15 @@ class autolinks_module {
 			default:
 				if (isset($_POST['submit']))
 				{
-					set_config('al_replace_times_in_a_post', request_var('al_max_post', 1));
-					set_config('al_max_num_of_a_word', request_var('al_max_word', 5)); 
-					add_log('admin', 'LOG_AUTOLINK_CONFIG_UPDATED');
 					trigger_error($user->lang['LOG_AUTOLINK_CONFIG_UPDATED'] . adm_back_link($this->u_action));
 				}
-
-				$sql = 'SELECT a.*, l.lang_local_name AS lang_name 
-						FROM ' . $table . ' a
-						LEFT JOIN ' . LANG_TABLE . ' l 
-						ON l.lang_id = a.al_word_lang'; 
+				$sql = 'SELECT * FROM ' . $table;
 				$result = $db->sql_query($sql);
 				while ($row = $db->sql_fetchrow($result))
 				{
 					$template->assign_block_vars('al', array(
 						'NAME'			=> $row['al_word'],
 						'URL'			=> $row['al_url'],
-						'RATE'			=> $row['al_rate'],
-						'LANG'			=> ( (empty($row['lang_name']) || !isset($row['lang_name'])) ? $user->lang['ACP_AUTOLINK_LANG_ALL'] : $row['lang_name'] ),
 						'U_EDIT'		=> $this->u_action . '&amp;action=edit&amp;edit_id=' . $row['al_id'],
 						'U_DELETE'		=> $this->u_action . '&amp;action=delete&amp;delete_id=' . $row['al_id']
 						)
@@ -187,8 +176,6 @@ class autolinks_module {
 				$db->sql_freeresult($result);
 				
 				$template->assign_vars(array(
-					'S_WORDS_MAX_POST'		=> (int) $config['al_replace_times_in_a_post'],
-					'S_MAX_WORD'			=> (int) $config['al_max_num_of_a_word'],
 					'S_CONFIG_PAGE'		=> true)
 					);				
 			break;
@@ -235,16 +222,6 @@ class autolinks_module {
 			$errors[] = $user->lang['AUTOLINK_EMPTY_URL_FIELD'];
 		}
 		
-		if (strpos($input_array['al_url'], '|') !== false)
-		{
-			$url_parts = explode('|', $input_array['al_url']);
-			$rate_parts = explode(':', $input_array['al_rate']);
-			
-			if (sizeof($url_parts) != sizeof($rate_parts))
-			{
-				$errors[] = $user->lang['AUTOLINK_DIFFERENT_SIZE_ARRAY'];
-			}
-		}
 		
 		$ret = (empty($errors)) ? true : $errors;
 		return ($ret);

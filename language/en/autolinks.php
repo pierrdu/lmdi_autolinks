@@ -51,5 +51,5 @@ $lang = array_merge($lang, array(
 	'INVALID_FORM_KEY'					=> 'The form’s token key is invalid!',
 	'AUTOLINK_EMPTY_WORD_FIELD'			=> 'You have to fill the word input field!',
 	'AUTOLINK_EMPTY_URL_FIELD'			=> 'You have to fill the URL input field!',
-	'AUTOLINK_WORD_ALREADY_EXIST'			=> 'This word already exists!',
-));
+	'AUTOLINK_WORD_ALREADY_EXIST'			=> 'This word already exists!')
+);
