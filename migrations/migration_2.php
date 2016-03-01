@@ -17,7 +17,7 @@ class migration_2 extends \phpbb\db\migration\migration
 
 	public function effectively_installed()
 	{
-		return $this->db_tools->sql_table_exists($this->table_prefix . 'autolinks');
+		return isset($this->config['lmdi_autolinks']);
 	}
 
 	static public function depends_on()
