@@ -9,10 +9,6 @@
 5. Navigate in the ACP to `Customise -> Manage extensions`.
 6. Look for `LMDI Autolinks` under the Disabled Extensions list, and click its `Enable` link.
 
-Enable the feature in the ACP (Extension tab).
-Some users dislike the tagging of terms in the posts. Therefore, there is an option 
-to disable it individually in the UCP.
-
 ## Uninstall
 
 1. Navigate in the ACP to `Customise -> Extension Management -> Extensions`.
