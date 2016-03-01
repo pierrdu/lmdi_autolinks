@@ -36,7 +36,7 @@ $lang = array_merge($lang, array(
 	'LOG_AUTOLINK_WORD_ADDED'			=> '¡Una nueva palabra (%s) ha sido añadida correctamente a la base de datos de Auto Enlace!',
 	'LOG_AUTOLINK_WORD_EDIT'			=> 'Los detalles de la palabra “%s” han sido actualizados en la base de datos de Auto Enlace!',
 	'LOG_AUTOLIMK_WORD_DELETE'			=> '¡La palabra “%s” ha sido eliminada de la base de datos de Auto Enlace!',
-	'LOG_AUTOLINK_CONFIG_UPDATED'		=> 'La configuracion de ajustes de Auto Enlace ha sido actualizada.',	
+	'LOG_AUTOLINK_CONFIG_UPDATED'		=> 'La configuracion de ajustes de Auto Enlace ha sido actualizada.',
 
 	// ACP table heading words
 	'AUTOLINK_NAME'						=> 'Palabra',

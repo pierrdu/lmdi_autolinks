@@ -176,7 +176,7 @@ class autolinks_module {
 
 				$template->assign_vars(array(
 					'S_CONFIG_PAGE'		=> true)
-					);				
+					);
 			break;
 		}
 
@@ -209,7 +209,7 @@ class autolinks_module {
 			$result = $db->sql_query($sql);
 			$word_stored_num = (int) $db->sql_fetchfield('num');
 			$db->sql_freeresult($result);
-			
+
 			if ($word_stored_num != 0 && !$update)
 			{
 				$errors[] = $user->lang['AUTOLINK_WORD_ALREADY_EXIST'];
