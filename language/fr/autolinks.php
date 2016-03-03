@@ -23,7 +23,7 @@ $lang = array_merge($lang, array(
 	'AUTOLINK_ADD_A_NEW_WORD'		=> 'Ajouter un nouveau terme',
 
 	// Main form's words
-	'ACP_AUTOLINK_CONFIG'			=> 'Configuration de l\'extension',
+	'ACP_AUTOLINKS_CONFIG'			=> 'Configuration de l\'extension',
 
 	'ACP_AUTOLINK_WORDS'				=> 'Addition d\'un nouveau terme',
 	'ACP_AUTOLINK_WORD'					=> 'Terme',

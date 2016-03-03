@@ -25,7 +25,7 @@ $lang = array_merge($lang, array(
 	'AUTOLINK_ADD_A_NEW_WORD'		=> 'Neuen Autolink hinzufügen',
 
 	// Main form's words
-	'ACP_AUTOLINK_CONFIG'			=> 'Autolink-Einstellungen',
+	'ACP_AUTOLINKS_CONFIG'			=> 'Autolink-Einstellungen',
 
 	'ACP_AUTOLINK_WORDS'		=> 'Begriffe',
 	'ACP_AUTOLINK_WORD'			=> 'Begriff',

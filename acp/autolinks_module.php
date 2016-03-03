@@ -52,9 +52,8 @@ class autolinks_module {
 
 				$template->assign_vars(array(
 					'S_WORD'	=> $row['al_word'],
-					'S_URL'		=> $row['al_url'],
-					'S_RATE'	=> $row['al_rate'])
-					);
+					'S_URL'	=> $row['al_url']
+					));
 				$update_action = true;
 			// break; don't needed
 			case 'add':

@@ -20,11 +20,11 @@ $lang = array_merge($lang, array(
 
 	// Menu's text and titles
 	'AUTOLINK_MOD_MENU_NAME'			=> 'Auto Enlace',
-	'ACP_AUTOLINK'						=> 'Administración de Auto Enlace',
+	'ACP_AUTOLINKS_TITLE'						=> 'Administración de Auto Enlace',
 	'AUTOLINK_ADD_A_NEW_WORD'			=> 'Añadir nuevo Auto Enlace',
 
 	// Main form's words
-	'ACP_AUTOLINK_CONFIG'				=> 'Ajustes de configuracion de Auto Enlace',
+	'ACP_AUTOLINKS_CONFIG'				=> 'Ajustes de configuracion de Auto Enlace',
 
 	'ACP_AUTOLINK_WORDS'				=> 'Manejar palabras',
 	'ACP_AUTOLINK_WORD'					=> 'Palabra',
