@@ -37,7 +37,7 @@ if (empty($lang) || !is_array($lang))
 	$lang = array();
 }
 $lang = array_merge($lang, array(
-	// Menu's text and titles
+	// Menu text and titles
 	'ACP_AUTOLINKS_TITLE'			=> 'Управление анкорами',
 	'AUTOLINK_ADD_A_NEW_WORD'		=> 'Добавить новый URL',
 

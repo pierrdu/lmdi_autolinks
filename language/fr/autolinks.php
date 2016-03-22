@@ -17,7 +17,7 @@ if (empty($lang) || !is_array($lang))
 	$lang = array();
 }
 $lang = array_merge($lang, array(
-	// Menu's text and titles
+	// Menu text and titles
 	'AUTOLINK_MOD_MENU_NAME'			=> 'Extension Autolinks',
 	'ACP_AUTOLINKS_TITLE'			=> 'Administration des liens automatiques',
 	'AUTOLINK_ADD_A_NEW_WORD'		=> 'Ajouter un nouveau terme',
