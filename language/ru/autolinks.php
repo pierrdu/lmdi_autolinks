@@ -17,25 +17,7 @@ if (empty($lang) || !is_array($lang))
 {
 	$lang = array();
 }
-$lang = array_merge($lang, array(
-<?php
-/**
- *
- * @package	Extension Autolink
- * @author	Máté Bartus <bartus.mate@root.hu>
- * @version	$Id: info_acp_autolink.php 46 2010-07-20 14:14:53Z CHItA $
- *
- **/
 
-if (!defined('IN_PHPBB'))
-{
-	exit;
-}
-
-if (empty($lang) || !is_array($lang))
-{
-	$lang = array();
-}
 $lang = array_merge($lang, array(
 	// Menu text and titles
 	'ACP_AUTOLINKS_TITLE'			=> 'Управление анкорами',

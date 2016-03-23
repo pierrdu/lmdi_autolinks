@@ -38,7 +38,7 @@ class autolinks_module {
 		{
 			case 'edit':
 				// Get the ID of the item we would like to edit
-				$word_id = $request_var('edit_id', 0);
+				$word_id = $request->variable ('edit_id', 0);
 				if ($word_id == 0)
 				{
 					trigger_error($user->lang['AUTOLINK_INVALID_ID'] . adm_back_link($this->u_action), E_USER_WARNING);
@@ -79,8 +79,8 @@ class autolinks_module {
 				if (isset($_POST['submit']))
 				{
 					$sql_array = array(
-						'al_word'		=> utf8_normalize_nfc($request_var('al_word', '', true)),
-						'al_url'		=> $request_var('al_url', '', true)
+						'al_word'	=> utf8_normalize_nfc($request->variable('al_word', '', true)),
+						'al_url'	=> $request->variable('al_url', '', true)
 						);
 
 					if ($action == 'edit')
@@ -120,7 +120,7 @@ class autolinks_module {
 				}
 			break;
 			case 'delete':
-				$word_id = $request_var('delete_id', 0);
+				$word_id = $request->variable('delete_id', 0);
 
 				if ($word_id == 0)
 				{
