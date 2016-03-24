@@ -102,7 +102,7 @@ class autolinks_module {
 					if ($errors === true)
 					{
 						$db->sql_query($sql);
-						$phpbb->add_log('admin', $log_msg);
+						add_log ('admin', $log_msg);
 						$cache->destroy ('_autolinks');
 						trigger_error($log_msg . adm_back_link($this->u_action));
 					}
@@ -139,7 +139,7 @@ class autolinks_module {
 
 						$sql = 'DELETE FROM ' . $table . ' WHERE al_id = ' . $word_id;
 						$db->sql_query($sql);
-						$phpbb->add_log('admin', $log_msg);
+						add_log('admin', $log_msg);
 						$cache->destroy ('_autolinks');
 						trigger_error($log_msg . adm_back_link($this->u_action));
 					}
