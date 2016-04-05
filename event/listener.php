@@ -179,7 +179,7 @@ class listener implements EventSubscriberInterface
 		$autolinks = $this->cache->get('_autolinks');
 		if ($autolinks === false)
 		{
-			$sql  = "SELECT * FROM $this->autolinks_table ";
+			$sql  = "SELECT * FROM $this->autolinks_table ORDER BY char_length(al_word) DESC";
 			$result = $this->db->sql_query($sql);
 			$autolinks = array();
 			while ($row = $this->db->sql_fetchrow($result))
