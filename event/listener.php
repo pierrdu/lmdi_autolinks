@@ -94,81 +94,92 @@ class listener implements EventSubscriberInterface
 		{
 			$autolinks = $this->compute_autolinks();
 		}
-		if (sizeof($autolinks))
+		if (!sizeof($autolinks))
 		{
-			$terms = $autolinks['terms'];
-			$urls = $autolinks['urls'];
-			// Sectionnement de la chaîne passée sur les éléments qui sont des balises.
-			// Breaking the input string on delimiters (tags).
-			preg_match_all ('#[][><][^][><]*|[^][><]+#', $texte, $parts);
-			$parts = &$parts[0];
-			if (empty($parts))
-			{
-				return '';
-			}
-			foreach ($parts as $index => $part)
-			{
-				// Code
-				if (strstr($part, '[code'))
-				{
-					$code = true;
-				}
-				if (!empty($code) && strstr($part, '[/code'))
-				{
-					$code = false;
-				}
-				// Images - Pictures
-				if (strstr($part, '[img'))
-				{
-					$img = true;
-				}
-				if (!empty($img) && strstr($part, '[/img'))
-				{
-					$img = false;
-				}
-				// Liens <a> - <a> links
-				if (strstr($part, '<a '))
-				{
-					$link = true;
-				}
-				if (!empty($link) && strstr($part, '</a'))
-				{
-					$link = false;
-				}
-				// Liens [url] - [url] links
-				if (strstr($part, '[url'))
-				{
-					$link = true;
-				}
-				if (!empty($link) && strstr($part, '[/url'))
-				{
-					$link = false;
-				}
-				// Script
-				if (strstr($part, '<script '))
-				{
-					$script = true;
-				}
-				if (!empty($script) && strstr($part, '</script'))
-				{
-					$script = false;
-				}
-				if (!($part{0} == '<' && $parts[$index + 1]{0} == '>') &&
-					!($part{0} == '[' && $parts[$index + 1]{0} == ']') &&
-					empty($img) && empty($code) && empty($link) && empty($script))
-				{
-					$part = preg_replace ($terms, $urls, $part);
-					$parts[$index] = $part;
-				}
-			}
-			unset ($part);
-			return implode ("", $parts);
+			return ($texte);
 		}
-	// Totally empty autolinks, we must return the raw text.
-	else
-	{
+		$terms = $autolinks['terms'];
+		$fterms = $autolinks['fterms'];
+		$urls  = $autolinks['urls'];
+		$furls = $autolinks['furls'];
+		/*
+		var_dump ($terms);
+		var_dump ($fterms);
+		var_dump ($urls);
+		var_dump ($furls);
+		*/
+		// Breaking the input string on tags. PREG_PATTERN_ORDER by default
+		preg_match_all ('#[][><][^][><]*|[^][><]+#', $texte, $parts);
+		$parts = &$parts[0];
+		// var_dump ($parts);
+		// exit;
+		if (empty($parts))
+		{
+			return '';
+		}
+		foreach ($parts as $index => $part)
+		{
+			// echo ("\nSous-passe dans foreach pour $part.\n");
+			// Code
+			if (strstr($part, '[code'))
+			{
+				$code = true;
+			}
+			if (!empty($code) && strstr($part, '[/code'))
+			{
+				$code = false;
+			}
+			// Images - Pictures
+			if (strstr($part, '[img'))
+			{
+				$img = true;
+			}
+			if (!empty($img) && strstr($part, '[/img'))
+			{
+				$img = false;
+			}
+			// Liens <a> - <a> links
+			if (strstr($part, '<a '))
+			{
+				$alink = true;
+			}
+			if (!empty($link) && strstr($part, '</a'))
+			{
+				$alink = false;
+			}
+			// Liens [url] - [url] links
+			if (strstr($part, '[url'))
+			{
+				$ulink = true;
+			}
+			if (!empty($link) && strstr($part, '[/url'))
+			{
+				$ulink = false;
+			}
+			// Script
+			if (strstr($part, '<script '))
+			{
+				$script = true;
+			}
+			if (!empty($script) && strstr($part, '</script'))
+			{
+				$script = false;
+			}
+			if (!($part{0} == '<' && $parts[$index + 1]{0} == '>') &&
+				!($part{0} == '[' && $parts[$index + 1]{0} == ']') &&
+				empty($img) && empty($code) && empty($alink) && empty($ulink) && empty($script))
+			{
+				$part = preg_replace ($terms, $furls, $part);
+				$nbt = count ($terms);
+				for ($i = 0; $i < $nbt; $i++) 
+				{
+					$part = str_replace ($furls[$i], $urls[$i] . $fterms[$i], $part);
+				}
+				$parts[$index] = $part;
+			}
+		}	// foreach
+		$texte = implode ("", $parts);
 		return ($texte);
-	}
 	}	// autolinks_pass
 
 
@@ -182,6 +193,7 @@ class listener implements EventSubscriberInterface
 			$sql  = "SELECT * FROM $this->autolinks_table ORDER BY char_length(al_word) DESC";
 			$result = $this->db->sql_query($sql);
 			$autolinks = array();
+			$cpt = 0;
 			while ($row = $this->db->sql_fetchrow($result))
 			{
 				$term = $row['al_word'];
@@ -189,7 +201,10 @@ class listener implements EventSubscriberInterface
 				$firstspace = '/\b(';
 				$lastspace = ')\b/ui';	// PCRE - u = UTF-8 - i = case insensitive
 				$autolinks['terms'][] = $firstspace . $term . $lastspace;
-				$autolinks['urls'][] = "<a href=\"$url\" class=\"postlink\">$1</a>";
+				$autolinks['urls'][]  = "<a href=\"$url\" class=\"postlink\">";
+				$autolinks['furls'][] = "al_**_{$cpt}_**_al";
+				$autolinks['fterms'][] = "$term</a>";
+				$cpt++;
 			}
 			$this->db->sql_freeresult($result);
 			$this->cache->put('_autolinks', $autolinks, 86400);		// 24 h
