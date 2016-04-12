@@ -23,6 +23,10 @@ $lang = array_merge($lang, array(
 	// Menu text and titles
 	'ACP_AUTOLINKS_TITLE'			=> 'Autolink-Administration',
 	'AUTOLINK_ADD_A_NEW_WORD'		=> 'Neuen Autolink hinzufügen',
+	'RECURS_FEATURE'				=> 'Recursion verhindern',
+	'RECURS_FEATURE_EXPLAIN'			=> 'Wenn die URLs gesuchte Begriffe beinhalten, kann die Konversion der Begriffe in Links fehlschlagen. Diese Option verhindert dieses Verhalten, hat jedoch zum Folge, daß die Begriffe durch die exacte Form der Tabelle ersetzt werden.',
+	'TERM_ADDITION'				=> 'Definition eines neuen Begriffs',
+	'TERM_ADDITION_EXPLAIN'			=> 'Formular zur Definition eines neuen Begriffs.',
 
 	// Main form's words
 	'ACP_AUTOLINKS_CONFIG'			=> 'Autolink-Einstellungen',

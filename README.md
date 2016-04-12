@@ -13,7 +13,7 @@
 
 1. Navigate in the ACP to `Customise -> Extension Management -> Extensions`.
 2. Look for `LMDI Autolinks` under the Enabled Extensions list, and click its `Disable` link.
-3. To permanently uninstall, click `Delete Data` and then delete the `/ext/lmdi/automlinks` folder.
+3. To permanently uninstall, click `Delete Data` and then delete the `/ext/lmdi/autolinks` folder.
 
 ## License
 [GNU General Public License v2](http://opensource.org/licenses/GPL-2.0)

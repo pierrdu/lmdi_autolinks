@@ -29,6 +29,7 @@ class autolinks_module {
 		$this->table = $table_prefix . 'autolinks';
 		$table = $this->table;
 
+
 		$action = $request->variable ('action', '');
 		// $action_config = $this->u_action . "&action=config";
 		$update_action = false;
@@ -36,6 +37,23 @@ class autolinks_module {
 		// var_dump ($action);
 		switch ($action)
 		{
+			case 'recursion' :
+				if (!check_form_key('acp_autolinks'))
+				{
+					trigger_error('FORM_INVALID');
+				}
+				$recurs = $request->variable ('lmdi_recursive', 0);
+				var_dump ($recurs);
+				$cfg_recurs = $config['lmdi_autolinks'] - 1;
+				var_dump ($cfg_recurs);
+				if ($recurs != $cfg_recurs)
+				{
+					$config->set ('lmdi_autolinks', $recurs + 1);
+					$cache->destroy ('_autolinks');
+					trigger_error($user->lang['LOG_AUTOLINK_CONFIG_UPDATED'] . adm_back_link($this->u_action));
+
+				}
+			break;
 			case 'edit':
 				// Get the ID of the item we would like to edit
 				$word_id = $request->variable ('edit_id', 0);
@@ -57,6 +75,10 @@ class autolinks_module {
 				$update_action = true;
 			// break; don't needed
 			case 'add':
+				// if (!check_form_key('acp_autolinks'))
+				// {
+				// 	trigger_error('FORM_INVALID');
+				// }
 				// Create the language list
 				$sql = 'SELECT * FROM ' . LANG_TABLE;
 				$result = $db->sql_query($sql);
@@ -74,7 +96,7 @@ class autolinks_module {
 					'S_ADD_PAGE'	=> true)
 					);
 
-				add_form_key('acp_autolinkword');
+				add_form_key('acp_autolinks');
 
 				if (isset($_POST['submit']))
 				{
@@ -98,7 +120,7 @@ class autolinks_module {
 						$log_msg = sprintf($user->lang['LOG_AUTOLINK_WORD_ADDED'], $sql_array['al_word']);
 					}
 
-					$errors = $this->input_check($sql_array, check_form_key('acp_autolinkword'), $update_action);
+					$errors = $this->input_check($sql_array, check_form_key('acp_autolinks'), $update_action);
 					if ($errors === true)
 					{
 						$db->sql_query($sql);
@@ -120,6 +142,10 @@ class autolinks_module {
 				}
 			break;
 			case 'delete':
+				if (!check_form_key('acp_autolinks'))
+				{
+					trigger_error('FORM_INVALID');
+				}
 				$word_id = $request->variable('delete_id', 0);
 
 				if ($word_id == 0)
@@ -154,34 +180,38 @@ class autolinks_module {
 					}
 				}
 			break;
-			default:
-				if (isset($_POST['submit']))
-				{
-					trigger_error($user->lang['LOG_AUTOLINK_CONFIG_UPDATED'] . adm_back_link($this->u_action));
-				}
-				$sql = 'SELECT * FROM ' . $table;
-				$result = $db->sql_query($sql);
-				while ($row = $db->sql_fetchrow($result))
-				{
-					$template->assign_block_vars('al', array(
-						'NAME'			=> $row['al_word'],
-						'URL'			=> $row['al_url'],
-						'U_EDIT'		=> $this->u_action . '&amp;action=edit&amp;edit_id=' . $row['al_id'],
-						'U_DELETE'		=> $this->u_action . '&amp;action=delete&amp;delete_id=' . $row['al_id']
-						)
-					);
-				}
-				$db->sql_freeresult($result);
+		}	// End of switch
 
-				$template->assign_vars(array(
-					'S_CONFIG_PAGE'		=> true)
-					);
-			break;
+		$form_key = 'acp_autolinks';
+		add_form_key ($form_key);
+		if (isset($_POST['submit']))
+		{
+			trigger_error($user->lang['LOG_AUTOLINK_CONFIG_UPDATED'] . adm_back_link($this->u_action));
 		}
+		$action_config = $this->u_action . "&action=recursion";
+		$sql = 'SELECT * FROM ' . $table;
+		$result = $db->sql_query($sql);
+		while ($row = $db->sql_fetchrow($result))
+		{
+			$template->assign_block_vars('al', array(
+				'NAME'			=> $row['al_word'],
+				'URL'			=> $row['al_url'],
+				'U_EDIT'		=> $this->u_action . '&amp;action=edit&amp;edit_id=' . $row['al_id'],
+				'U_DELETE'		=> $this->u_action . '&amp;action=delete&amp;delete_id=' . $row['al_id']
+				)
+			);
+		}
+		$db->sql_freeresult($result);
 
 		$template->assign_vars(array(
-			'U_ADD'				=> $this->u_action . '&amp;action=add',
-			'U_ACTION'			=> $this->u_action)
+			'C_ACTION'		=> $action_config,
+			'S_CONFIG_PAGE'	=> true,
+			'ALLOW_FEATURE_NO'	=> $config['lmdi_autolinks'] == 1 ? 'checked="checked"' : '',
+			'ALLOW_FEATURE_YES'	=> $config['lmdi_autolinks'] == 2 ? 'checked="checked"' : '',
+			));
+		$template->assign_vars(array(
+			'U_ADD'			=> $this->u_action . '&amp;action=add',
+			'U_ACTION'		=> $this->u_action)
 		);
 	}
 

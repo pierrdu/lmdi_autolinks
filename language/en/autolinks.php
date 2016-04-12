@@ -19,8 +19,12 @@ if (empty($lang) || !is_array($lang))
 $lang = array_merge($lang, array(
 
 	// Menu text and titles
-	'ACP_AUTOLINKS_TITLE'				=> 'Autolink Administration',
-	'AUTOLINK_ADD_A_NEW_WORD'			=> 'Add new Autolink',
+	'ACP_AUTOLINKS_TITLE'			=> 'Autolink Administration',
+	'AUTOLINK_ADD_A_NEW_WORD'		=> 'Add new Autolink',
+	'RECURS_FEATURE'				=> 'Prevent recursive replacement',
+	'RECURS_FEATURE_EXPLAIN'			=> 'If the URLs contain the terms to be replaced, there is a risk of recursive replacement and the links don\'t work as they should. This option prevents the recursive replacement but a side effect is that the term gets replaced by the exact form entered in the table below.',
+	'TERM_ADDITION'				=> 'Adding a new term',
+	'TERM_ADDITION_EXPLAIN'			=> 'This options displays a form to create a new term.',
 
 	// Main form's words
 	'ACP_AUTOLINKS_CONFIG'				=> 'Autolink configuration',

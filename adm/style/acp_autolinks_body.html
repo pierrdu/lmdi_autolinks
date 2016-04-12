@@ -3,7 +3,33 @@
 <a name="maincontent"></a>
 <h1>{L_ACP_AUTOLINKS_TITLE}</h1>
 <!-- IF S_CONFIG_PAGE -->
-<p><a href="{U_ADD}">{L_AUTOLINK_ADD_A_NEW_WORD}</a></p>
+<form id="acp_autolinks" method="post" action="{C_ACTION}">
+<fieldset>
+	<dl>
+		<dt><label>{L_RECURS_FEATURE}{L_COLON}</label><br />
+		<span>{L_RECURS_FEATURE_EXPLAIN}</span></dt>
+		<dd>
+		<label><input type="radio" id="lmdi_recursive" name="lmdi_recursive"
+		value="1" class="radio" {ALLOW_FEATURE_YES}/>{L_YES}</label>
+		<label><input type="radio" id="lmdi_recursive" name="lmdi_recursive"
+		value="0" class="radio" {ALLOW_FEATURE_NO}/>{L_NO}</label>
+		</dd>
+	</dl>
+	<p class="submit-buttons">
+		<input class="button1" type="submit" id="submit" name="config"
+		value="{L_SUBMIT}" />&nbsp;
+	</p>
+	{S_FORM_TOKEN}
+</fieldset>
+</form>
+<fieldset>
+	<dl>
+		<dt><label>{L_TERM_ADDITION}{L_COLON}</label><br />
+		<span>{L_TERM_ADDITION_EXPLAIN}</span></dt>
+		<dd>
+		<a href="{U_ADD}">{L_AUTOLINK_ADD_A_NEW_WORD}</a>
+		</dd>
+	</dl>
 <table cellspacing="1">
 	<thead>
 		<tr>
@@ -22,6 +48,7 @@
 	<!-- END al -->
 	</tbody>
 </table>
+</fieldset>
 <!-- ENDIF -->
 <!-- IF S_ADD_PAGE -->
 <form id="acp_alword" method="post" action="{U_W_ACTION}">

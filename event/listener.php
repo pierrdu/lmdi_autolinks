@@ -99,9 +99,12 @@ class listener implements EventSubscriberInterface
 			return ($texte);
 		}
 		$terms = $autolinks['terms'];
-		$fterms = $autolinks['fterms'];
 		$urls  = $autolinks['urls'];
-		$furls = $autolinks['furls'];
+		if ($this->config['lmdi_autolinks'] == 2)
+		{
+			$fterms = $autolinks['fterms'];
+			$furls = $autolinks['furls'];
+		}
 		/*
 		var_dump ($terms);
 		var_dump ($fterms);
@@ -169,11 +172,18 @@ class listener implements EventSubscriberInterface
 				!($part{0} == '[' && $parts[$index + 1]{0} == ']') &&
 				empty($img) && empty($code) && empty($alink) && empty($ulink) && empty($script))
 			{
-				$part = preg_replace ($terms, $furls, $part);
-				$nbt = count ($terms);
-				for ($i = 0; $i < $nbt; $i++) 
+				if ($this->config['lmdi_autolinks'] == 2)
 				{
-					$part = str_replace ($furls[$i], $urls[$i] . $fterms[$i], $part);
+					$part = preg_replace ($terms, $furls, $part);
+					$nbt = count ($terms);
+					for ($i = 0; $i < $nbt; $i++)
+					{
+						$part = str_replace ($furls[$i], $urls[$i] . $fterms[$i], $part);
+					}
+				}
+				else
+				{
+					$part = preg_replace ($terms, $urls, $part);
 				}
 				$parts[$index] = $part;
 			}
@@ -198,13 +208,23 @@ class listener implements EventSubscriberInterface
 			{
 				$term = $row['al_word'];
 				$url  = $row['al_url'];
-				$firstspace = '/\b(';
-				$lastspace = ')\b/ui';	// PCRE - u = UTF-8 - i = case insensitive
-				$autolinks['terms'][] = $firstspace . $term . $lastspace;
-				$autolinks['urls'][]  = "<a href=\"$url\" class=\"postlink\">";
-				$autolinks['furls'][] = "al_**_{$cpt}_**_al";
-				$autolinks['fterms'][] = "$term</a>";
-				$cpt++;
+				if ($this->config['lmdi_autolinks'] == 2)
+				{
+					$firstspace = '/\b(';
+					$lastspace = ')\b/ui';	// PCRE - u = UTF-8 - i = case insensitive
+					$autolinks['terms'][] = $firstspace . $term . $lastspace;
+					$autolinks['urls'][]  = "<a href=\"$url\" class=\"postlink\">";
+					$autolinks['furls'][] = "al_**_{$cpt}_**_al";
+					$autolinks['fterms'][] = "$term</a>";
+					$cpt++;
+				}
+				else
+				{
+					$firstspace = '/\b(';
+					$lastspace = ')\b/ui';	// PCRE - u = UTF-8 - i = case insensitive
+					$autolinks['terms'][] = $firstspace . $term . $lastspace;
+					$autolinks['urls'][]  = "<a href=\"$url\" class=\"postlink\">$1</a>";
+				}
 			}
 			$this->db->sql_freeresult($result);
 			$this->cache->put('_autolinks', $autolinks, 86400);		// 24 h

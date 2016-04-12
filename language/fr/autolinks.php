@@ -21,6 +21,10 @@ $lang = array_merge($lang, array(
 	'AUTOLINK_MOD_MENU_NAME'			=> 'Extension Autolinks',
 	'ACP_AUTOLINKS_TITLE'			=> 'Administration des liens automatiques',
 	'AUTOLINK_ADD_A_NEW_WORD'		=> 'Ajouter un nouveau terme',
+	'RECURS_FEATURE'				=> 'Empêcher le remplacement récursif',
+	'RECURS_FEATURE_EXPLAIN'			=> 'Si les URL saisies contiennent l\'un des termes servant de mot-clef, il existe un risque de remplacement récursif. Cette option empêche le remplacement récursif, mais a pour effet que le terme est remplacé par le terme exact saisi dans la table ci-dessous.',
+	'TERM_ADDITION'				=> 'Addition d\'un nouveau terme',
+	'TERM_ADDITION_EXPLAIN'			=> 'Appel d\'un formulaire de création d\'un nouveau terme.',
 
 	// Main form's words
 	'ACP_AUTOLINKS_CONFIG'			=> 'Configuration de l\'extension',
