@@ -3,6 +3,7 @@
  *
  * @package	Extension Autolink
  * @author	Máté Bartus <bartus.mate@root.hu>
+ * @author	Pierre Duhem <pierre@duhem.com>
  * @version	$Id: info_acp_autolink.php 46 2010-07-20 14:14:53Z CHItA $
  * Russian translation by MaxTr
  *
@@ -22,7 +23,10 @@ $lang = array_merge($lang, array(
 	// Menu text and titles
 	'ACP_AUTOLINKS_TITLE'			=> 'Управление анкорами',
 	'AUTOLINK_ADD_A_NEW_WORD'		=> 'Добавить новый URL',
-
+	'RECURS_FEATURE'				=> 'Предотвращение рекурсивной замены',
+	'RECURS_FEATURE_EXPLAIN'			=> 'Если URL-адреса содержат анкоры, которые должны быть заменены, существует риск рекурсивной замены, эта опция предотвращает рекурсивную замену, но побочным эффектом является то, что анкор заменяется на точный термин, введенный в форму ниже.',
+	'TERM_ADDITION'				=> 'Добавление нового термина',
+	'TERM_ADDITION_EXPLAIN'			=> 'Эта форма отображает параметр для создания нового термина.',
 	// Main form's words
 	'ACP_AUTOLINKS_CONFIG'			=> 'Конфигурация',
 	'ACP_AUTOLINK_WORDS'			=> 'Управление анкорами',

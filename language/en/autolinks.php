@@ -3,6 +3,7 @@
  *
  * @package	Extension Autolink [English]
  * @author	Máté Bartus <bartus.mate@root.hu>
+ * @author	Pierre Duhem <pierre@duhem.com>
  * @version	$Id: info_acp_autolink.php 46 2010-07-20 14:14:53Z CHItA $
  *
  **/
