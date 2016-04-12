@@ -29,7 +29,6 @@ class autolinks_module {
 		$this->table = $table_prefix . 'autolinks';
 		$table = $this->table;
 
-
 		$action = $request->variable ('action', '');
 		// $action_config = $this->u_action . "&action=config";
 		$update_action = false;
@@ -43,9 +42,9 @@ class autolinks_module {
 					trigger_error('FORM_INVALID');
 				}
 				$recurs = $request->variable ('lmdi_recursive', 0);
-				var_dump ($recurs);
+				// var_dump ($recurs);
 				$cfg_recurs = $config['lmdi_autolinks'] - 1;
-				var_dump ($cfg_recurs);
+				// var_dump ($cfg_recurs);
 				if ($recurs != $cfg_recurs)
 				{
 					$config->set ('lmdi_autolinks', $recurs + 1);
@@ -75,10 +74,6 @@ class autolinks_module {
 				$update_action = true;
 			// break; don't needed
 			case 'add':
-				// if (!check_form_key('acp_autolinks'))
-				// {
-				// 	trigger_error('FORM_INVALID');
-				// }
 				// Create the language list
 				$sql = 'SELECT * FROM ' . LANG_TABLE;
 				$result = $db->sql_query($sql);
@@ -136,7 +131,6 @@ class autolinks_module {
 								'ERROR_MSG' => $errors[$i])
 								);
 						}
-
 						$template->assign_var('S_ERROR_FORM', true);
 					}
 				}
@@ -147,7 +141,6 @@ class autolinks_module {
 					trigger_error('FORM_INVALID');
 				}
 				$word_id = $request->variable('delete_id', 0);
-
 				if ($word_id == 0)
 				{
 					trigger_error($user->lang['AUTOLINK_INVALID_ID'] . adm_back_link($this->u_action), E_USER_WARNING);
@@ -213,7 +206,7 @@ class autolinks_module {
 			'U_ADD'			=> $this->u_action . '&amp;action=add',
 			'U_ACTION'		=> $this->u_action)
 		);
-	}
+	}	// Main
 
 
 	function input_check($input_array, $key_error = false, $update = false)
@@ -252,5 +245,5 @@ class autolinks_module {
 
 		$ret = (empty($errors)) ? true : $errors;
 		return ($ret);
-	}
+	}	// input_check
 }
