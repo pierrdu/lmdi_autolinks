@@ -25,6 +25,9 @@ $lang = array_merge($lang, array(
 	'RECURS_FEATURE_EXPLAIN'			=> 'Si les URL saisies contiennent l\'un des termes servant de mot-clef, il existe un risque de remplacement récursif. Cette option empêche le remplacement récursif, mais a pour effet que le terme est remplacé par le terme exact saisi dans la table ci-dessous.',
 	'TERM_ADDITION'				=> 'Addition d\'un nouveau terme',
 	'TERM_ADDITION_EXPLAIN'			=> 'Appel d\'un formulaire de création d\'un nouveau terme.',
+	'PST_LEGEND3'		=> 'Paramétrage des forums',
+	'PST_NOSHOW_LIST'	=> 'Valider les liens automatiques dans',
+	'LEGEND_ADD_TERM'	=> 'Gestion des termes',
 
 	// Main form's words
 	'ACP_AUTOLINKS_CONFIG'			=> 'Configuration de l\'extension',

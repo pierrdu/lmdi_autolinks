@@ -20,9 +20,6 @@ class autolinks_module {
 		global $config, $phpbb_root_path, $phpbb_admin_path, $phpbb, $phpEx;
 		global $table_prefix, $phpbb_container;
 
-		// $id = string(36) "\lmdi\autolinks\acp\autolinks_module"
-		// $mode = string(8) "settings"
-
 		$user->add_lang_ext ('lmdi/autolinks', 'autolinks');
 		$this->tpl_name = 'acp_autolinks_body';
 		$this->page_title = $user->lang('ACP_AUTOLINKS_TITLE');
@@ -33,18 +30,36 @@ class autolinks_module {
 		// $action_config = $this->u_action . "&action=config";
 		$update_action = false;
 
-		// var_dump ($action);
 		switch ($action)
 		{
+			case 'forums' :
+				if (!check_form_key('acp_autolinks'))
+				{
+					trigger_error('FORM_INVALID');
+				}
+				$enabled_forums = implode(',', $request->variable('mark_enable_forum', array(0), true));
+				$sql = 'UPDATE ' . FORUMS_TABLE . '
+					SET lmdi_autolinks = DEFAULT';
+				$db->sql_query($sql);
+				$eforums = explode (',', $enabled_forums);
+				$nbf = count ($eforums);
+				for ($i=0; $i<$nbf; $i++)
+				{
+					$numf = $eforums[$i];
+					$sql = 'UPDATE ' . FORUMS_TABLE . "
+						SET lmdi_autolinks = 1
+						WHERE forum_id = $numf";
+					$db->sql_query($sql);
+				}
+				$cache->put('_al_enabled_forums', $eforums, 86400);		// 24 h
+			break;
 			case 'recursion' :
 				if (!check_form_key('acp_autolinks'))
 				{
 					trigger_error('FORM_INVALID');
 				}
 				$recurs = $request->variable ('lmdi_recursive', 0);
-				// var_dump ($recurs);
 				$cfg_recurs = $config['lmdi_autolinks'] - 1;
-				// var_dump ($cfg_recurs);
 				if ($recurs != $cfg_recurs)
 				{
 					$config->set ('lmdi_autolinks', $recurs + 1);
@@ -74,21 +89,9 @@ class autolinks_module {
 				$update_action = true;
 			// break; don't needed
 			case 'add':
-				// Create the language list
-				$sql = 'SELECT * FROM ' . LANG_TABLE;
-				$result = $db->sql_query($sql);
-				while ($row = $db->sql_fetchrow($result))
-				{
-					$template->assign_block_vars('al_lang_option', array(
-						'S_OPTION_VALUE'	=> $row['lang_id'],
-						'LANG_NAME'		=> $row['lang_local_name'])
-						);
-				}
-				$db->sql_freeresult($result);
-
 				$template->assign_vars(array(
 					'U_W_ACTION'	=> ( ($action == 'edit') ? $this->u_action . '&amp;action=edit&amp;edit_id=' . $word_id : $this->u_action . '&amp;action=add'),
-					'S_ADD_PAGE'	=> true)
+					'S_ADD_TERM'	=> true)
 					);
 
 				add_form_key('acp_autolinks');
@@ -96,7 +99,7 @@ class autolinks_module {
 				if (isset($_POST['submit']))
 				{
 					$sql_array = array(
-						'al_word'	=> utf8_normalize_nfc($request->variable('al_word', '', true)),
+						'al_word'	=> $request->variable('al_word', '', true),
 						'al_url'	=> $request->variable('al_url', '', true)
 						);
 
@@ -175,12 +178,12 @@ class autolinks_module {
 			break;
 		}	// End of switch
 
-		$form_key = 'acp_autolinks';
-		add_form_key ($form_key);
-		if (isset($_POST['submit']))
+		if ($request->variable('submit', 0))
 		{
 			trigger_error($user->lang['LOG_AUTOLINK_CONFIG_UPDATED'] . adm_back_link($this->u_action));
 		}
+		$form_key = 'acp_autolinks';
+		add_form_key ($form_key);
 		$action_config = $this->u_action . "&action=recursion";
 		$sql = 'SELECT * FROM ' . $table;
 		$result = $db->sql_query($sql);
@@ -196,7 +199,17 @@ class autolinks_module {
 		}
 		$db->sql_freeresult($result);
 
+		$forum_list = $this->get_forum_list();
+		foreach ($forum_list as $row)
+		{
+			$template->assign_block_vars('forums', array(
+				'FORUM_NAME'			=> $row['forum_name'],
+				'FORUM_ID'			=> $row['forum_id'],
+				'CHECKED_ENABLE_FORUM'	=> $row['lmdi_autolinks']? 'checked="checked"' : '',
+			));
+		}
 		$template->assign_vars(array(
+			'U_W_ACTION'		=> $this->u_action . '&amp;action=forums',
 			'C_ACTION'		=> $action_config,
 			'S_CONFIG_PAGE'	=> true,
 			'ALLOW_FEATURE_NO'	=> $config['lmdi_autolinks'] == 1 ? 'checked="checked"' : '',
@@ -204,8 +217,9 @@ class autolinks_module {
 			));
 		$template->assign_vars(array(
 			'U_ADD'			=> $this->u_action . '&amp;action=add',
-			'U_ACTION'		=> $this->u_action)
-		);
+			'U_ACTION'		=> $this->u_action,
+			'S_SET_FORUMS'		=> true,
+			));
 	}	// Main
 
 
@@ -246,4 +260,19 @@ class autolinks_module {
 		$ret = (empty($errors)) ? true : $errors;
 		return ($ret);
 	}	// input_check
+
+
+	function get_forum_list()
+	{
+		global $db;
+		$sql = 'SELECT forum_id, forum_name, lmdi_autolinks
+			FROM ' . FORUMS_TABLE . '
+			WHERE forum_type = ' . FORUM_POST . '
+			ORDER BY left_id ASC';
+		$result = $db->sql_query($sql);
+		$forum_list = $db->sql_fetchrowset($result);
+		$db->sql_freeresult($result);
+		return $forum_list;
+	}
+
 }

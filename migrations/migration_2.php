@@ -76,5 +76,4 @@ class migration_2 extends \phpbb\db\migration\migration
 		);
 	}
 
-
 }

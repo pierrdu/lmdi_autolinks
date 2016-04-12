@@ -75,15 +75,20 @@ class listener implements EventSubscriberInterface
 	// event.rowset_data.post_text = text of the post
 	public function insertion_autolinks ($event)
 	{
+		static $enabled_forums = "";
+		if (empty ($enabled_forums))
+		{
+			$enabled_forums = $this->cache->get('_al_enabled_forums');
+		}
 		$rowset_data = $event['rowset_data'];
-		// var_dump ($rowset_data);
-		$post_text = $rowset_data['post_text'];
-
-		// var_dump ($post_text);
-		$post_text = $this->autolinks_pass ($post_text);
-
-		$rowset_data['post_text'] = $post_text;
-		$event['rowset_data'] = $rowset_data;
+		$forum_id = $rowset_data['forum_id'];
+		if (in_array ($forum_id, $enabled_forums))
+		{
+			$post_text = $rowset_data['post_text'];
+			$post_text = $this->autolinks_pass ($post_text);
+			$rowset_data['post_text'] = $post_text;
+			$event['rowset_data'] = $rowset_data;
+		}
 	}	// insertion_autolinks
 
 
@@ -105,12 +110,6 @@ class listener implements EventSubscriberInterface
 			$fterms = $autolinks['fterms'];
 			$furls = $autolinks['furls'];
 		}
-		/*
-		var_dump ($terms);
-		var_dump ($fterms);
-		var_dump ($urls);
-		var_dump ($furls);
-		*/
 		// Breaking the input string on tags. PREG_PATTERN_ORDER by default
 		preg_match_all ('#[][><][^][><]*|[^][><]+#', $texte, $parts);
 		$parts = &$parts[0];

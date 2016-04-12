@@ -23,6 +23,7 @@
 </fieldset>
 </form>
 <fieldset>
+	<legend>{L_LEGEND_ADD_TERM}</legend>
 	<dl>
 		<dt><label>{L_TERM_ADDITION}{L_COLON}</label><br />
 		<span>{L_TERM_ADDITION_EXPLAIN}</span></dt>
@@ -50,8 +51,10 @@
 </table>
 </fieldset>
 <!-- ENDIF -->
-<!-- IF S_ADD_PAGE -->
+
+<!-- IF S_ADD_TERM -->
 <form id="acp_alword" method="post" action="{U_W_ACTION}">
+	<legend>{L_LEGEND_ADD_TERM}</legend>
 	<fieldset>
 		<legend>{L_ACP_AUTOLINK_WORDS}</legend>
 		<!-- IF S_ERROR_FORM --><p class="error"><ul><!-- BEGIN error --><li>{error.ERROR_MSG}</li><!-- END error --></ul></p><!-- ENDIF -->
@@ -69,6 +72,45 @@
 		</p>
 	</fieldset>
 	{S_FORM_TOKEN}
+</form>
+<!-- ENDIF -->
+
+<!-- IF S_SET_FORUMS -->
+<form id="acp_alword" method="post" action="{U_W_ACTION}">
+<fieldset>
+	<legend>{L_PST_LEGEND3}</legend>
+		<table class="table1">
+			<col class="row1" /><col class="row2" />
+			<thead>
+				<tr>
+					<th width="78%">{L_FORUMS}</th>
+					<th style="width:22%; text-align: center;">{L_PST_NOSHOW_LIST}</th>
+				</tr>
+			</thead>
+		</table>
+	<div style="max-height:300px; overflow:auto;">
+		<table class="table1">
+			<col class="row1" /><col class="row2" />
+			<tbody>
+				<!-- BEGIN forums -->
+				<tr>
+					<td width="80%">
+					<strong><a href="{forums.U_FORUM}">{forums.FORUM_NAME}</a></strong>
+					</td>
+					<td style="width:20%; text-align: center;" title="{forums.FORUM_NAME}">
+					<input type="checkbox" class="radio" name="mark_enable_forum[]" value="{forums.FORUM_ID}" {forums.CHECKED_ENABLE_FORUM} />
+					</td>
+				</tr>
+				<!-- END forums -->
+			</tbody>
+		</table>
+	</div>
+	<p class="submit-buttons">
+		<input class="button1" type="submit" id="submit" name="submit" value="{L_SUBMIT}" />&nbsp;
+		<input class="button2" type="reset" id="reset" name="reset" value="{L_RESET}" />
+	</p>
+</fieldset>
+{S_FORM_TOKEN}
 </form>
 <!-- ENDIF -->
 
