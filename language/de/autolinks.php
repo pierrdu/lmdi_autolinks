@@ -31,6 +31,9 @@ $lang = array_merge($lang, array(
 	'PST_LEGEND3'		=> 'Forum Parameter',
 	'PST_NOSHOW_LIST'	=> 'Autolinks verwenden in',
 	'LEGEND_ADD_TERM'	=> 'Begriffe',
+	'ACP_CHECKALL'		=> 'Wählen/abwählen', 
+	'ACP_CHECKALL_EXPLAIN'	=> 'Alle Foren auf einmal wählen/abwählen.',
+	'ACP_ALL_FORUMS'	=> 'Alle Foren',
 
 	// Main form's words
 	'ACP_AUTOLINKS_CONFIG'			=> 'Autolink-Einstellungen',

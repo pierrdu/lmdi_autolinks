@@ -41,17 +41,24 @@ class autolinks_module {
 				$sql = 'UPDATE ' . FORUMS_TABLE . '
 					SET lmdi_autolinks = DEFAULT';
 				$db->sql_query($sql);
-				$eforums = explode (',', $enabled_forums);
-				$nbf = count ($eforums);
-				for ($i=0; $i<$nbf; $i++)
+				if (!empty ($enabled_forums))
 				{
-					$numf = $eforums[$i];
-					$sql = 'UPDATE ' . FORUMS_TABLE . "
-						SET lmdi_autolinks = 1
-						WHERE forum_id = $numf";
-					$db->sql_query($sql);
+					$eforums = explode (',', $enabled_forums);
+					$nbf = count ($eforums);
+					for ($i=0; $i<$nbf; $i++)
+					{
+						$numf = $eforums[$i];
+						$sql = 'UPDATE ' . FORUMS_TABLE . "
+							SET lmdi_autolinks = 1
+							WHERE forum_id = $numf";
+						$db->sql_query($sql);
+					}
+					$cache->put('_al_enabled_forums', $eforums, 86400);		// 24 h
 				}
-				$cache->put('_al_enabled_forums', $eforums, 86400);		// 24 h
+				else
+				{
+					$cache->destroy ('_al_enabled_forums');
+				}
 			break;
 			case 'recursion' :
 				if (!check_form_key('acp_autolinks'))

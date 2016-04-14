@@ -80,14 +80,17 @@ class listener implements EventSubscriberInterface
 		{
 			$enabled_forums = $this->cache->get('_al_enabled_forums');
 		}
-		$rowset_data = $event['rowset_data'];
-		$forum_id = $rowset_data['forum_id'];
-		if (in_array ($forum_id, $enabled_forums))
+		if (!empty ($enabled_forums))
 		{
-			$post_text = $rowset_data['post_text'];
-			$post_text = $this->autolinks_pass ($post_text);
-			$rowset_data['post_text'] = $post_text;
-			$event['rowset_data'] = $rowset_data;
+			$rowset_data = $event['rowset_data'];
+			$forum_id = $rowset_data['forum_id'];
+			if (in_array ($forum_id, $enabled_forums))
+			{
+				$post_text = $rowset_data['post_text'];
+				$post_text = $this->autolinks_pass ($post_text);
+				$rowset_data['post_text'] = $post_text;
+				$event['rowset_data'] = $rowset_data;
+			}
 		}
 	}	// insertion_autolinks
 

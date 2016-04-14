@@ -79,6 +79,11 @@
 <form id="acp_alword" method="post" action="{U_W_ACTION}">
 <fieldset>
 	<legend>{L_PST_LEGEND3}</legend>
+		<dl>
+			<dt><label for="checkall">{L_ACP_CHECKALL}{L_COLON}</label><br />
+			{L_ACP_CHECKALL_EXPLAIN}</dt>
+			<dd><input type="checkbox" name="checkall" onchange="check_all(this)" id="checkall" value="" /> {L_ACP_ALL_FORUMS}</dd>
+		</dl>
 		<table class="table1">
 			<col class="row1" /><col class="row2" />
 			<thead>
@@ -98,7 +103,7 @@
 					<strong><a href="{forums.U_FORUM}">{forums.FORUM_NAME}</a></strong>
 					</td>
 					<td style="width:20%; text-align: center;" title="{forums.FORUM_NAME}">
-					<input type="checkbox" class="radio" name="mark_enable_forum[]" value="{forums.FORUM_ID}" {forums.CHECKED_ENABLE_FORUM} />
+					<input type="checkbox" class="radio" name="mark_enable_forum" value="{forums.FORUM_ID}" {forums.CHECKED_ENABLE_FORUM} />
 					</td>
 				</tr>
 				<!-- END forums -->
@@ -116,3 +121,4 @@
 
 
 <!-- INCLUDE overall_footer.html -->
+

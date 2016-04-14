@@ -29,6 +29,9 @@ $lang = array_merge($lang, array(
 	'PST_LEGEND3'		=> 'Forum settings',
 	'PST_NOSHOW_LIST'	=> 'Enable autolinks in',
 	'LEGEND_ADD_TERM'	=> 'Term Management',
+	'ACP_CHECKALL'		=> 'Select/deselect', 
+	'ACP_CHECKALL_EXPLAIN'	=> 'Here you can check/uncheck all forums together.',
+	'ACP_ALL_FORUMS'	=> 'All forums',
 
 
 	// Main form's words
