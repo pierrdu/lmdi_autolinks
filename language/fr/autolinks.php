@@ -28,7 +28,7 @@ $lang = array_merge($lang, array(
 	'PST_LEGEND3'		=> 'Paramétrage des forums',
 	'PST_NOSHOW_LIST'	=> 'Valider les liens automatiques dans',
 	'LEGEND_ADD_TERM'	=> 'Gestion des termes',
-	'ACP_CHECKALL'		=> 'Sélection/désélection', 
+	'ACP_CHECKALL'		=> 'Sélection/désélection',
 	'ACP_CHECKALL_EXPLAIN'	=> 'Vous pouvez ici sélectionner/déselectionner tous les forums en une seule fois.',
 	'ACP_ALL_FORUMS'	=> 'Tous les forums',
 
