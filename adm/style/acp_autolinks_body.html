@@ -2,8 +2,9 @@
 
 <a name="maincontent"></a>
 <h1>{L_ACP_AUTOLINKS_TITLE}</h1>
+
 <!-- IF S_CONFIG_PAGE -->
-<form id="acp_autolinks" method="post" action="{C_ACTION}">
+<form id="acp_autolinks" method="post" action="{R_ACTION}">
 <fieldset>
 	<dl>
 		<dt><label>{L_RECURS_FEATURE}{L_COLON}</label><br />
@@ -53,11 +54,11 @@
 <!-- ENDIF -->
 
 <!-- IF S_ADD_TERM -->
-<form id="acp_alword" method="post" action="{U_W_ACTION}">
+<form id="acp_alword" method="post" action="{A_ACTION}">
 	<legend>{L_LEGEND_ADD_TERM}</legend>
 	<fieldset>
 		<legend>{L_ACP_AUTOLINK_WORDS}</legend>
-		<!-- IF S_ERROR_FORM --><p class="error"><ul><!-- BEGIN error --><li>{error.ERROR_MSG}</li><!-- END error --></ul></p><!-- ENDIF -->
+		<!-- IF S_ERROR_FORM --><ul class="error"><!-- BEGIN error --><li>{error.ERROR_MSG}</li><!-- END error --></ul><!-- ENDIF -->
 		<dl>
 			<dt><label for="al_word">{L_ACP_AUTOLINK_WORD}{L_COLON}</label><br />{L_ACP_AUTOLINK_WORD_NOTE}</dt>
 			<dd><input type="text" name="al_word" id="al_word" value="{S_WORD}" /></dd>
@@ -76,7 +77,7 @@
 <!-- ENDIF -->
 
 <!-- IF S_SET_FORUMS -->
-<form id="acp_alword" method="post" action="{U_W_ACTION}">
+<form id="acp_alword" method="post" action="{F_ACTION}">
 <fieldset>
 	<legend>{L_PST_LEGEND3}</legend>
 		<dl>
@@ -103,7 +104,7 @@
 					<strong><a href="{forums.U_FORUM}">{forums.FORUM_NAME}</a></strong>
 					</td>
 					<td style="width:20%; text-align: center;" title="{forums.FORUM_NAME}">
-					<input type="checkbox" class="radio" name="mark_enable_forum" value="{forums.FORUM_ID}" {forums.CHECKED_ENABLE_FORUM} />
+					<input type="checkbox" class="radio" name="mark_enable_forum[]" value="{forums.FORUM_ID}" {forums.CHECKED_ENABLE_FORUM} />
 					</td>
 				</tr>
 				<!-- END forums -->

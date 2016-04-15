@@ -3,11 +3,12 @@
 	"type": "phpbb-extension",
 	"description": "Autolinks for phpBB 3.1",
 	"homepage": "http://www.insecte.org/ext/readme.txt",
-	"version": "1.0.8",
-	"time": "2016-4-14",
+	"version": "1.0.9",
+	"time": "2016-4-15",
 	"license": "GPL-2.0",
 	"authors": 
-	[	{
+	[	
+		{
 			"name": "Pierre Duhem",
 			"email": "pierre@duhem.com",
 			"homepage": "http://www.insecte.org/ext/readme.txt",

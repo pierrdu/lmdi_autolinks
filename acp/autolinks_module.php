@@ -33,6 +33,7 @@ class autolinks_module {
 		switch ($action)
 		{
 			case 'forums' :
+				// echo ("Entrée dans le code de traitement des forums...\n");
 				if (!check_form_key('acp_autolinks'))
 				{
 					trigger_error('FORM_INVALID');
@@ -43,6 +44,7 @@ class autolinks_module {
 				$db->sql_query($sql);
 				if (!empty ($enabled_forums))
 				{
+					echo ("La liste n'est pas vide...\n");
 					$eforums = explode (',', $enabled_forums);
 					$nbf = count ($eforums);
 					for ($i=0; $i<$nbf; $i++)
@@ -57,6 +59,7 @@ class autolinks_module {
 				}
 				else
 				{
+					echo ("La liste est vide...\n");
 					$cache->destroy ('_al_enabled_forums');
 				}
 			break;
@@ -76,14 +79,13 @@ class autolinks_module {
 				}
 			break;
 			case 'edit':
-				// Get the ID of the item we would like to edit
+				echo ("Entrée dans le code d'édition d'un terme...\n");
 				$word_id = $request->variable ('edit_id', 0);
 				if ($word_id == 0)
 				{
 					trigger_error($user->lang['AUTOLINK_INVALID_ID'] . adm_back_link($this->u_action), E_USER_WARNING);
 				}
 
-				// Query the data of the item
 				$sql = 'SELECT * FROM ' . $table . ' WHERE al_id = ' . $word_id;
 				$result = $db->sql_query($sql);
 				$row = $db->sql_fetchrow($result);
@@ -94,14 +96,50 @@ class autolinks_module {
 					'S_URL'	=> $row['al_url']
 					));
 				$update_action = true;
-			// break; don't needed
-			case 'add':
 				$template->assign_vars(array(
-					'U_W_ACTION'	=> ( ($action == 'edit') ? $this->u_action . '&amp;action=edit&amp;edit_id=' . $word_id : $this->u_action . '&amp;action=add'),
+					'A_ACTION'	=> $this->u_action . '&amp;action=edit&amp;edit_id=' . $word_id,
+					'S_ADD_TERM'	=> true)
+					);
+				if (isset($_POST['submit']))
+				{
+					$sql_array = array(
+						'al_word'	=> $request->variable('al_word', '', true),
+						'al_url'	=> $request->variable('al_url', '', true)
+						);
+
+					$sql = 'UPDATE ' . $table . ' SET '
+						. $db->sql_build_array('UPDATE', $sql_array) . " 
+						WHERE al_id = $word_id";
+
+					$log_msg = sprintf($user->lang['LOG_AUTOLINK_WORD_EDIT'], $sql_array['al_word']);
+
+					$errors = $this->input_check($sql_array, check_form_key('acp_autolinks'), $update_action);
+					if ($errors === true)
+					{
+						$db->sql_query($sql);
+						add_log ('admin', $log_msg);
+						$cache->destroy ('_autolinks');
+						trigger_error($log_msg . adm_back_link($this->u_action));
+					}
+					else
+					{
+						for ($i = 0; $i < sizeof($errors); $i++)
+						{
+							$template->assign_block_vars('error', array(
+								'ERROR_MSG' => $errors[$i])
+								);
+						}
+						$template->assign_var('S_ERROR_FORM', true);
+					}
+				}
+			break;
+			case 'add':
+				echo ("Entrée dans le code d'addition d'un terme...\n");
+				$template->assign_vars(array(
+					'A_ACTION'	=> $this->u_action . '&amp;action=add',
 					'S_ADD_TERM'	=> true)
 					);
 
-				add_form_key('acp_autolinks');
 
 				if (isset($_POST['submit']))
 				{
@@ -146,10 +184,6 @@ class autolinks_module {
 				}
 			break;
 			case 'delete':
-				if (!check_form_key('acp_autolinks'))
-				{
-					trigger_error('FORM_INVALID');
-				}
 				$word_id = $request->variable('delete_id', 0);
 				if ($word_id == 0)
 				{
@@ -183,7 +217,7 @@ class autolinks_module {
 					}
 				}
 			break;
-		}	// End of switch
+		}	// End of big switch
 
 		if ($request->variable('submit', 0))
 		{
@@ -191,6 +225,7 @@ class autolinks_module {
 		}
 		$form_key = 'acp_autolinks';
 		add_form_key ($form_key);
+		
 		$action_config = $this->u_action . "&action=recursion";
 		$sql = 'SELECT * FROM ' . $table;
 		$result = $db->sql_query($sql);
@@ -216,8 +251,9 @@ class autolinks_module {
 			));
 		}
 		$template->assign_vars(array(
-			'U_W_ACTION'		=> $this->u_action . '&amp;action=forums',
-			'C_ACTION'		=> $action_config,
+			'F_ACTION'		=> $this->u_action . '&amp;action=forums',
+			'R_ACTION'		=> $this->u_action . '&amp;action=recursion',
+			// 'A_ACTION'		=> $this->u_action . '&amp;action=add',
 			'S_CONFIG_PAGE'	=> true,
 			'ALLOW_FEATURE_NO'	=> $config['lmdi_autolinks'] == 1 ? 'checked="checked"' : '',
 			'ALLOW_FEATURE_YES'	=> $config['lmdi_autolinks'] == 2 ? 'checked="checked"' : '',

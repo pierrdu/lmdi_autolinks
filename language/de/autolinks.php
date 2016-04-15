@@ -5,8 +5,6 @@
  * @author	Máté Bartus <bartus.mate@root.hu>
  * @author	Pierre Duhem <pierre@duhem.com>
  * @author	Luula
- * @version	$Id: info_acp_autolink.php 38 2010-07-20 14:08:37Z CHItA $
- * @license http://opensource.org/licenses/gpl-license.php GNU Public License
  *
  **/
 
