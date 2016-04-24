@@ -44,7 +44,7 @@ class autolinks_module {
 				$db->sql_query($sql);
 				if (!empty ($enabled_forums))
 				{
-					echo ("La liste n'est pas vide...\n");
+					// echo ("La liste n'est pas vide...\n");
 					$eforums = explode (',', $enabled_forums);
 					$nbf = count ($eforums);
 					for ($i=0; $i<$nbf; $i++)
@@ -59,7 +59,7 @@ class autolinks_module {
 				}
 				else
 				{
-					echo ("La liste est vide...\n");
+					// echo ("La liste est vide...\n");
 					$cache->destroy ('_al_enabled_forums');
 				}
 			break;
@@ -79,7 +79,7 @@ class autolinks_module {
 				}
 			break;
 			case 'edit':
-				echo ("Entrée dans le code d'édition d'un terme...\n");
+				// echo ("Entrée dans le code d'édition d'un terme...\n");
 				$word_id = $request->variable ('edit_id', 0);
 				if ($word_id == 0)
 				{
@@ -134,12 +134,11 @@ class autolinks_module {
 				}
 			break;
 			case 'add':
-				echo ("Entrée dans le code d'addition d'un terme...\n");
+				// echo ("Entrée dans le code d'addition d'un terme...\n");
 				$template->assign_vars(array(
 					'A_ACTION'	=> $this->u_action . '&amp;action=add',
 					'S_ADD_TERM'	=> true)
 					);
-
 
 				if (isset($_POST['submit']))
 				{
@@ -223,9 +222,10 @@ class autolinks_module {
 		{
 			trigger_error($user->lang['LOG_AUTOLINK_CONFIG_UPDATED'] . adm_back_link($this->u_action));
 		}
+
 		$form_key = 'acp_autolinks';
 		add_form_key ($form_key);
-		
+
 		$action_config = $this->u_action . "&action=recursion";
 		$sql = 'SELECT * FROM ' . $table;
 		$result = $db->sql_query($sql);
