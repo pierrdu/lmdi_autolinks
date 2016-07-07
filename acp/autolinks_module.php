@@ -33,7 +33,6 @@ class autolinks_module {
 		switch ($action)
 		{
 			case 'forums' :
-				// echo ("Entrée dans le code de traitement des forums...\n");
 				if (!check_form_key('acp_autolinks'))
 				{
 					trigger_error('FORM_INVALID');
@@ -44,7 +43,6 @@ class autolinks_module {
 				$db->sql_query($sql);
 				if (!empty ($enabled_forums))
 				{
-					// echo ("La liste n'est pas vide...\n");
 					$eforums = explode (',', $enabled_forums);
 					$nbf = count ($eforums);
 					for ($i=0; $i<$nbf; $i++)
@@ -59,7 +57,6 @@ class autolinks_module {
 				}
 				else
 				{
-					// echo ("La liste est vide...\n");
 					$cache->destroy ('_al_enabled_forums');
 				}
 			break;
@@ -79,7 +76,6 @@ class autolinks_module {
 				}
 			break;
 			case 'edit':
-				// echo ("Entrée dans le code d'édition d'un terme...\n");
 				$word_id = $request->variable ('edit_id', 0);
 				if ($word_id == 0)
 				{
@@ -134,7 +130,6 @@ class autolinks_module {
 				}
 			break;
 			case 'add':
-				// echo ("Entrée dans le code d'addition d'un terme...\n");
 				$template->assign_vars(array(
 					'A_ACTION'	=> $this->u_action . '&amp;action=add',
 					'S_ADD_TERM'	=> true)
@@ -216,7 +211,7 @@ class autolinks_module {
 					}
 				}
 			break;
-		}	// End of big switch
+		}
 
 		if ($request->variable('submit', 0))
 		{
@@ -265,6 +260,19 @@ class autolinks_module {
 			));
 	}	// Main
 
+	protected function get_forum_list()
+	{
+		global $db;
+		$sql = 'SELECT forum_id, forum_name, lmdi_autolinks
+			FROM ' . FORUMS_TABLE . '
+			WHERE forum_type = ' . FORUM_POST . '
+			ORDER BY left_id ASC';
+		$result = $db->sql_query($sql);
+		$forum_list = $db->sql_fetchrowset($result);
+		$db->sql_freeresult($result);
+
+		return $forum_list;
+	}
 
 	function input_check($input_array, $key_error = false, $update = false)
 	{
@@ -303,19 +311,5 @@ class autolinks_module {
 		$ret = (empty($errors)) ? true : $errors;
 		return ($ret);
 	}	// input_check
-
-
-	function get_forum_list()
-	{
-		global $db;
-		$sql = 'SELECT forum_id, forum_name, lmdi_autolinks
-			FROM ' . FORUMS_TABLE . '
-			WHERE forum_type = ' . FORUM_POST . '
-			ORDER BY left_id ASC';
-		$result = $db->sql_query($sql);
-		$forum_list = $db->sql_fetchrowset($result);
-		$db->sql_freeresult($result);
-		return $forum_list;
-	}
 
 }

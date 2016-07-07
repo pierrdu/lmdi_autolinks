@@ -3,8 +3,8 @@
 	"type": "phpbb-extension",
 	"description": "Autolinks for phpBB 3.1",
 	"homepage": "http://www.insecte.org/ext/readme.txt",
-	"version": "1.0.10",
-	"time": "2016-4-24",
+	"version": "1.0.11",
+	"time": "2016-7-7",
 	"license": "GPL-2.0",
 	"authors": 
 	[	
@@ -36,7 +36,7 @@
 	"extra": {
 		"display-name": "LMDI Autolinks",
 		"soft-require": {
-			"phpbb/phpbb": ">=3.1.0-RC2,<3.3.*@dev"
+			"phpbb/phpbb": ">=3.1.0-RC2,<3.3.0@dev"
 		}
 	}
 }
