@@ -37,7 +37,7 @@ class autolinks_module {
 				{
 					trigger_error('FORM_INVALID');
 				}
-				$enabled_forums = implode(',', $request->variable('mark_enable_forum', array(0), true));
+				$enabled_forums = implode(',', $request->variable('mark_autolinks_forum', array(0), true));
 				$sql = 'UPDATE ' . FORUMS_TABLE . '
 					SET lmdi_autolinks = DEFAULT';
 				$db->sql_query($sql);

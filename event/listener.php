@@ -70,21 +70,6 @@ class listener implements EventSubscriberInterface
 		$event['lang_set_ext'] = $lang_set_ext;
 	}
 
-	private function cache_production ()
-	{
-		$cache = array();
-		$sql = 'SELECT  forum_id from ' . FORUMS_TABLE . '
-			WHERE lmdi_autolinks = 1';
-		$result = $this->db->sql_query($sql);
-		while ($row = $this->db->sql_fetchrow($result))
-		{
-			$cache[] = $row['forum_id'];
-		}
-		$this->db->sql_freeresult($result);
-		$this->cache->put('_al_enabled_forums', $cache, 86400 *  7);
-		return ($cache);
-	}
-
 	// Event: core.viewtopic_post_rowset_data
 	// Called for each post in the topic
 	// event.rowset_data.post_text = text of the post
@@ -99,6 +84,7 @@ class listener implements EventSubscriberInterface
 		{
 			$enabled_forums = $this->cache_production();
 		}
+		// var_dump ($enabled_forums);
 		if (!empty ($enabled_forums))
 		{
 			$rowset_data = $event['rowset_data'];
@@ -253,5 +239,22 @@ class listener implements EventSubscriberInterface
 		}
 		return $autolinks;
 	}	// compute_autolinks
+
+	private function cache_production ()
+	{
+		$cache = array();
+		$sql = 'SELECT forum_id from ' . FORUMS_TABLE . '
+			WHERE lmdi_autolinks = 1';
+		$result = $this->db->sql_query($sql);
+		while ($row = $this->db->sql_fetchrow($result))
+		{
+			var_dump ($row);
+			$cache[] = $row['forum_id'];
+		}
+		$this->db->sql_freeresult($result);
+		$this->cache->put('_al_enabled_forums', $cache, 86400 *  7);
+		return ($cache);
+	}	// cache_production
+
 
 }
