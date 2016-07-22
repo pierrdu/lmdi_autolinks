@@ -248,7 +248,7 @@ class listener implements EventSubscriberInterface
 		$result = $this->db->sql_query($sql);
 		while ($row = $this->db->sql_fetchrow($result))
 		{
-			var_dump ($row);
+			// var_dump ($row);
 			$cache[] = $row['forum_id'];
 		}
 		$this->db->sql_freeresult($result);
