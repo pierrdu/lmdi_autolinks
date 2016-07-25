@@ -20,9 +20,18 @@ if (empty($lang) || !is_array($lang))
 $lang = array_merge($lang, array(
 
 	// Menu text and titles
-	'AUTOLINK_MOD_MENU_NAME'			=> 'Auto Enlace',
-	'ACP_AUTOLINKS_TITLE'			=> 'Administración de Auto Enlace',
+	'ACP_AUTOLINKS_TITLE'			=> 'Auto Enlace',
 	'AUTOLINK_ADD_A_NEW_WORD'		=> 'Añadir nuevo Auto Enlace',
+	'RECURS_FEATURE'				=> 'Prevenir la sustitución recursiva',
+	'RECURS_FEATURE_EXPLAIN'			=> 'Si las URL contienen los términos a ser reemplazado, hay un riesgo de sustitución recursiva y los enlaces no funcionan como deberían. Esta opción evita la sustitución recursiva, un efecto secundario es que el término es reemplazado por la forma exacta entrada en la siguiente tabla.',
+	'TERM_ADDITION'				=> 'Añadir nuevo término',
+	'TERM_ADDITION_EXPLAIN'			=> 'Esta opción muestra un formulario para crear un nuevo término.',
+	'PST_LEGEND3'					=> 'Configuraciones de Foro',
+	'PST_NOSHOW_LIST'				=> 'Habilitar Auto Enlace en',
+	'LEGEND_ADD_TERM'				=> 'Gestión de términos',
+	'ACP_CHECKALL'					=> 'Seleccionar/deseleccionar',
+	'ACP_CHECKALL_EXPLAIN'			=> 'Aquí se puede activar / desactivar todos los foros juntos.',
+	'ACP_ALL_FORUMS'				=> 'Todos los Foros',
 
 	// Main form's words
 	'ACP_AUTOLINKS_CONFIG'			=> 'Ajustes de configuracion de Auto Enlace',
