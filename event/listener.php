@@ -107,7 +107,7 @@ class listener implements EventSubscriberInterface
 		{
 			$autolinks = $this->compute_autolinks();
 		}
-		if (!sizeof($autolinks))
+		if (empty($autolinks))
 		{
 			return ($texte);
 		}
@@ -127,6 +127,7 @@ class listener implements EventSubscriberInterface
 		{
 			return '';
 		}
+		$img = $code = $alink = $ulink = $script = 0;
 		foreach ($parts as $index => $part)
 		{
 			// echo ("\nSous-passe dans foreach pour $part.\n");
@@ -153,7 +154,7 @@ class listener implements EventSubscriberInterface
 			{
 				$alink = true;
 			}
-			if (!empty($link) && strstr($part, '</a'))
+			if (!empty($alink) && strstr($part, '</a'))
 			{
 				$alink = false;
 			}
@@ -162,7 +163,7 @@ class listener implements EventSubscriberInterface
 			{
 				$ulink = true;
 			}
-			if (!empty($link) && strstr($part, '[/url'))
+			if (!empty($ulink) && strstr($part, '[/url'))
 			{
 				$ulink = false;
 			}
@@ -175,6 +176,8 @@ class listener implements EventSubscriberInterface
 			{
 				$script = false;
 			}
+			// echo ("$part<br>\n");
+			// echo ("Valeurs des drapeaux : image = $img, code = $code, alink = $alink, ulink = $ulink, script = $script.<br>\n");
 			if (!($part{0} == '<' && $parts[$index + 1]{0} == '>') &&
 				!($part{0} == '[' && $parts[$index + 1]{0} == ']') &&
 				empty($img) && empty($code) && empty($alink) && empty($ulink) && empty($script))
@@ -196,6 +199,7 @@ class listener implements EventSubscriberInterface
 			}
 		}	// foreach
 		$texte = implode ("", $parts);
+		// var_dump ($texte);
 		return ($texte);
 	}	// autolinks_pass
 
