@@ -10,9 +10,9 @@ namespace lmdi\autolinks\acp;
 
 class autolinks_module {
 
-	var $u_action;
-	var $action;
-	var $table;
+	protected $u_action;
+	protected $action;
+	protected $table;
 
 	public function main ($id, $mode)
 	{

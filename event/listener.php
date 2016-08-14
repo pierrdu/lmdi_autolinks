@@ -56,7 +56,7 @@ class listener implements EventSubscriberInterface
 	{
 	return array(
 		'core.user_setup'				=> 'load_language_on_setup',
-		'core.viewtopic_post_rowset_data'	=> 'insertion_autolinks',
+		'core.viewtopic_post_rowset_data'	=> array ('insertion_autolinks', -200),
 		);
 	}
 
