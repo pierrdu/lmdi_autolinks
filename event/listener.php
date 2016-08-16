@@ -224,7 +224,7 @@ class listener implements EventSubscriberInterface
 					$firstspace = '/\b(';
 					$lastspace = ')\b/ui';	// PCRE - u = UTF-8 - i = case insensitive
 					$autolinks['terms'][] = $firstspace . $term . $lastspace;
-					$autolinks['urls'][]  = "<a href=\"$url\" class=\"postlink\">";
+					$autolinks['urls'][]  = "<a href=\"$url\" class=\"postlink autolinks\">";
 					$autolinks['furls'][] = "al_**_{$cpt}_**_al";
 					$autolinks['fterms'][] = "$term</a>";
 					$cpt++;
@@ -234,7 +234,7 @@ class listener implements EventSubscriberInterface
 					$firstspace = '/\b(';
 					$lastspace = ')\b/ui';	// PCRE - u = UTF-8 - i = case insensitive
 					$autolinks['terms'][] = $firstspace . $term . $lastspace;
-					$autolinks['urls'][]  = "<a href=\"$url\" class=\"postlink\">$1</a>";
+					$autolinks['urls'][]  = "<a href=\"$url\" class=\"postlink autolinks\">$1</a>";
 				}
 			}
 			$this->db->sql_freeresult($result);
