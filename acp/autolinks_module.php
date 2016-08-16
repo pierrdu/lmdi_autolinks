@@ -10,7 +10,7 @@ namespace lmdi\autolinks\acp;
 
 class autolinks_module {
 
-	protected $u_action;
+	public $u_action;
 	protected $action;
 	protected $table;
 
