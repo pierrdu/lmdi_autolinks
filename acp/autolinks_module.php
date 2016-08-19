@@ -275,11 +275,11 @@ class autolinks_module {
 		$sql = 'SELECT * FROM ' . $table;
 		if ($sort_col)
 		{
-			$sql = 'SELECT * FROM ' . $table .' ORDER BY al_url' . (($sort_order) ? ' DESC' : ' ASC'); 
+			$sql = 'SELECT * FROM ' . $table .' ORDER BY al_url' . (($sort_order) ? ' DESC' : ' ASC');
 		}
 		else
 		{
-			$sql = 'SELECT * FROM ' . $table .' ORDER BY al_word' . (($sort_order) ? ' DESC' : ' ASC'); 
+			$sql = 'SELECT * FROM ' . $table .' ORDER BY al_word' . (($sort_order) ? ' DESC' : ' ASC');
 		}
 		$result = $db->sql_query($sql);
 		while ($row = $db->sql_fetchrow($result))

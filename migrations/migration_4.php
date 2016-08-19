@@ -13,7 +13,6 @@ class migration_4 extends \phpbb\db\migration\migration
 	public function effectively_installed()
 	{
 		return isset($this->config['lmdi_autolinks_sort']);
-		
 	}
 
 	static public function depends_on()
@@ -23,7 +22,6 @@ class migration_4 extends \phpbb\db\migration\migration
 
 	public function update_schema()
 	{
-		
 		return array(
 			array('config.add', array('lmdi_autolinks_sort', 0)),
 			array('config.add', array('lmdi_autolinks_blank', 0)),
