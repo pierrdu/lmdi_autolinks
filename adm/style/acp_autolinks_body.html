@@ -6,6 +6,7 @@
 <!-- IF S_CONFIG_PAGE -->
 <form id="acp_autolinks" method="post" action="{R_ACTION}">
 <fieldset>
+	<legend>{L_ACP_AUTOLINKS_CONFIG}</legend>
 	<dl>
 		<dt><label>{L_RECURS_FEATURE}{L_COLON}</label><br />
 		<span>{L_RECURS_FEATURE_EXPLAIN}</span></dt>
@@ -14,6 +15,16 @@
 		value="1" class="radio" {ALLOW_FEATURE_YES}/>{L_YES}</label>
 		<label><input type="radio" id="lmdi_recursive" name="lmdi_recursive"
 		value="0" class="radio" {ALLOW_FEATURE_NO}/>{L_NO}</label>
+		</dd>
+	</dl>
+	<dl>
+		<dt><label>{L_AUTOLINK_BLANK}{L_COLON}</label><br />
+		<span>{L_AUTOLINK_BLANK_EXPLAIN}</span></dt>
+		<dd>
+		<label><input type="radio" id="lmdi_blank" name="lmdi_blank"
+		value="1" class="radio" {BLANK_TARGET_YES}/>{L_YES}</label>
+		<label><input type="radio" id="lmdi_blank" name="lmdi_blank"
+		value="0" class="radio" {BLANK_TARGET_NO}/>{L_NO}</label>
 		</dd>
 	</dl>
 	<p class="submit-buttons">
@@ -35,8 +46,8 @@
 <table cellspacing="1">
 	<thead>
 		<tr>
-			<th>{L_AUTOLINK_NAME}</th>
-			<th>{L_AUTOLINK_URL}</th>
+			<th><a href='{TH_TERM}'>{L_AUTOLINK_NAME}</a></th>
+			<th><a href='{TH_URL}'>{L_AUTOLINKS_URL}</a></th>
 			<th>{L_ACTION}</th>
 		</tr>
 	</thead>

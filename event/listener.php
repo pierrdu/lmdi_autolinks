@@ -211,6 +211,11 @@ class listener implements EventSubscriberInterface
 		$autolinks = $this->cache->get('_autolinks');
 		if ($autolinks === false)
 		{
+			$blank = "";
+			if ($this->config['lmdi_autolinks_blank'])
+			{
+				$blank = "target = \"_blank\"";
+			}
 			$sql  = "SELECT * FROM $this->autolinks_table ORDER BY char_length(al_word) DESC";
 			$result = $this->db->sql_query($sql);
 			$autolinks = array();
@@ -224,7 +229,7 @@ class listener implements EventSubscriberInterface
 					$firstspace = '/\b(';
 					$lastspace = ')\b/ui';	// PCRE - u = UTF-8 - i = case insensitive
 					$autolinks['terms'][] = $firstspace . $term . $lastspace;
-					$autolinks['urls'][]  = "<a href=\"$url\" class=\"postlink autolinks\">";
+					$autolinks['urls'][]  = "<a href=\"$url\" $blank class=\"postlink autolinks\">";
 					$autolinks['furls'][] = "al_**_{$cpt}_**_al";
 					$autolinks['fterms'][] = "$term</a>";
 					$cpt++;
@@ -234,7 +239,7 @@ class listener implements EventSubscriberInterface
 					$firstspace = '/\b(';
 					$lastspace = ')\b/ui';	// PCRE - u = UTF-8 - i = case insensitive
 					$autolinks['terms'][] = $firstspace . $term . $lastspace;
-					$autolinks['urls'][]  = "<a href=\"$url\" class=\"postlink autolinks\">$1</a>";
+					$autolinks['urls'][]  = "<a href=\"$url\" $blank class=\"postlink autolinks\">$1</a>";
 				}
 			}
 			$this->db->sql_freeresult($result);

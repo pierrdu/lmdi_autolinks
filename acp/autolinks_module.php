@@ -27,11 +27,58 @@ class autolinks_module {
 		$table = $this->table;
 
 		$action = $request->variable ('action', '');
-		// $action_config = $this->u_action . "&action=config";
 		$update_action = false;
+
+		// Sort default values
+		$sort = $config['lmdi_autolinks_sort'];
+		switch ($sort)
+		{
+			case 0 :
+				$sort_col = 0;
+				$sort_order = 0;
+				break;
+			case 1 :
+				$sort_col = 0;
+				$sort_order = 1;
+				break;
+			case 2 :
+				$sort_col = 1;
+				$sort_order = 0;
+				break;
+			case 3 :
+				$sort_col = 1;
+				$sort_order = 1;
+				break;
+		}
 
 		switch ($action)
 		{
+			case 'sort' :
+				/*
+				if (!check_form_key('acp_autolinks'))
+				{
+					trigger_error('FORM_INVALID');
+				}
+				*/
+				$sort_col = $request->variable ('col', 0);
+				$sort_order = $request->variable ('order', 0);
+				if ($sort_col && $sort_order)
+				{
+					$config->set ('lmdi_autolinks_sort', 3);
+				}
+				if ($sort_col && !$sort_order)
+				{
+					$config->set ('lmdi_autolinks_sort', 2);
+				}
+				if (!$sort_col && $sort_order)
+				{
+					$config->set ('lmdi_autolinks_sort', 1);
+				}
+				if (!$sort_col && !$sort_order)
+				{
+					$config->set ('lmdi_autolinks_sort', 0);
+				}
+			break;
 			case 'forums' :
 				if (!check_form_key('acp_autolinks'))
 				{
@@ -67,9 +114,12 @@ class autolinks_module {
 				}
 				$recurs = $request->variable ('lmdi_recursive', 0);
 				$cfg_recurs = $config['lmdi_autolinks'] - 1;
-				if ($recurs != $cfg_recurs)
+				$blank = $request->variable ('lmdi_blank', 0);
+				$cfg_blank = $config['lmdi_autolinks_blank'];
+				if ($recurs != $cfg_recurs || $blank != $cfg_blank)
 				{
 					$config->set ('lmdi_autolinks', $recurs + 1);
+					$config->set ('lmdi_autolinks_blank', $blank);
 					$cache->destroy ('_autolinks');
 					trigger_error($user->lang['LOG_AUTOLINK_CONFIG_UPDATED'] . adm_back_link($this->u_action));
 
@@ -223,14 +273,22 @@ class autolinks_module {
 
 		$action_config = $this->u_action . "&action=recursion";
 		$sql = 'SELECT * FROM ' . $table;
+		if ($sort_col)
+		{
+			$sql = 'SELECT * FROM ' . $table .' ORDER BY al_url' . (($sort_order) ? ' DESC' : ' ASC'); 
+		}
+		else
+		{
+			$sql = 'SELECT * FROM ' . $table .' ORDER BY al_word' . (($sort_order) ? ' DESC' : ' ASC'); 
+		}
 		$result = $db->sql_query($sql);
 		while ($row = $db->sql_fetchrow($result))
 		{
 			$template->assign_block_vars('al', array(
-				'NAME'			=> $row['al_word'],
-				'URL'			=> $row['al_url'],
+				'NAME'		=> $row['al_word'],
+				'URL'		=> $row['al_url'],
 				'U_EDIT'		=> $this->u_action . '&amp;action=edit&amp;edit_id=' . $row['al_id'],
-				'U_DELETE'		=> $this->u_action . '&amp;action=delete&amp;delete_id=' . $row['al_id']
+				'U_DELETE'	=> $this->u_action . '&amp;action=delete&amp;delete_id=' . $row['al_id']
 				)
 			);
 		}
@@ -245,20 +303,43 @@ class autolinks_module {
 				'CHECKED_ENABLE_FORUM'	=> $row['lmdi_autolinks']? 'checked="checked"' : '',
 			));
 		}
+
+		$al_sort = $config['lmdi_autolinks_sort'] ;
+		switch ($al_sort)
+		{
+			case 0 :
+				$th_term = '&amp;action=sort&amp;col=0&amp;order=1';
+				$th_url  = '&amp;action=sort&amp;col=1&amp;order=0';
+				break;
+			case 1 :
+				$th_term = '&amp;action=sort&amp;col=0&amp;order=0';
+				$th_url  = '&amp;action=sort&amp;col=1&amp;order=0';
+				break;
+			case 2 :
+				$th_term = '&amp;action=sort&amp;col=0&amp;order=0';
+				$th_url  = '&amp;action=sort&amp;col=1&amp;order=1';
+				break;
+			case 3 :
+				$th_term = '&amp;action=sort&amp;col=0&amp;order=0';
+				$th_url  = '&amp;action=sort&amp;col=1&amp;order=0';
+				break;
+		}
 		$template->assign_vars(array(
 			'F_ACTION'		=> $this->u_action . '&amp;action=forums',
 			'R_ACTION'		=> $this->u_action . '&amp;action=recursion',
-			// 'A_ACTION'		=> $this->u_action . '&amp;action=add',
 			'S_CONFIG_PAGE'	=> true,
 			'ALLOW_FEATURE_NO'	=> $config['lmdi_autolinks'] == 1 ? 'checked="checked"' : '',
 			'ALLOW_FEATURE_YES'	=> $config['lmdi_autolinks'] == 2 ? 'checked="checked"' : '',
-			));
-		$template->assign_vars(array(
 			'U_ADD'			=> $this->u_action . '&amp;action=add',
 			'U_ACTION'		=> $this->u_action,
 			'S_SET_FORUMS'		=> true,
+			'TH_TERM'			=> $this->u_action . $th_term,
+			'TH_URL'			=> $this->u_action . $th_url,
+			'BLANK_TARGET_NO'	=> $config['lmdi_autolinks_blank'] == 0 ? 'checked="checked"' : '',
+			'BLANK_TARGET_YES'	=> $config['lmdi_autolinks_blank'] == 1 ? 'checked="checked"' : '',
 			));
 	}	// Main
+
 
 	protected function get_forum_list()
 	{

@@ -50,6 +50,9 @@ $lang = array_merge($lang, array(
 	// ACP table heading words
 	'AUTOLINK_NAME'				=> 'Terme',
 	'AUTOLINK_URL'					=> 'URL',
+	'AUTOLINK_BLANK'				=> 'Utiliser target=\'_blank\' pour les liens',
+	'AUTOLINK_BLANK_EXPLAIN'			=> 'Utilisez cette option pour ouvrir le lien automatique dans une nouvelle fenêtre.',
+
 
 	// Error messages
 	'AUTOLINK_NOT_ADDED'			=> 'Le terme n’a pas été ajouté dans la table.',

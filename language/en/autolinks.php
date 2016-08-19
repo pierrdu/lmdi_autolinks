@@ -50,8 +50,10 @@ $lang = array_merge($lang, array(
 	'LOG_AUTOLINK_CONFIG_UPDATED'		=> 'The Autolink config settings were updated.',
 
 	// ACP table heading words
-	'AUTOLINK_NAME'				=> 'Word',
+	'AUTOLINK_NAME'				=> 'Keyword',
 	'AUTOLINK_URL'					=> 'URL',
+	'AUTOLINK_BLANK'				=> 'Use target=\'_blank\' for the links',
+	'AUTOLINK_BLANK_EXPLAIN'			=> 'Check this option if you want to open the automatic link in a new window.',
 
 	// Error messages
 	'AUTOLINK_NOT_ADDED'			=> 'The word wasn’t added to the Autolink database!',
