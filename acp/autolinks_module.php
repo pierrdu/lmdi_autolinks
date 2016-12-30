@@ -18,7 +18,7 @@ class autolinks_module {
 	{
 		global $db, $user, $auth, $template, $cache, $request;
 		global $config, $phpbb_root_path, $phpbb_admin_path, $phpbb, $phpEx;
-		global $table_prefix, $phpbb_container;
+		global $table_prefix, $phpbb_container, $phpbb_log;
 
 		$user->add_lang_ext ('lmdi/autolinks', 'autolinks');
 		$this->tpl_name = 'acp_autolinks_body';
@@ -163,7 +163,7 @@ class autolinks_module {
 					if ($errors === true)
 					{
 						$db->sql_query($sql);
-						add_log ('admin', $log_msg);
+						$phpbb_log->add ('admin', ANONYMOUS, '', $log_msg);
 						$cache->destroy ('_autolinks');
 						trigger_error($log_msg . adm_back_link($this->u_action));
 					}
@@ -211,7 +211,7 @@ class autolinks_module {
 					if ($errors === true)
 					{
 						$db->sql_query($sql);
-						add_log ('admin', $log_msg);
+						$phpbb_log->add ('admin', ANONYMOUS, '', $log_msg);
 						$cache->destroy ('_autolinks');
 						trigger_error($log_msg . adm_back_link($this->u_action));
 					}
@@ -246,7 +246,7 @@ class autolinks_module {
 
 						$sql = 'DELETE FROM ' . $table . ' WHERE al_id = ' . $word_id;
 						$db->sql_query($sql);
-						add_log('admin', $log_msg);
+						$phpbb_log->add ('admin', ANONYMOUS, '', $log_msg);
 						$cache->destroy ('_autolinks');
 						trigger_error($log_msg . adm_back_link($this->u_action));
 					}

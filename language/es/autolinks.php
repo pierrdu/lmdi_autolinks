@@ -64,9 +64,9 @@ $lang = array_merge($lang, array(
 	'AUTOLINK_EMPTY_WORD_FIELD'		=> '¡Tiene que completar el campo de palabra!',
 	'AUTOLINK_EMPTY_URL_FIELD'		=> '¡Tiene que completar el campo de URL!',
 	'AUTOLINK_WORD_ALREADY_EXIST'	=> '¡Está palabra ya existe!'
-));
 
 	'AUTOLINK_EMPTY_WORD_FIELD'		=> '¡Tiene que completar el campo de palabra!',
 	'AUTOLINK_EMPTY_URL_FIELD'		=> '¡Tiene que completar el campo de URL!',
 	'AUTOLINK_WORD_ALREADY_EXIST'		=> '¡Está palabra ya existe!'
-));
+	)
+);
