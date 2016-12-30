@@ -63,7 +63,7 @@ $lang = array_merge($lang, array(
 	'INVALID_FORM_KEY'				=> '¡El formulario de llave simbólica no es válido!',
 	'AUTOLINK_EMPTY_WORD_FIELD'		=> '¡Tiene que completar el campo de palabra!',
 	'AUTOLINK_EMPTY_URL_FIELD'		=> '¡Tiene que completar el campo de URL!',
-	'AUTOLINK_WORD_ALREADY_EXIST'	=> '¡Está palabra ya existe!'
+	'AUTOLINK_WORD_ALREADY_EXIST'	=> '¡Está palabra ya existe!',
 
 	'AUTOLINK_EMPTY_WORD_FIELD'		=> '¡Tiene que completar el campo de palabra!',
 	'AUTOLINK_EMPTY_URL_FIELD'		=> '¡Tiene que completar el campo de URL!',
