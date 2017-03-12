@@ -3,8 +3,8 @@
 	"type": "phpbb-extension",
 	"description": "Autolinks for phpBB 3.1",
 	"homepage": "http://www.insecte.org/ext/readme.txt",
-	"version": "1.0.21",
-	"time": "2016/12/30",
+	"version": "1.1.0",
+	"time": "2017/03/12",
 	"license": "GPL-2.0",
 	"authors": 
 	[	

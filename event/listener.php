@@ -19,19 +19,18 @@ use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 */
 class listener implements EventSubscriberInterface
 {
-	/** @var \phpbb\cache\service */
 	protected $cache;
-	/* @var \phpbb\user */
 	protected $user;
-	/* @var \phpbb\db\driver\driver_interface */
 	protected $db;
-	/* @var \phpbb\template\template */
 	protected $template;
-	/* @var \phpbb\config\config */
 	protected $config;
-	/* @var \phpbb\controller\helper */
 	protected $helper;
+	protected $request;
 	protected $autolinks_table;
+	protected $tid;	// Topic id
+	protected $tab1;
+	protected $tab2;
+
 
 	public function __construct(
 		\phpbb\db\driver\driver_interface $db,
@@ -40,6 +39,7 @@ class listener implements EventSubscriberInterface
 		\phpbb\template\template $template,
 		\phpbb\cache\service $cache,
 		\phpbb\user $user,
+		\phpbb\request\request $request,
 		$autolinks_table
 		)
 	{
@@ -50,15 +50,25 @@ class listener implements EventSubscriberInterface
 		$this->cache = $cache;
 		$this->user = $user;
 		$this->autolinks_table = $autolinks_table;
+		$this->request = $request;
+
+		$this->tab1[] = "<a href=";
+		$this->tab1[] = "</a>";
+		$this->tab2[] = "lmdi_autolinks";
+		$this->tab2[] = "autolinks_lmdi";
 	}
+
 
 	static public function getSubscribedEvents ()
 	{
 	return array(
 		'core.user_setup'				=> 'load_language_on_setup',
 		'core.viewtopic_post_rowset_data'	=> array ('insertion_autolinks', -200),
+		'core.text_formatter_s9e_render_before' => 's9e_before',
+		'core.text_formatter_s9e_render_after' => 's9e_after',
 		);
 	}
+
 
 	public function load_language_on_setup($event)
 	{
@@ -70,8 +80,33 @@ class listener implements EventSubscriberInterface
 		$event['lang_set_ext'] = $lang_set_ext;
 	}
 
+
+	public function s9e_before ($event)
+	{
+		$xml = $event['xml'];
+		// Texts with <t> are dumped as is. Texts with <r> are raw and must be parsed.
+		// We have to protect ourselves against this parser.
+		if (substr($xml, 0, 3) === '<r>')
+		{
+			$this->tid = $this->request->variable ('t', 0);
+			$xml = str_replace ($this->tab1, $this->tab2, $xml);
+			$event['xml'] = $xml;
+		}
+	}
+
+
+	public function s9e_after ($event)
+	{
+		if ($this->tid == $this->request->variable ('t', 0))
+		{
+			$html = $event['html'];
+			$html = str_replace ($this->tab2, $this->tab1, $html);
+			$event['html'] = $html;
+		}
+	}
+
+
 	// Event: core.viewtopic_post_rowset_data
-	// Called for each post in the topic
 	// event.rowset_data.post_text = text of the post
 	public function insertion_autolinks ($event)
 	{
@@ -84,7 +119,6 @@ class listener implements EventSubscriberInterface
 		{
 			$enabled_forums = $this->cache_production();
 		}
-		// var_dump ($enabled_forums);
 		if (!empty ($enabled_forums))
 		{
 			$rowset_data = $event['rowset_data'];
@@ -121,8 +155,6 @@ class listener implements EventSubscriberInterface
 		// Breaking the input string on tags. PREG_PATTERN_ORDER by default
 		preg_match_all ('#[][><][^][><]*|[^][><]+#', $texte, $parts);
 		$parts = &$parts[0];
-		// var_dump ($parts);
-		// exit;
 		if (empty($parts))
 		{
 			return '';
@@ -130,7 +162,6 @@ class listener implements EventSubscriberInterface
 		$img = $code = $alink = $ulink = $script = 0;
 		foreach ($parts as $index => $part)
 		{
-			// echo ("\nSous-passe dans foreach pour $part.\n");
 			// Code
 			if (strstr($part, '[code'))
 			{
@@ -176,8 +207,8 @@ class listener implements EventSubscriberInterface
 			{
 				$script = false;
 			}
-			// echo ("$part<br>\n");
-			// echo ("Valeurs des drapeaux : image = $img, code = $code, alink = $alink, ulink = $ulink, script = $script.<br>\n");
+			// var_dump ("$part<br>\n");
+			// var_dump ("Valeurs des drapeaux : image = $img, code = $code, alink = $alink, ulink = $ulink, script = $script.<br>\n");
 			if (!($part{0} == '<' && $parts[$index + 1]{0} == '>') &&
 				!($part{0} == '[' && $parts[$index + 1]{0} == ']') &&
 				empty($img) && empty($code) && empty($alink) && empty($ulink) && empty($script))
@@ -249,6 +280,7 @@ class listener implements EventSubscriberInterface
 		return $autolinks;
 	}	// compute_autolinks
 
+
 	private function cache_production ()
 	{
 		$cache = array();
@@ -264,6 +296,5 @@ class listener implements EventSubscriberInterface
 		$this->cache->put('_al_enabled_forums', $cache, 86400 *  7);
 		return ($cache);
 	}	// cache_production
-
 
 }

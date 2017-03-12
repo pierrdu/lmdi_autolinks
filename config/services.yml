@@ -11,6 +11,7 @@ services:
             - '@template'
             - '@cache'
             - '@user'
+            - '@request'
             - '%lmdi.autolinks.tables.autolinks%'
         tags:
             - { name: event.listener }
