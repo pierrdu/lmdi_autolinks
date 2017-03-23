@@ -245,7 +245,6 @@ class autolinks_module {
 
 						$sql = 'DELETE FROM ' . $table . ' WHERE al_id = ' . $word_id;
 						$db->sql_query($sql);
-						// 
 						$phpbb_log->add ('admin', $user->data['user_id'], $user->ip, $log_msg);
 						$cache->destroy ('_autolinks');
 						trigger_error($log_msg . adm_back_link($this->u_action));
