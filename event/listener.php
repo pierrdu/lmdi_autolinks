@@ -27,6 +27,7 @@ class listener implements EventSubscriberInterface
 	protected $helper;
 	protected $request;
 	protected $autolinks_table;
+
 	protected $tid;	// Topic id
 	protected $tab1;
 	protected $tab2;
@@ -64,8 +65,9 @@ class listener implements EventSubscriberInterface
 	return array(
 		'core.user_setup'				=> 'load_language_on_setup',
 		'core.viewtopic_post_rowset_data'	=> array ('insertion_autolinks', -200),
-		'core.text_formatter_s9e_render_before' => 's9e_before',
-		'core.text_formatter_s9e_render_after' => 's9e_after',
+		'core.modify_text_for_display_after'	=> 'insertion_autolinks_32x',
+		// 'core.text_formatter_s9e_render_before' => 's9e_before',
+		// 'core.text_formatter_s9e_render_after' => 's9e_after',
 		);
 	}
 
@@ -105,30 +107,82 @@ class listener implements EventSubscriberInterface
 		}
 	}
 
+	/**
+	* Use this event to modify the text after it is parsed
+	*
+	* @event core.modify_text_for_display_after
+	* @var string	text		The text to parse
+	* @var string	uid		The BBCode UID
+	* @var string	bitfield	The BBCode Bitfield
+	* @var int	flags	The BBCode Flags
+	* @since 3.1.0-a1
+	* Line 532 & ss. of includes/functions_content.php
+	*/
+	public function insertion_autolinks_32x ($event)
+	{
+		static $enabled_forums;
+		if (version_compare ($this->config['version'], '3.2.x', '>='))
+		{
+			if (empty ($enabled_forums))
+			{
+				$enabled_forums = $this->cache->get('_al_enabled_forums');
+			}
+			if (!$enabled_forums)	// No data in cache
+			{
+				$enabled_forums = $this->cache_production();
+			}
+			if (!empty ($enabled_forums))
+			{
+				$forum_id = $this->request->variable ('f', 0);
+				if (in_array ($forum_id, $enabled_forums))
+				{
+					$text = $event['text'];
+					// $uid = $event['uid'];
+					// $bitfield = $event['bitfield'];
+					$flags = $event['flags'];
+					/*
+					var_dump ($text);
+					var_dump ($uid);
+					var_dump ($bitfield);
+					var_dump ($flags);
+					*/
+					if ($flags == 2)
+					{
+						$text = $this->autolinks_pass ($text);
+						$event['text'] = $text;
+					}
+				}
+			}
+		}
+	}
+
 
 	// Event: core.viewtopic_post_rowset_data
 	// event.rowset_data.post_text = text of the post
 	public function insertion_autolinks ($event)
 	{
-		static $enabled_forums = "";
-		if (empty ($enabled_forums))
+		static $enabled_forums;
+		if (version_compare ($this->config['version'], '3.2.x', '<'))
 		{
-			$enabled_forums = $this->cache->get('_al_enabled_forums');
-		}
-		if (!$enabled_forums)	// No data in cache
-		{
-			$enabled_forums = $this->cache_production();
-		}
-		if (!empty ($enabled_forums))
-		{
-			$rowset_data = $event['rowset_data'];
-			$forum_id = $rowset_data['forum_id'];
-			if (in_array ($forum_id, $enabled_forums))
+			if (empty ($enabled_forums))
 			{
-				$post_text = $rowset_data['post_text'];
-				$post_text = $this->autolinks_pass ($post_text);
-				$rowset_data['post_text'] = $post_text;
-				$event['rowset_data'] = $rowset_data;
+				$enabled_forums = $this->cache->get('_al_enabled_forums');
+			}
+			if (!$enabled_forums)	// No data in cache
+			{
+				$enabled_forums = $this->cache_production();
+			}
+			if (!empty ($enabled_forums))
+			{
+				$rowset_data = $event['rowset_data'];
+				$forum_id = $rowset_data['forum_id'];
+				if (in_array ($forum_id, $enabled_forums))
+				{
+					$post_text = $rowset_data['post_text'];
+					$post_text = $this->autolinks_pass ($post_text);
+					$rowset_data['post_text'] = $post_text;
+					$event['rowset_data'] = $rowset_data;
+				}
 			}
 		}
 	}	// insertion_autolinks
@@ -137,6 +191,8 @@ class listener implements EventSubscriberInterface
 	function autolinks_pass ($texte)
 	{
 		static $autolinks;
+
+		$autolinks = $this->cache->get('_autolinks');
 		if (!isset ($autolinks) || !is_array ($autolinks))
 		{
 			$autolinks = $this->compute_autolinks();
@@ -239,44 +295,40 @@ class listener implements EventSubscriberInterface
 		*/
 	function compute_autolinks()
 	{
-		$autolinks = $this->cache->get('_autolinks');
-		if ($autolinks === false)
+		$blank = "";
+		if ($this->config['lmdi_autolinks_blank'])
 		{
-			$blank = "";
-			if ($this->config['lmdi_autolinks_blank'])
-			{
-				$blank = "target = \"_blank\"";
-			}
-			$sql  = "SELECT * FROM $this->autolinks_table ORDER BY char_length(al_word) DESC";
-			$result = $this->db->sql_query($sql);
-			$autolinks = array();
-			$cpt = 0;
-			while ($row = $this->db->sql_fetchrow($result))
-			{
-				$term = $row['al_word'];
-				$url  = $row['al_url'];
-				if ($this->config['lmdi_autolinks'] == 2)
-				{
-					$firstspace = '/\b(';
-					$lastspace = ')\b/ui';	// PCRE - u = UTF-8 - i = case insensitive
-					$autolinks['terms'][] = $firstspace . $term . $lastspace;
-					$autolinks['urls'][]  = "<a href=\"$url\" $blank class=\"postlink autolinks\">";
-					$autolinks['furls'][] = "al_**_{$cpt}_**_al";
-					$autolinks['fterms'][] = "$term</a>";
-					$cpt++;
-				}
-				else
-				{
-					$firstspace = '/\b(';
-					$lastspace = ')\b/ui';	// PCRE - u = UTF-8 - i = case insensitive
-					$autolinks['terms'][] = $firstspace . $term . $lastspace;
-					$autolinks['urls'][]  = "<a href=\"$url\" $blank class=\"postlink autolinks\">$1</a>";
-				}
-			}
-			$this->db->sql_freeresult($result);
-			$this->cache->put('_autolinks', $autolinks, 86400);		// 24 h
-
+			$blank = "target=\"_blank\" ";
 		}
+		$sql  = "SELECT * FROM $this->autolinks_table ORDER BY char_length(al_word) DESC";
+		$result = $this->db->sql_query($sql);
+		$autolinks = array();
+		$cpt = 0;
+		while ($row = $this->db->sql_fetchrow($result))
+		{
+			$term = $row['al_word'];
+			$url  = $row['al_url'];
+			if ($this->config['lmdi_autolinks'] == 2)
+			{
+				$firstspace = '/\b(';
+				$lastspace = ')\b/ui';	// PCRE - u = UTF-8 - i = case insensitive
+				$autolinks['terms'][] = $firstspace . $term . $lastspace;
+			$autolinks['urls'][] = "<a href=\"$url\" ${blank}class=\"postlink autolinks\">";
+				$autolinks['furls'][] = "al_**_{$cpt}_**_al";
+				$autolinks['fterms'][] = "$term</a>";
+				$cpt++;
+			}
+			else
+			{
+				$firstspace = '/\b(';
+				$lastspace = ')\b/ui';	// PCRE - u = UTF-8 - i = case insensitive
+				$autolinks['terms'][] = $firstspace . $term . $lastspace;
+			$autolinks['urls'][]  = "<a href=\"$url\" ${blank}class=\"postlink autolinks\">$1</a>";
+			}
+		}
+		$this->db->sql_freeresult($result);
+		$this->cache->put('_autolinks', $autolinks, 86400);		// 24 h
+
 		return $autolinks;
 	}	// compute_autolinks
 
@@ -289,7 +341,6 @@ class listener implements EventSubscriberInterface
 		$result = $this->db->sql_query($sql);
 		while ($row = $this->db->sql_fetchrow($result))
 		{
-			// var_dump ($row);
 			$cache[] = $row['forum_id'];
 		}
 		$this->db->sql_freeresult($result);

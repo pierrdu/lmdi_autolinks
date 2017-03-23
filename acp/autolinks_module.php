@@ -16,9 +16,9 @@ class autolinks_module {
 
 	public function main ($id, $mode)
 	{
-		global $db, $user, $auth, $template, $cache, $request;
-		global $config, $phpbb_root_path, $phpbb_admin_path, $phpbb, $phpEx;
-		global $table_prefix, $phpbb_container, $phpbb_log;
+		global $db, $user, $template, $cache, $request;
+		global $config, $phpbb;
+		global $table_prefix, $phpbb_log;
 
 		$user->add_lang_ext ('lmdi/autolinks', 'autolinks');
 		$this->tpl_name = 'acp_autolinks_body';
@@ -106,6 +106,7 @@ class autolinks_module {
 				{
 					$cache->destroy ('_al_enabled_forums');
 				}
+				trigger_error($user->lang['LOG_AUTOLINK_CONFIG_UPDATED'] . adm_back_link($this->u_action));
 			break;
 			case 'recursion' :
 				if (!check_form_key('acp_autolinks'))
@@ -163,7 +164,7 @@ class autolinks_module {
 					if ($errors === true)
 					{
 						$db->sql_query($sql);
-						$phpbb_log->add ('admin', ANONYMOUS, '', $log_msg);
+						$phpbb_log->add ('admin', $user->data['user_id'], $user->ip, $log_msg);
 						$cache->destroy ('_autolinks');
 						trigger_error($log_msg . adm_back_link($this->u_action));
 					}
@@ -197,13 +198,11 @@ class autolinks_module {
 						$sql = 'UPDATE ' . $table . ' SET '
 							. $db->sql_build_array('UPDATE', $sql_array) . " 
 							WHERE al_id = $word_id";
-
 						$log_msg = sprintf($user->lang['LOG_AUTOLINK_WORD_EDIT'], $sql_array['al_word']);
 					}
 					else
 					{
 						$sql = 'INSERT INTO ' . $table . ' ' . $db->sql_build_array('INSERT', $sql_array);
-
 						$log_msg = sprintf($user->lang['LOG_AUTOLINK_WORD_ADDED'], $sql_array['al_word']);
 					}
 
@@ -211,7 +210,7 @@ class autolinks_module {
 					if ($errors === true)
 					{
 						$db->sql_query($sql);
-						$phpbb_log->add ('admin', ANONYMOUS, '', $log_msg);
+						$phpbb_log->add ('admin', $user->data['user_id'], $user->ip, $log_msg);
 						$cache->destroy ('_autolinks');
 						trigger_error($log_msg . adm_back_link($this->u_action));
 					}
@@ -246,7 +245,8 @@ class autolinks_module {
 
 						$sql = 'DELETE FROM ' . $table . ' WHERE al_id = ' . $word_id;
 						$db->sql_query($sql);
-						$phpbb_log->add ('admin', ANONYMOUS, '', $log_msg);
+						// 
+						$phpbb_log->add ('admin', $user->data['user_id'], $user->ip, $log_msg);
 						$cache->destroy ('_autolinks');
 						trigger_error($log_msg . adm_back_link($this->u_action));
 					}
