@@ -263,8 +263,6 @@ class listener implements EventSubscriberInterface
 			{
 				$script = false;
 			}
-			// var_dump ("$part<br>\n");
-			// var_dump ("Valeurs des drapeaux : image = $img, code = $code, alink = $alink, ulink = $ulink, script = $script.<br>\n");
 			if (!($part{0} == '<' && $parts[$index + 1]{0} == '>') &&
 				!($part{0} == '[' && $parts[$index + 1]{0} == ']') &&
 				empty($img) && empty($code) && empty($alink) && empty($ulink) && empty($script))
@@ -307,13 +305,14 @@ class listener implements EventSubscriberInterface
 		while ($row = $this->db->sql_fetchrow($result))
 		{
 			$term = $row['al_word'];
+			$term = preg_quote ($term, '/');
 			$url  = $row['al_url'];
 			if ($this->config['lmdi_autolinks'] == 2)
 			{
 				$firstspace = '/\b(';
 				$lastspace = ')\b/ui';	// PCRE - u = UTF-8 - i = case insensitive
 				$autolinks['terms'][] = $firstspace . $term . $lastspace;
-			$autolinks['urls'][] = "<a href=\"$url\" ${blank}class=\"postlink autolinks\">";
+				$autolinks['urls'][] = "<a href=\"$url\" ${blank}class=\"postlink autolinks\">";
 				$autolinks['furls'][] = "al_**_{$cpt}_**_al";
 				$autolinks['fterms'][] = "$term</a>";
 				$cpt++;
@@ -323,7 +322,7 @@ class listener implements EventSubscriberInterface
 				$firstspace = '/\b(';
 				$lastspace = ')\b/ui';	// PCRE - u = UTF-8 - i = case insensitive
 				$autolinks['terms'][] = $firstspace . $term . $lastspace;
-			$autolinks['urls'][]  = "<a href=\"$url\" ${blank}class=\"postlink autolinks\">$1</a>";
+				$autolinks['urls'][]  = "<a href=\"$url\" ${blank}class=\"postlink autolinks\">$1</a>";
 			}
 		}
 		$this->db->sql_freeresult($result);
