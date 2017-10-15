@@ -27,7 +27,7 @@
 
   <meta name="viewport" content="width=device-width">
   
-  <title>ad-management/prepare-phpbb.sh at master · phpbb-extensions/ad-management · GitHub</title>
+  <title>ad-management/prepare-epv.sh at master · phpbb-extensions/ad-management · GitHub</title>
   <link rel="search" type="application/opensearchdescription+xml" href="/opensearch.xml" title="GitHub">
   <link rel="fluid-icon" href="https://github.com/fluidicon.png" title="GitHub">
   <meta property="fb:app_id" content="1401488693436528">
@@ -39,7 +39,7 @@
   
   <meta name="pjax-timeout" content="1000">
   
-  <meta name="request-id" content="C893:081D:22F39BA:354A942:59E32DA6" data-pjax-transient>
+  <meta name="request-id" content="C893:081D:22F34AF:354A266:59E32D9F" data-pjax-transient>
   
 
   <meta name="selected-link" value="repo_source" data-pjax-transient>
@@ -48,7 +48,7 @@
 <meta name="google-site-verification" content="ZzhVyEFwb7w3e0-uOTltm8Jsck2F5StVihD0exw2fsA">
     <meta name="google-analytics" content="UA-3769691-2">
 
-<meta content="collector.githubapp.com" name="octolytics-host" /><meta content="github" name="octolytics-app-id" /><meta content="https://collector.githubapp.com/github-external/browser_event" name="octolytics-event-url" /><meta content="C893:081D:22F39BA:354A942:59E32DA6" name="octolytics-dimension-request_id" /><meta content="iad" name="octolytics-dimension-region_edge" /><meta content="iad" name="octolytics-dimension-region_render" />
+<meta content="collector.githubapp.com" name="octolytics-host" /><meta content="github" name="octolytics-app-id" /><meta content="https://collector.githubapp.com/github-external/browser_event" name="octolytics-event-url" /><meta content="C893:081D:22F34AF:354A266:59E32D9F" name="octolytics-dimension-request_id" /><meta content="iad" name="octolytics-dimension-region_edge" /><meta content="iad" name="octolytics-dimension-region_render" />
 <meta content="/&lt;user-name&gt;/&lt;repo-name&gt;/blob/show" data-pjax-transient="true" name="analytics-location" />
 
 
@@ -63,7 +63,7 @@
   <meta name="user-login" content="">
 
       <meta name="expected-hostname" content="github.com">
-    <meta name="js-proxy-site-detection-payload" content="MjIwZjEzNThkZTVmNDk2N2E2MmVhYzFjMzY2ZTVhZmI1MjYyZmY0NDk4NDhkMGU4YjkxZDUwZjhiNTZlNDc3MHx7InJlbW90ZV9hZGRyZXNzIjoiMTA5LjE5MC44OS44IiwicmVxdWVzdF9pZCI6IkM4OTM6MDgxRDoyMkYzOUJBOjM1NEE5NDI6NTlFMzJEQTYiLCJ0aW1lc3RhbXAiOjE1MDgwNjA1ODksImhvc3QiOiJnaXRodWIuY29tIn0=">
+    <meta name="js-proxy-site-detection-payload" content="YjdhNWRkM2E1ZTI4N2MxY2NjNzY5YmIwZWFhMDJkMjk1YjllMGFkOTQzYjM4NTliNGVmMmQwYzAyNzhhYjUyOHx7InJlbW90ZV9hZGRyZXNzIjoiMTA5LjE5MC44OS44IiwicmVxdWVzdF9pZCI6IkM4OTM6MDgxRDoyMkYzNEFGOjM1NEEyNjY6NTlFMzJEOUYiLCJ0aW1lc3RhbXAiOjE1MDgwNjA1ODIsImhvc3QiOiJnaXRodWIuY29tIn0=">
 
 
   <meta name="html-safe-nonce" content="0bb7496f1b7c3fe1c72e0ad5175a1175e45af153">
@@ -79,7 +79,7 @@
   <meta content="5825776" name="octolytics-dimension-user_id" /><meta content="phpbb-extensions" name="octolytics-dimension-user_login" /><meta content="90912828" name="octolytics-dimension-repository_id" /><meta content="phpbb-extensions/ad-management" name="octolytics-dimension-repository_nwo" /><meta content="true" name="octolytics-dimension-repository_public" /><meta content="false" name="octolytics-dimension-repository_is_fork" /><meta content="90912828" name="octolytics-dimension-repository_network_root_id" /><meta content="phpbb-extensions/ad-management" name="octolytics-dimension-repository_network_root_nwo" /><meta content="false" name="octolytics-dimension-repository_explore_github_marketplace_ci_cta_shown" />
 
 
-    <link rel="canonical" href="https://github.com/phpbb-extensions/ad-management/blob/master/travis/prepare-phpbb.sh" data-pjax-transient>
+    <link rel="canonical" href="https://github.com/phpbb-extensions/ad-management/blob/master/travis/prepare-epv.sh" data-pjax-transient>
 
 
   <meta name="browser-stats-url" content="https://api.github.com/_private/browser/stats">
@@ -150,7 +150,7 @@
             <div class="header-search scoped-search site-scoped-search js-site-search" role="search">
   <!-- '"` --><!-- </textarea></xmp> --></option></form><form accept-charset="UTF-8" action="/phpbb-extensions/ad-management/search" class="js-site-search-form" data-scoped-search-url="/phpbb-extensions/ad-management/search" data-unscoped-search-url="/search" method="get"><div style="margin:0;padding:0;display:inline"><input name="utf8" type="hidden" value="&#x2713;" /></div>
     <label class="form-control header-search-wrapper js-chromeless-input-container">
-        <a href="/phpbb-extensions/ad-management/blob/master/travis/prepare-phpbb.sh" class="header-search-scope no-underline">This repository</a>
+        <a href="/phpbb-extensions/ad-management/blob/master/travis/prepare-epv.sh" class="header-search-scope no-underline">This repository</a>
       <input type="text"
         class="form-control header-search-input js-site-search-focus js-site-search-field is-clearable"
         data-hotkey="s"
@@ -169,7 +169,7 @@
 
         <span class="d-inline-block">
             <div class="HeaderNavlink px-0 py-2 m-0">
-              <a class="text-bold text-white no-underline" href="/login?return_to=%2Fphpbb-extensions%2Fad-management%2Fblob%2Fmaster%2Ftravis%2Fprepare-phpbb.sh" data-ga-click="(Logged out) Header, clicked Sign in, text:sign-in">Sign in</a>
+              <a class="text-bold text-white no-underline" href="/login?return_to=%2Fphpbb-extensions%2Fad-management%2Fblob%2Fmaster%2Ftravis%2Fprepare-epv.sh" data-ga-click="(Logged out) Header, clicked Sign in, text:sign-in">Sign in</a>
                 <span class="text-gray">or</span>
                 <a class="text-bold text-white no-underline" href="/join?source=header-repo" data-ga-click="(Logged out) Header, clicked Sign up, text:sign-up">Sign up</a>
             </div>
@@ -304,9 +304,9 @@
   <div class="repository-content">
 
     
-  <a href="/phpbb-extensions/ad-management/blob/9d93632f5c07497fe2e8ebd87e2837c3a6753863/travis/prepare-phpbb.sh" class="d-none js-permalink-shortcut" data-hotkey="y">Permalink</a>
+  <a href="/phpbb-extensions/ad-management/blob/9d93632f5c07497fe2e8ebd87e2837c3a6753863/travis/prepare-epv.sh" class="d-none js-permalink-shortcut" data-hotkey="y">Permalink</a>
 
-  <!-- blob contrib key: blob_contributors:v21:a0f5d89ee98d5a52b1344dabbd9d44d6 -->
+  <!-- blob contrib key: blob_contributors:v21:a41222ac936c93ba79696e2b927fcffb -->
 
   <div class="file-navigation js-zeroclipboard-container">
     
@@ -348,7 +348,7 @@
 
 
             <a class="select-menu-item js-navigation-item js-navigation-open selected"
-               href="/phpbb-extensions/ad-management/blob/master/travis/prepare-phpbb.sh"
+               href="/phpbb-extensions/ad-management/blob/master/travis/prepare-epv.sh"
                data-name="master"
                data-skip-pjax="true"
                rel="nofollow">
@@ -367,7 +367,7 @@
 
 
             <a class="select-menu-item js-navigation-item js-navigation-open "
-              href="/phpbb-extensions/ad-management/tree/1.0.3/travis/prepare-phpbb.sh"
+              href="/phpbb-extensions/ad-management/tree/1.0.3/travis/prepare-epv.sh"
               data-name="1.0.3"
               data-skip-pjax="true"
               rel="nofollow">
@@ -377,7 +377,7 @@
               </span>
             </a>
             <a class="select-menu-item js-navigation-item js-navigation-open "
-              href="/phpbb-extensions/ad-management/tree/1.0.2/travis/prepare-phpbb.sh"
+              href="/phpbb-extensions/ad-management/tree/1.0.2/travis/prepare-epv.sh"
               data-name="1.0.2"
               data-skip-pjax="true"
               rel="nofollow">
@@ -387,7 +387,7 @@
               </span>
             </a>
             <a class="select-menu-item js-navigation-item js-navigation-open "
-              href="/phpbb-extensions/ad-management/tree/1.0.1/travis/prepare-phpbb.sh"
+              href="/phpbb-extensions/ad-management/tree/1.0.1/travis/prepare-epv.sh"
               data-name="1.0.1"
               data-skip-pjax="true"
               rel="nofollow">
@@ -397,7 +397,7 @@
               </span>
             </a>
             <a class="select-menu-item js-navigation-item js-navigation-open "
-              href="/phpbb-extensions/ad-management/tree/1.0.0/travis/prepare-phpbb.sh"
+              href="/phpbb-extensions/ad-management/tree/1.0.0/travis/prepare-epv.sh"
               data-name="1.0.0"
               data-skip-pjax="true"
               rel="nofollow">
@@ -407,7 +407,7 @@
               </span>
             </a>
             <a class="select-menu-item js-navigation-item js-navigation-open "
-              href="/phpbb-extensions/ad-management/tree/1.0.0-b2/travis/prepare-phpbb.sh"
+              href="/phpbb-extensions/ad-management/tree/1.0.0-b2/travis/prepare-epv.sh"
               data-name="1.0.0-b2"
               data-skip-pjax="true"
               rel="nofollow">
@@ -417,7 +417,7 @@
               </span>
             </a>
             <a class="select-menu-item js-navigation-item js-navigation-open "
-              href="/phpbb-extensions/ad-management/tree/1.0.0-b1/travis/prepare-phpbb.sh"
+              href="/phpbb-extensions/ad-management/tree/1.0.0-b1/travis/prepare-epv.sh"
               data-name="1.0.0-b1"
               data-skip-pjax="true"
               rel="nofollow">
@@ -445,30 +445,53 @@
       <button aria-label="Copy file path to clipboard" class="js-zeroclipboard btn btn-sm BtnGroup-item tooltipped tooltipped-s" data-copied-hint="Copied!" type="button">Copy path</button>
     </div>
     <div class="breadcrumb js-zeroclipboard-target">
-      <span class="repo-root js-repo-root"><span class="js-path-segment"><a href="/phpbb-extensions/ad-management"><span>ad-management</span></a></span></span><span class="separator">/</span><span class="js-path-segment"><a href="/phpbb-extensions/ad-management/tree/master/travis"><span>travis</span></a></span><span class="separator">/</span><strong class="final-path">prepare-phpbb.sh</strong>
+      <span class="repo-root js-repo-root"><span class="js-path-segment"><a href="/phpbb-extensions/ad-management"><span>ad-management</span></a></span></span><span class="separator">/</span><span class="js-path-segment"><a href="/phpbb-extensions/ad-management/tree/master/travis"><span>travis</span></a></span><span class="separator">/</span><strong class="final-path">prepare-epv.sh</strong>
     </div>
   </div>
 
 
-  <include-fragment class="commit-tease" src="/phpbb-extensions/ad-management/contributors/master/travis/prepare-phpbb.sh">
-    <div>
-      Fetching contributors&hellip;
-    </div>
+  
+  <div class="commit-tease">
+      <span class="float-right">
+        <a class="commit-tease-sha" href="/phpbb-extensions/ad-management/commit/2afd095cdfbc41d262feda25f8baaabca3ab0248" data-pjax>
+          2afd095
+        </a>
+        <relative-time datetime="2017-07-15T19:28:17Z">Jul 15, 2017</relative-time>
+      </span>
+      <div>
+        <img alt="@senky" class="avatar" height="20" src="https://avatars0.githubusercontent.com/u/182498?s=40&amp;v=4" width="20" />
+        <a href="/senky" class="user-mention" rel="contributor">senky</a>
+          <a href="/phpbb-extensions/ad-management/commit/2afd095cdfbc41d262feda25f8baaabca3ab0248" class="message" data-pjax="true" title="Fix epv">Fix epv</a>
+      </div>
 
     <div class="commit-tease-contributors">
-      <img alt="" class="loader-loading float-left" height="16" src="https://assets-cdn.github.com/images/spinners/octocat-spinner-32-EAF2F5.gif" width="16" />
-      <span class="loader-error">Cannot retrieve contributors at this time</span>
+      <button type="button" class="btn-link muted-link contributors-toggle" data-facebox="#blob_contributors_box">
+        <strong>1</strong>
+         contributor
+      </button>
+      
     </div>
-</include-fragment>
+
+    <div id="blob_contributors_box" style="display:none">
+      <h2 class="facebox-header" data-facebox-id="facebox-header">Users who have contributed to this file</h2>
+      <ul class="facebox-user-list" data-facebox-id="facebox-description">
+          <li class="facebox-user-list-item">
+            <img alt="@senky" height="24" src="https://avatars1.githubusercontent.com/u/182498?s=48&amp;v=4" width="24" />
+            <a href="/senky">senky</a>
+          </li>
+      </ul>
+    </div>
+  </div>
+
 
   <div class="file">
     <div class="file-header">
   <div class="file-actions">
 
     <div class="BtnGroup">
-      <a href="/phpbb-extensions/ad-management/raw/master/travis/prepare-phpbb.sh" class="btn btn-sm BtnGroup-item" id="raw-url">Raw</a>
-        <a href="/phpbb-extensions/ad-management/blame/master/travis/prepare-phpbb.sh" class="btn btn-sm js-update-url-with-hash BtnGroup-item" data-hotkey="b">Blame</a>
-      <a href="/phpbb-extensions/ad-management/commits/master/travis/prepare-phpbb.sh" class="btn btn-sm BtnGroup-item" rel="nofollow">History</a>
+      <a href="/phpbb-extensions/ad-management/raw/master/travis/prepare-epv.sh" class="btn btn-sm BtnGroup-item" id="raw-url">Raw</a>
+        <a href="/phpbb-extensions/ad-management/blame/master/travis/prepare-epv.sh" class="btn btn-sm js-update-url-with-hash BtnGroup-item" data-hotkey="b">Blame</a>
+      <a href="/phpbb-extensions/ad-management/commits/master/travis/prepare-epv.sh" class="btn btn-sm BtnGroup-item" rel="nofollow">History</a>
     </div>
 
         <a class="btn-octicon tooltipped tooltipped-nw"
@@ -491,9 +514,9 @@
   <div class="file-info">
       <span class="file-mode" title="File mode">executable file</span>
       <span class="file-info-divider"></span>
-      25 lines (21 sloc)
+      24 lines (21 sloc)
       <span class="file-info-divider"></span>
-    504 Bytes
+    541 Bytes
   </div>
 </div>
 
@@ -556,49 +579,44 @@
       </tr>
       <tr>
         <td id="L14" class="blob-num js-line-number" data-line-number="14"></td>
-        <td id="LC14" class="blob-code blob-code-inner js-file-line">EXTNAME=<span class="pl-smi">$1</span></td>
+        <td id="LC14" class="blob-code blob-code-inner js-file-line">EPV=<span class="pl-smi">$1</span></td>
       </tr>
       <tr>
         <td id="L15" class="blob-num js-line-number" data-line-number="15"></td>
-        <td id="LC15" class="blob-code blob-code-inner js-file-line">BRANCH=<span class="pl-smi">$2</span></td>
+        <td id="LC15" class="blob-code blob-code-inner js-file-line">NOTESTS=<span class="pl-smi">$2</span></td>
       </tr>
       <tr>
         <td id="L16" class="blob-num js-line-number" data-line-number="16"></td>
-        <td id="LC16" class="blob-code blob-code-inner js-file-line">EXTPATH_TEMP=<span class="pl-smi">$3</span></td>
+        <td id="LC16" class="blob-code blob-code-inner js-file-line">
+</td>
       </tr>
       <tr>
         <td id="L17" class="blob-num js-line-number" data-line-number="17"></td>
-        <td id="LC17" class="blob-code blob-code-inner js-file-line">
-</td>
+        <td id="LC17" class="blob-code blob-code-inner js-file-line"><span class="pl-k">if</span> [ <span class="pl-s"><span class="pl-pds">&quot;</span><span class="pl-smi">$EPV</span><span class="pl-pds">&quot;</span></span> <span class="pl-k">==</span> <span class="pl-s"><span class="pl-pds">&quot;</span>1<span class="pl-pds">&quot;</span></span> <span class="pl-k">-a</span> <span class="pl-s"><span class="pl-pds">&quot;</span><span class="pl-smi">$NOTESTS</span><span class="pl-pds">&quot;</span></span> <span class="pl-k">==</span> <span class="pl-s"><span class="pl-pds">&quot;</span>1<span class="pl-pds">&quot;</span></span> ]</td>
       </tr>
       <tr>
         <td id="L18" class="blob-num js-line-number" data-line-number="18"></td>
-        <td id="LC18" class="blob-code blob-code-inner js-file-line"><span class="pl-c"><span class="pl-c">#</span> Copy extension to a temp folder</span></td>
+        <td id="LC18" class="blob-code blob-code-inner js-file-line"><span class="pl-k">then</span></td>
       </tr>
       <tr>
         <td id="L19" class="blob-num js-line-number" data-line-number="19"></td>
-        <td id="LC19" class="blob-code blob-code-inner js-file-line">mkdir ../../tmp</td>
+        <td id="LC19" class="blob-code blob-code-inner js-file-line">	<span class="pl-c1">cd</span> phpBB</td>
       </tr>
       <tr>
         <td id="L20" class="blob-num js-line-number" data-line-number="20"></td>
-        <td id="LC20" class="blob-code blob-code-inner js-file-line">cp -R <span class="pl-c1">.</span> ../../tmp</td>
+        <td id="LC20" class="blob-code blob-code-inner js-file-line">	composer remove sami/sami --update-with-dependencies --dev --no-interaction</td>
       </tr>
       <tr>
         <td id="L21" class="blob-num js-line-number" data-line-number="21"></td>
-        <td id="LC21" class="blob-code blob-code-inner js-file-line"><span class="pl-c1">cd</span> ../../</td>
+        <td id="LC21" class="blob-code blob-code-inner js-file-line">	composer require phpbb/epv:dev-master --dev --no-interaction --ignore-platform-reqs</td>
       </tr>
       <tr>
         <td id="L22" class="blob-num js-line-number" data-line-number="22"></td>
-        <td id="LC22" class="blob-code blob-code-inner js-file-line">
-</td>
+        <td id="LC22" class="blob-code blob-code-inner js-file-line">	<span class="pl-c1">cd</span> ../</td>
       </tr>
       <tr>
         <td id="L23" class="blob-num js-line-number" data-line-number="23"></td>
-        <td id="LC23" class="blob-code blob-code-inner js-file-line"><span class="pl-c"><span class="pl-c">#</span> Clone phpBB</span></td>
-      </tr>
-      <tr>
-        <td id="L24" class="blob-num js-line-number" data-line-number="24"></td>
-        <td id="LC24" class="blob-code blob-code-inner js-file-line">git clone --depth=1 <span class="pl-s"><span class="pl-pds">&quot;</span>git://github.com/phpbb/phpbb.git<span class="pl-pds">&quot;</span></span> <span class="pl-s"><span class="pl-pds">&quot;</span>phpBB3<span class="pl-pds">&quot;</span></span> --branch=<span class="pl-smi">$BRANCH</span></td>
+        <td id="LC23" class="blob-code blob-code-inner js-file-line"><span class="pl-k">fi</span></td>
       </tr>
 </table>
 
@@ -616,7 +634,7 @@
       <ul class="BlobToolbar-dropdown dropdown-menu dropdown-menu-se mt-2">
         <li><a class="js-zeroclipboard dropdown-item" style="cursor:pointer;" id="js-copy-lines" data-original-text="Copy lines">Copy lines</a></li>
         <li><a class="js-zeroclipboard dropdown-item" id= "js-copy-permalink" style="cursor:pointer;" data-original-text="Copy permalink">Copy permalink</a></li>
-        <li><a href="/phpbb-extensions/ad-management/blame/9d93632f5c07497fe2e8ebd87e2837c3a6753863/travis/prepare-phpbb.sh" class="dropdown-item js-update-url-with-hash" id="js-view-git-blame">View git blame</a></li>
+        <li><a href="/phpbb-extensions/ad-management/blame/9d93632f5c07497fe2e8ebd87e2837c3a6753863/travis/prepare-epv.sh" class="dropdown-item js-update-url-with-hash" id="js-view-git-blame">View git blame</a></li>
           <li><a href="/phpbb-extensions/ad-management/issues/new" class="dropdown-item" id="js-new-issue">Open new issue</a></li>
       </ul>
     </div>
@@ -646,7 +664,7 @@
 <div class="footer container-lg px-3" role="contentinfo">
   <div class="position-relative d-flex flex-justify-between py-6 mt-6 f6 text-gray border-top border-gray-light ">
     <ul class="list-style-none d-flex flex-wrap ">
-      <li class="mr-3">&copy; 2017 <span title="0.12335s from unicorn-1220534544-8jtvn">GitHub</span>, Inc.</li>
+      <li class="mr-3">&copy; 2017 <span title="0.10209s from unicorn-1037246079-jtbm2">GitHub</span>, Inc.</li>
         <li class="mr-3"><a href="https://github.com/site/terms" data-ga-click="Footer, go to terms, text:terms">Terms</a></li>
         <li class="mr-3"><a href="https://github.com/site/privacy" data-ga-click="Footer, go to privacy, text:privacy">Privacy</a></li>
         <li class="mr-3"><a href="https://github.com/security" data-ga-click="Footer, go to security, text:security">Security</a></li>
