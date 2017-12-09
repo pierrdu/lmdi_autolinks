@@ -39,6 +39,7 @@ class migration_2 extends \phpbb\db\migration\migration
 				'ACP_AUTOLINKS_TITLE',
 				array(
 					'module_basename'	=> '\lmdi\autolinks\acp\autolinks_module',
+					'auth'			=> 'ext_lmdi/autolinks && acl_a_board',
 					'modes'			=> array('settings'),
 				),
 			)),

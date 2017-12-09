@@ -26,6 +26,8 @@ $lang = array_merge($lang, array(
 	'RECURS_FEATURE_EXPLAIN'			=> 'Если URL-адреса содержат анкоры, которые должны быть заменены, существует риск рекурсивной замены, эта опция предотвращает рекурсивную замену, но побочным эффектом является то, что анкор заменяется на точный термин, введенный в форму ниже.',
 	'TERM_ADDITION'				=> 'Добавление нового термина',
 	'TERM_ADDITION_EXPLAIN'			=> 'Эта форма отображает параметр для создания нового термина.',
+	'AL_FORUM_SELECTION'			=> 'Forum selection',
+	'AL_NOSHOW_LIST'				=> 'Enable autolinks',
 	// Main form's words
 	'ACP_AUTOLINKS_CONFIG'			=> 'Конфигурация',
 	'ACP_AUTOLINK_WORDS'			=> 'Управление анкорами',

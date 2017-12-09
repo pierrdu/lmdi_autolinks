@@ -11,7 +11,7 @@ namespace lmdi\autolinks\acp;
 
 class autolinks_info
 {
-	function module()
+	public function module()
 	{
 		return array(
 			'filename'	=> '\lmdi\autolinks\acp\autolinks_module',

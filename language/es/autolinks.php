@@ -26,12 +26,9 @@ $lang = array_merge($lang, array(
 	'RECURS_FEATURE_EXPLAIN'		=> 'Si las URL contienen los términos a ser reemplazado, hay un riesgo de sustitución recursiva y los enlaces no funcionan como deberían. Esta opción evita la sustitución recursiva, un efecto secundario es que el término es reemplazado por la forma exacta entrada en la siguiente tabla.',
 	'TERM_ADDITION'					=> 'Añadir nuevo término',
 	'TERM_ADDITION_EXPLAIN'			=> 'Esta opción muestra un formulario para crear un nuevo término.',
-	'PST_LEGEND3'					=> 'Configuraciones de Foro',
-	'PST_NOSHOW_LIST'				=> 'Habilitar Auto Enlace en',
+	'AL_FORUM_SELECTION'			=> 'Configuraciones de Foro',
+	'AL_NOSHOW_LIST'				=> 'Habilitar Auto Enlace',
 	'LEGEND_ADD_TERM'				=> 'Gestión de términos',
-	'ACP_CHECKALL'					=> 'Seleccionar/deseleccionar',
-	'ACP_CHECKALL_EXPLAIN'			=> 'Aquí se puede activar / desactivar todos los foros juntos.',
-	'ACP_ALL_FORUMS'				=> 'Todos los Foros',
 
 	// Main form's words
 	'ACP_AUTOLINKS_CONFIG'			=> 'Ajustes de configuracion de Auto Enlace',

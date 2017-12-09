@@ -26,12 +26,9 @@ $lang = array_merge($lang, array(
 	'RECURS_FEATURE_EXPLAIN'			=> 'Wenn die URLs gesuchte Begriffe beinhalten, kann die Konversion der Begriffe in Links fehlschlagen. Diese Option verhindert dieses Verhalten, hat jedoch zum Folge, daß die Begriffe durch die exacte Form der Tabelle ersetzt werden.',
 	'TERM_ADDITION'				=> 'Definition eines neuen Begriffs',
 	'TERM_ADDITION_EXPLAIN'			=> 'Formular zur Definition eines neuen Begriffs.',
-	'PST_LEGEND3'					=> 'Foren-Parameter',
-	'PST_NOSHOW_LIST'				=> 'Autolinks verwenden in',
+	'AL_FORUM_SELECTION'			=> 'Foren-Parameter',
+	'AL_NOSHOW_LIST'				=> 'Autolinks verwenden',
 	'LEGEND_ADD_TERM'				=> 'Begriffe',
-	'ACP_CHECKALL'					=> 'Wählen/abwählen',
-	'ACP_CHECKALL_EXPLAIN'			=> 'Alle Foren auf einmal wählen/abwählen.',
-	'ACP_ALL_FORUMS'				=> 'Alle Foren',
 
 	// Main form's words
 	'ACP_AUTOLINKS_CONFIG'			=> 'Autolink-Einstellungen',
@@ -43,9 +40,9 @@ $lang = array_merge($lang, array(
 	'ACP_AUTOLINK_URL_NOTE'			=> 'Hier kannst Du eine einzige URL für den oben eingetragenen Begriff definieren.',
 
 	// Logs
-	'LOG_AUTOLINK_WORD_ADDED'		=> 'Der neue Begriff "%s" wurde in die Datenbank übernommen.',
-	'LOG_AUTOLINK_WORD_EDIT'			=> 'Die Änderungen für den Begriff "%s" wurden übernommen.',
-	'LOG_AUTOLIMK_WORD_DELETE'		=> 'Der Begriff "%s" wurde aus der Datenbank entfernt.',
+	'LOG_AUTOLINK_WORD_ADDED'		=> 'Der neue Begriff "%s" wurde in die Autolink-Datenbank übernommen.',
+	'LOG_AUTOLINK_WORD_EDIT'			=> 'Die Änderungen für den Begriff "%s" wurden in die Autolink-Datenbank übernommen.',
+	'LOG_AUTOLIMK_WORD_DELETE'		=> 'Der Begriff "%s" wurde aus der Autolink-Datenbank entfernt.',
 	'LOG_AUTOLINK_CONFIG_UPDATED'		=> 'Die Autolink-Einstellungen wurden geändert.',
 
 	// ACP table heading words
