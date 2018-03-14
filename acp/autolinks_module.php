@@ -1,7 +1,7 @@
 <?php
 /**
 * @package phpBB Extension - LMDI Autolinks
-* @copyright (c) 2016 Pierre Duhem - LMDI
+* @copyright (c) 2016-2018 Pierre Duhem - LMDI
 * @license http://opensource.org/licenses/gpl-2.0.php GNU General Public License v2
 *
 */

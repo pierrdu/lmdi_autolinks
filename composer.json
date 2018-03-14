@@ -1,10 +1,10 @@
 {
 	"name": "lmdi/autolinks",
 	"type": "phpbb-extension",
-	"description": "Autolinks for phpBB 3.1",
+	"description": "Autolinks for phpBB 3.2",
 	"homepage": "http://www.insecte.org/ext/readme.txt",
-	"version": "1.2.2",
-	"time": "2017/10/15",
+	"version": "1.2.3",
+	"time": "2018/03/14",
 	"license": "GPL-2.0",
 	"authors": 
 	[	

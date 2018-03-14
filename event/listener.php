@@ -2,7 +2,7 @@
 /**
 *
 * @package phpBB Extension - LMDI Autolinks extension
-* @copyright (c) 2016 LMDI - Pierre Duhem
+* @copyright (c) 2016-2018 LMDI - Pierre Duhem
 * @license http://opensource.org/licenses/gpl-2.0.php GNU General Public License v2
 *
 */
@@ -66,8 +66,6 @@ class listener implements EventSubscriberInterface
 		'core.user_setup'				=> 'load_language_on_setup',
 		'core.viewtopic_post_rowset_data'	=> array ('insertion_autolinks', -200),
 		'core.modify_text_for_display_after'	=> 'insertion_autolinks_32x',
-		// 'core.text_formatter_s9e_render_before' => 's9e_before',
-		// 'core.text_formatter_s9e_render_after' => 's9e_after',
 		);
 	}
 
@@ -82,30 +80,6 @@ class listener implements EventSubscriberInterface
 		$event['lang_set_ext'] = $lang_set_ext;
 	}
 
-
-	public function s9e_before ($event)
-	{
-		$xml = $event['xml'];
-		// Texts with <t> are dumped as is. Texts with <r> are raw and must be parsed.
-		// We have to protect ourselves against this parser.
-		if (substr($xml, 0, 3) === '<r>')
-		{
-			$this->tid = $this->request->variable ('t', 0);
-			$xml = str_replace ($this->tab1, $this->tab2, $xml);
-			$event['xml'] = $xml;
-		}
-	}
-
-
-	public function s9e_after ($event)
-	{
-		if ($this->tid == $this->request->variable ('t', 0))
-		{
-			$html = $event['html'];
-			$html = str_replace ($this->tab2, $this->tab1, $html);
-			$event['html'] = $html;
-		}
-	}
 
 	/**
 	* Use this event to modify the text after it is parsed
@@ -304,14 +278,15 @@ class listener implements EventSubscriberInterface
 		$cpt = 0;
 		while ($row = $this->db->sql_fetchrow($result))
 		{
-			$term = $row['al_word'];
-			$term = preg_quote ($term, '/');
 			$url  = $row['al_url'];
+			$term = $row['al_word'];
+			$qterm = preg_quote ($term, '/');
+			// Protection against recursive replacing
 			if ($this->config['lmdi_autolinks'] == 2)
 			{
 				$firstspace = '/\b(';
 				$lastspace = ')\b/ui';	// PCRE - u = UTF-8 - i = case insensitive
-				$autolinks['terms'][] = $firstspace . $term . $lastspace;
+				$autolinks['terms'][] = $firstspace . $qterm . $lastspace;
 				$autolinks['urls'][] = "<a href=\"$url\" ${blank}class=\"postlink autolinks\">";
 				$autolinks['furls'][] = "al_**_{$cpt}_**_al";
 				$autolinks['fterms'][] = "$term</a>";
@@ -321,7 +296,7 @@ class listener implements EventSubscriberInterface
 			{
 				$firstspace = '/\b(';
 				$lastspace = ')\b/ui';	// PCRE - u = UTF-8 - i = case insensitive
-				$autolinks['terms'][] = $firstspace . $term . $lastspace;
+				$autolinks['terms'][] = $firstspace . $qterm . $lastspace;
 				$autolinks['urls'][]  = "<a href=\"$url\" ${blank}class=\"postlink autolinks\">$1</a>";
 			}
 		}

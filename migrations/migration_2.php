@@ -2,7 +2,7 @@
 /**
 *
 * @package phpBB Extension - LMDI Autolinks
-* @copyright (c) 2016 Pierre Duhem - LMDI
+* @copyright (c) 2016-2018 Pierre Duhem - LMDI
 * @license http://opensource.org/licenses/gpl-2.0.php GNU General Public License v2
 *
 */
@@ -28,7 +28,6 @@ class migration_2 extends \phpbb\db\migration\migration
 	public function update_data()
 	{
 		return array(
-			// ACP modules
 			array('module.add', array(
 				'acp',
 				'ACP_CAT_DOT_MODS',
