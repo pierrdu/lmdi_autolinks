@@ -22,7 +22,7 @@ class autolinks_module {
 
 		$user->add_lang_ext ('lmdi/autolinks', 'autolinks');
 		$this->tpl_name = 'acp_autolinks_body';
-		$this->page_title = $user->lang('ACP_AUTOLINKS_TITLE');
+		$this->page_title = $user->lang['ACP_AUTOLINKS_TITLE'];
 		$this->table = $table_prefix . 'autolinks';
 		$table = $this->table;
 
@@ -104,7 +104,7 @@ class autolinks_module {
 				}
 				else
 				{
-					$cache->destroy ('_al_enabled_forums');
+					$cache->destroy('_al_enabled_forums');
 				}
 				trigger_error($user->lang['LOG_AUTOLINK_CONFIG_UPDATED'] . adm_back_link($this->u_action));
 			break;

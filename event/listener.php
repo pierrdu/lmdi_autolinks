@@ -107,19 +107,12 @@ class listener implements EventSubscriberInterface
 			}
 			if (!empty ($enabled_forums))
 			{
-				$forum_id = $this->request->variable ('f', 0);
+				// $forum_id = $this->request->variable ('f', 0);
+				$forum_id = $this->user->page ('forum');
 				if (in_array ($forum_id, $enabled_forums))
 				{
 					$text = $event['text'];
-					// $uid = $event['uid'];
-					// $bitfield = $event['bitfield'];
 					$flags = $event['flags'];
-					/*
-					var_dump ($text);
-					var_dump ($uid);
-					var_dump ($bitfield);
-					var_dump ($flags);
-					*/
 					if ($flags == 2)
 					{
 						$text = $this->autolinks_pass ($text);
