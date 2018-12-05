@@ -107,8 +107,7 @@ class listener implements EventSubscriberInterface
 			}
 			if (!empty ($enabled_forums))
 			{
-				// $forum_id = $this->request->variable ('f', 0);
-				$forum_id = $this->user->page ('forum');
+				$forum_id = $this->user->page['forum'];
 				if (in_array ($forum_id, $enabled_forums))
 				{
 					$text = $event['text'];
