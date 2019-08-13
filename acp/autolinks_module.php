@@ -85,8 +85,7 @@ class autolinks_module {
 					trigger_error('FORM_INVALID');
 				}
 				$enabled_forums = implode(',', $request->variable('mark_autolinks_forum', array(0), true));
-				$sql = 'UPDATE ' . FORUMS_TABLE . '
-					SET lmdi_autolinks = DEFAULT';
+				$sql = 'UPDATE ' . FORUMS_TABLE . ' SET lmdi_autolinks = DEFAULT';
 				$db->sql_query($sql);
 				if (!empty ($enabled_forums))
 				{
@@ -96,8 +95,7 @@ class autolinks_module {
 					{
 						$numf = $eforums[$i];
 						$sql = 'UPDATE ' . FORUMS_TABLE . "
-							SET lmdi_autolinks = 1
-							WHERE forum_id = $numf";
+							SET lmdi_autolinks = 1 WHERE forum_id = $numf";
 						$db->sql_query($sql);
 					}
 					$cache->put('_al_enabled_forums', $eforums, 86400);		// 24 h

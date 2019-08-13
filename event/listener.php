@@ -2,7 +2,7 @@
 /**
 *
 * @package phpBB Extension - LMDI Autolinks extension
-* @copyright (c) 2016-2018 LMDI - Pierre Duhem
+* @copyright (c) 2016-2019 LMDI - Pierre Duhem
 * @license http://opensource.org/licenses/gpl-2.0.php GNU General Public License v2
 *
 */
@@ -185,20 +185,20 @@ class listener implements EventSubscriberInterface
 		foreach ($parts as $index => $part)
 		{
 			// Code
-			if (strstr($part, '[code'))
+			if (strstr($part, '<code'))
 			{
 				$code = true;
 			}
-			if (!empty($code) && strstr($part, '[/code'))
+			if (!empty($code) && strstr($part, '</code'))
 			{
 				$code = false;
 			}
 			// Images - Pictures
-			if (strstr($part, '[img'))
+			if (strstr($part, '<img'))
 			{
 				$img = true;
 			}
-			if (!empty($img) && strstr($part, '[/img'))
+			if (!empty($img) && strstr($part, '</img'))
 			{
 				$img = false;
 			}
@@ -250,7 +250,6 @@ class listener implements EventSubscriberInterface
 			}
 		}	// foreach
 		$texte = implode ("", $parts);
-		// var_dump ($texte);
 		return ($texte);
 	}	// autolinks_pass
 
@@ -264,7 +263,7 @@ class listener implements EventSubscriberInterface
 		{
 			$blank = "target=\"_blank\" ";
 		}
-		$sql  = "SELECT * FROM $this->autolinks_table ORDER BY char_length(al_word) DESC";
+		$sql = "SELECT * FROM $this->autolinks_table ORDER BY char_length(al_word) DESC";
 		$result = $this->db->sql_query($sql);
 		$autolinks = array();
 		$cpt = 0;
@@ -293,7 +292,7 @@ class listener implements EventSubscriberInterface
 			}
 		}
 		$this->db->sql_freeresult($result);
-		$this->cache->put('_autolinks', $autolinks, 86400);		// 24 h
+		$this->cache->put('_autolinks', $autolinks, 86400);	// 24 h
 
 		return $autolinks;
 	}	// compute_autolinks
