@@ -194,6 +194,7 @@ class listener implements EventSubscriberInterface
 				$code = false;
 			}
 			// Images - Pictures
+			/*
 			if (strstr($part, '<img'))
 			{
 				$img = true;
@@ -202,6 +203,7 @@ class listener implements EventSubscriberInterface
 			{
 				$img = false;
 			}
+			*/
 			// Liens <a> - <a> links
 			if (strstr($part, '<a '))
 			{
