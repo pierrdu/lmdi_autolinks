@@ -21,6 +21,7 @@ class listener implements EventSubscriberInterface
 {
 	protected $cache;
 	protected $user;
+	protected $language;
 	protected $db;
 	protected $template;
 	protected $config;
@@ -40,6 +41,7 @@ class listener implements EventSubscriberInterface
 		\phpbb\template\template $template,
 		\phpbb\cache\service $cache,
 		\phpbb\user $user,
+		\phpbb\language\language $language,
 		\phpbb\request\request $request,
 		$autolinks_table
 		)

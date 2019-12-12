@@ -11,6 +11,7 @@ services:
             - '@template'
             - '@cache'
             - '@user'
+            - '@language'
             - '@request'
             - '%lmdi.autolinks.tables.autolinks%'
         tags:

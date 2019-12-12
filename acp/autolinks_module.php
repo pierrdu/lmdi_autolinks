@@ -16,13 +16,13 @@ class autolinks_module {
 
 	public function main ($id, $mode)
 	{
-		global $db, $user, $template, $cache, $request;
+		global $db, $user, $language, $template, $cache, $request;
 		global $config, $phpbb;
 		global $table_prefix, $phpbb_log;
 
-		$user->add_lang_ext ('lmdi/autolinks', 'autolinks');
+		$language->add_lang ('autolinks', 'lmdi/autolinks');
 		$this->tpl_name = 'acp_autolinks_body';
-		$this->page_title = $user->lang['ACP_AUTOLINKS_TITLE'];
+		$this->page_title = $language->lang('ACP_AUTOLINKS_TITLE');
 		$this->table = $table_prefix . 'autolinks';
 		$table = $this->table;
 
@@ -54,12 +54,6 @@ class autolinks_module {
 		switch ($action)
 		{
 			case 'sort' :
-				/*
-				if (!check_form_key('acp_autolinks'))
-				{
-					trigger_error('FORM_INVALID');
-				}
-				*/
 				$sort_col = $request->variable ('col', 0);
 				$sort_order = $request->variable ('order', 0);
 				if ($sort_col && $sort_order)
@@ -104,7 +98,7 @@ class autolinks_module {
 				{
 					$cache->destroy('_al_enabled_forums');
 				}
-				trigger_error($user->lang['LOG_AUTOLINK_CONFIG_UPDATED'] . adm_back_link($this->u_action));
+				trigger_error($language->lang('LOG_AUTOLINK_CONFIG_UPDATED') . adm_back_link($this->u_action));
 			break;
 			case 'recursion' :
 				if (!check_form_key('acp_autolinks'))
@@ -120,7 +114,7 @@ class autolinks_module {
 					$config->set ('lmdi_autolinks', $recurs + 1);
 					$config->set ('lmdi_autolinks_blank', $blank);
 					$cache->destroy ('_autolinks');
-					trigger_error($user->lang['LOG_AUTOLINK_CONFIG_UPDATED'] . adm_back_link($this->u_action));
+					trigger_error($language->lang('LOG_AUTOLINK_CONFIG_UPDATED') . adm_back_link($this->u_action));
 
 				}
 			break;
@@ -128,7 +122,7 @@ class autolinks_module {
 				$word_id = $request->variable ('edit_id', 0);
 				if ($word_id == 0)
 				{
-					trigger_error($user->lang['AUTOLINK_INVALID_ID'] . adm_back_link($this->u_action), E_USER_WARNING);
+					trigger_error($language->lang('AUTOLINK_INVALID_ID') . adm_back_link($this->u_action), E_USER_WARNING);
 				}
 
 				$sql = 'SELECT * FROM ' . $table . ' WHERE al_id = ' . $word_id;
@@ -156,7 +150,7 @@ class autolinks_module {
 						. $db->sql_build_array('UPDATE', $sql_array) . " 
 						WHERE al_id = $word_id";
 
-					$log_msg = sprintf($user->lang['LOG_AUTOLINK_WORD_EDIT'], $sql_array['al_word']);
+					$log_msg = sprintf($language->lang('LOG_AUTOLINK_WORD_EDIT'), $sql_array['al_word']);
 
 					$errors = $this->input_check($sql_array, check_form_key('acp_autolinks'), $update_action);
 					if ($errors === true)
@@ -196,12 +190,12 @@ class autolinks_module {
 						$sql = 'UPDATE ' . $table . ' SET '
 							. $db->sql_build_array('UPDATE', $sql_array) . " 
 							WHERE al_id = $word_id";
-						$log_msg = sprintf($user->lang['LOG_AUTOLINK_WORD_EDIT'], $sql_array['al_word']);
+						$log_msg = sprintf($language->lang('LOG_AUTOLINK_WORD_EDIT'), $sql_array['al_word']);
 					}
 					else
 					{
 						$sql = 'INSERT INTO ' . $table . ' ' . $db->sql_build_array('INSERT', $sql_array);
-						$log_msg = sprintf($user->lang['LOG_AUTOLINK_WORD_ADDED'], $sql_array['al_word']);
+						$log_msg = sprintf($language->lang('LOG_AUTOLINK_WORD_ADDED'), $sql_array['al_word']);
 					}
 
 					$errors = $this->input_check($sql_array, check_form_key('acp_autolinks'), $update_action);
@@ -228,7 +222,7 @@ class autolinks_module {
 				$word_id = $request->variable('delete_id', 0);
 				if ($word_id == 0)
 				{
-					trigger_error($user->lang['AUTOLINK_INVALID_ID'] . adm_back_link($this->u_action), E_USER_WARNING);
+					trigger_error($language->lang('AUTOLINK_INVALID_ID') . adm_back_link($this->u_action), E_USER_WARNING);
 				}
 				else
 				{
@@ -239,7 +233,7 @@ class autolinks_module {
 						$row = $db->sql_fetchrow($result);
 						$db->sql_freeresult($result);
 
-						$log_msg = sprintf($user->lang['LOG_AUTOLIMK_WORD_DELETE'], $row['al_word']);
+						$log_msg = sprintf($language->lang('LOG_AUTOLIMK_WORD_DELETE'), $row['al_word']);
 
 						$sql = 'DELETE FROM ' . $table . ' WHERE al_id = ' . $word_id;
 						$db->sql_query($sql);
@@ -249,7 +243,7 @@ class autolinks_module {
 					}
 					else
 					{
-						confirm_box(false, $user->lang['CONFIRM_OPERATION'], build_hidden_fields(array(
+						confirm_box(false, $language->lang('CONFIRM_OPERATION'), build_hidden_fields(array(
 							'i'		=> $id,
 							'mode'		=> $mode,
 							'delete_id'	=> $word_id,
@@ -262,7 +256,7 @@ class autolinks_module {
 
 		if ($request->variable('submit', 0))
 		{
-			trigger_error($user->lang['LOG_AUTOLINK_CONFIG_UPDATED'] . adm_back_link($this->u_action));
+			trigger_error($language->lang('LOG_AUTOLINK_CONFIG_UPDATED') . adm_back_link($this->u_action));
 		}
 
 		$form_key = 'acp_autolinks';
@@ -359,12 +353,12 @@ class autolinks_module {
 
 		if (!$key_error)
 		{
-			$errors[] = $user->lang['INVALID_FORM_KEY'];
+			$errors[] = $language->lang('INVALID_FORM_KEY');
 		}
 
 		if (empty($input_array['al_word']))
 		{
-			$errors[] = $user->lang['AUTOLINK_EMPTY_WORD_FIELD'];
+			$errors[] = $language->lang('AUTOLINK_EMPTY_WORD_FIELD');
 		}
 		else
 		{
@@ -377,13 +371,13 @@ class autolinks_module {
 
 			if ($word_stored_num != 0 && !$update)
 			{
-				$errors[] = $user->lang['AUTOLINK_WORD_ALREADY_EXIST'];
+				$errors[] = $language->lang('AUTOLINK_WORD_ALREADY_EXIST');
 			}
 		}
 
 		if (empty($input_array['al_url']))
 		{
-			$errors[] = $user->lang['AUTOLINK_EMPTY_URL_FIELD'];
+			$errors[] = $language->lang('AUTOLINK_EMPTY_URL_FIELD');
 		}
 
 		$ret = (empty($errors)) ? true : $errors;

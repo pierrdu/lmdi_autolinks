@@ -1,126 +1,126 @@
-<!-- INCLUDE overall_header.html -->
+{% INCLUDE 'overall_header.html' %}
 
 <a name="maincontent"></a>
-<h1>{L_ACP_AUTOLINKS_TITLE}</h1>
+<h1>{{ lang('ACP_AUTOLINKS_TITLE') }}</h1>
 
-<!-- IF S_CONFIG_PAGE -->
-<form id="acp_autolinks" method="post" action="{R_ACTION}">
+{% if S_CONFIG_PAGE %}
+<form id="acp_autolinks" method="post" action="{{ R_ACTION }}">
 <fieldset>
-	<legend>{L_ACP_AUTOLINKS_CONFIG}</legend>
+	<legend>{{ lang('ACP_AUTOLINKS_CONFIG') }}</legend>
 	<dl>
-		<dt><label>{L_RECURS_FEATURE}{L_COLON}</label><br />
-		<span>{L_RECURS_FEATURE_EXPLAIN}</span></dt>
+		<dt><label>{{ lang('RECURS_FEATURE') }}{{ lang('COLON') }}</label><br />
+		<span>{{ lang('RECURS_FEATURE_EXPLAIN') }}</span></dt>
 		<dd>
 		<label><input type="radio" id="lmdi_recursive" name="lmdi_recursive"
-		value="1" class="radio" {ALLOW_FEATURE_YES}/>{L_YES}</label>
+		value="1" class="radio" {{ ALLOW_FEATURE_YES }}/>{{ lang('YES') }}</label>
 		<label><input type="radio" id="lmdi_recursive" name="lmdi_recursive"
-		value="0" class="radio" {ALLOW_FEATURE_NO}/>{L_NO}</label>
+		value="0" class="radio" {{ ALLOW_FEATURE_NO }}/>{{ lang('NO') }}</label>
 		</dd>
 	</dl>
 	<dl>
-		<dt><label>{L_AUTOLINK_BLANK}{L_COLON}</label><br />
-		<span>{L_AUTOLINK_BLANK_EXPLAIN}</span></dt>
+		<dt><label>{{ lang('AUTOLINK_BLANK') }}{{ lang('COLON') }}</label><br />
+		<span>{{ lang('AUTOLINK_BLANK_EXPLAIN') }}</span></dt>
 		<dd>
 		<label><input type="radio" id="lmdi_blank" name="lmdi_blank"
-		value="1" class="radio" {BLANK_TARGET_YES}/>{L_YES}</label>
+		value="1" class="radio" {{ BLANK_TARGET_YES }}/>{{ lang('YES') }}</label>
 		<label><input type="radio" id="lmdi_blank" name="lmdi_blank"
-		value="0" class="radio" {BLANK_TARGET_NO}/>{L_NO}</label>
+		value="0" class="radio" {{ BLANK_TARGET_NO }}/>{{ lang('NO') }}</label>
 		</dd>
 	</dl>
 	<p class="submit-buttons">
 		<input class="button1" type="submit" id="submit" name="config"
-		value="{L_SUBMIT}" />&nbsp;
+		value="{{ lang('SUBMIT') }}" />&nbsp;
 	</p>
-	{S_FORM_TOKEN}
+	{{ S_FORM_TOKEN }}
 </fieldset>
 </form>
 <fieldset>
-	<legend>{L_LEGEND_ADD_TERM}</legend>
+	<legend>{{ lang('LEGEND_ADD_TERM') }}</legend>
 	<dl>
-		<dt><label>{L_TERM_ADDITION}{L_COLON}</label><br />
-		<span>{L_TERM_ADDITION_EXPLAIN}</span></dt>
+		<dt><label>{{ lang('TERM_ADDITION') }}{{ lang('COLON') }}</label><br />
+		<span>{{ lang('TERM_ADDITION_EXPLAIN') }}</span></dt>
 		<dd>
-		<a href="{U_ADD}">{L_AUTOLINK_ADD_A_NEW_WORD}</a>
+		<a href="{{ U_ADD }}">{{ lang('AUTOLINK_ADD_A_NEW_WORD') }}</a>
 		</dd>
 	</dl>
 <table cellspacing="1">
 	<thead>
 		<tr>
-			<th><a href='{TH_TERM}'>{L_AUTOLINK_NAME}</a></th>
-			<th><a href='{TH_URL}'>{L_AUTOLINK_URL}</a></th>
-			<th>{L_ACTION}</th>
+			<th><a href='{{ TH_TERM }}'>{{ lang('AUTOLINK_NAME') }}</a></th>
+			<th><a href='{{ TH_URL }}'>{{ lang('AUTOLINK_URL') }}</a></th>
+			<th>{{ lang('ACTION') }}</th>
 		</tr>
 	</thead>
 	<tbody>
-	<!-- BEGIN al -->
-		<!-- IF al.S_ROW_COUNT is even --><tr class="row1"><!-- ELSE --><tr class="row2"><!-- ENDIF -->
-			<td>{al.NAME}</td>
-			<td>{al.URL}</td>
-			<td>&nbsp;<a href="{al.U_EDIT}">{ICON_EDIT}</a>&nbsp;&nbsp;<a href="{al.U_DELETE}">{ICON_DELETE}</a>&nbsp;</td>
+	{% for al in loops.al %}
+		{% if al.S_ROW_COUNT is even %}<tr class="row1">{% else %}<tr class="row2">{% endif %}
+			<td>{{ al.NAME }}</td>
+			<td>{{ al.URL }}</td>
+			<td>&nbsp;<a href="{{ al.U_EDIT }}">{{ ICON_EDIT }}</a>&nbsp;&nbsp;<a href="{{ al.U_DELETE }}">{{ ICON_DELETE }}</a>&nbsp;</td>
 		</tr>
-	<!-- END al -->
+	{% endfor %}
 	</tbody>
 </table>
 </fieldset>
-<!-- ENDIF -->
+{% endif %}
 
-<!-- IF S_ADD_TERM -->
-<form id="acp_alword" method="post" action="{A_ACTION}">
-	<legend>{L_LEGEND_ADD_TERM}</legend>
+{% if S_ADD_TERM %}
+<form id="acp_alword" method="post" action="{{ A_ACTION }}">
+	<legend>{{ lang('LEGEND_ADD_TERM') }}</legend>
 	<fieldset>
-		<legend>{L_ACP_AUTOLINK_WORDS}</legend>
-		<!-- IF S_ERROR_FORM --><ul class="error"><!-- BEGIN error --><li>{error.ERROR_MSG}</li><!-- END error --></ul><!-- ENDIF -->
+		<legend>{{ lang('ACP_AUTOLINK_WORDS') }}</legend>
+		{% if S_ERROR_FORM %}<ul class="error">{% for error in loops.error %}<li>{{ error.ERROR_MSG }}</li>{% endfor %}</ul>{% endif %}
 		<dl>
-			<dt><label for="al_word">{L_ACP_AUTOLINK_WORD}{L_COLON}</label><br />{L_ACP_AUTOLINK_WORD_NOTE}</dt>
-			<dd><input type="text" name="al_word" id="al_word" value="{S_WORD}" /></dd>
+			<dt><label for="al_word">{{ lang('ACP_AUTOLINK_WORD') }}{{ lang('COLON') }}</label><br />{{ lang('ACP_AUTOLINK_WORD_NOTE') }}</dt>
+			<dd><input type="text" name="al_word" id="al_word" value="{{ S_WORD }}" /></dd>
 		</dl>
 		<dl>
-			<dt><label for="al_url">{L_ACP_AUTOLINK_URL}{L_COLON}</label><br />{L_ACP_AUTOLINK_URL_NOTE}</dt>
-			<dd><input type="text" name="al_url" id="al_url" value="{S_URL}" /></dd>
+			<dt><label for="al_url">{{ lang('ACP_AUTOLINK_URL') }}{{ lang('COLON') }}</label><br />{{ lang('ACP_AUTOLINK_URL_NOTE') }}</dt>
+			<dd><input type="text" name="al_url" id="al_url" value="{{ S_URL }}" /></dd>
 		</dl>
 		<p class="submit-buttons">
-			<input class="button1" type="submit" id="submit" name="submit" value="{L_SUBMIT}" />&nbsp;
-			<input class="button2" type="reset" id="reset" name="reset" value="{L_RESET}" />
+			<input class="button1" type="submit" id="submit" name="submit" value="{{ lang('SUBMIT') }}" />&nbsp;
+			<input class="button2" type="reset" id="reset" name="reset" value="{{ lang('RESET') }}" />
 		</p>
 	</fieldset>
-	{S_FORM_TOKEN}
+	{{ S_FORM_TOKEN }}
 </form>
-<!-- ENDIF -->
+{% endif %}
 
-<!-- IF S_SET_FORUMS -->
-<form id="acp_alforums" method="post" action="{F_ACTION}">
+{% if S_SET_FORUMS %}
+<form id="acp_alforums" method="post" action="{{ F_ACTION }}">
 	<fieldset>
-	<legend>{L_AL_FORUM_SELECTION}</legend>
+	<legend>{{ lang('AL_FORUM_SELECTION') }}</legend>
 	<table class="table1 zebra-table alphasort">
 		<thead>
 			<tr>
-				<th width="78%">{L_FORUMS}</th>
-				<th style="width:22%; white-space: nowrap; text-align: center";">{L_AL_NOSHOW_LIST}</th>
+				<th width="78%">{{ lang('FORUMS') }}</th>
+				<th style="width:22%; white-space: nowrap; text-align: center";">{{ lang('AL_NOSHOW_LIST') }}</th>
 			</tr>
 		</thead>
 		<tbody>
-			<!-- BEGIN forums -->
+			{% for forums in loops.forums %}
 			<tr>
 				<td width="80%">
-				<strong>{forums.FORUM_NAME}</strong>
+				<strong>{{ forums.FORUM_NAME }}</strong>
 				</td>
-				<td style="width:20%; text-align: center;" title="{forums.FORUM_NAME}">
-				<input type="checkbox" class="radio" name="mark_autolinks_forum[]" value="{forums.FORUM_ID}" {forums.CHECKED_ENABLE_FORUM} />
+				<td style="width:20%; text-align: center;" title="{{ forums.FORUM_NAME }}">
+				<input type="checkbox" class="radio" name="mark_autolinks_forum[]" value="{{ forums.FORUM_ID }}" {{ forums.CHECKED_ENABLE_FORUM }} />
 				</td>
 			</tr>
-			<!-- END forums -->
+			{% endfor %}
 		</tbody>
 	</table>
 	</fieldset>
 	<fieldset class="quick">
-		<p class="small"><a href="#" onclick="marklist('acp_alforums', 'mark_autolinks_forum', true); return false;">{L_MARK_ALL}</a> &bull; <a href="#" onclick="marklist('acp_alforums', 'mark_autolinks_forum', false); return false;">{L_UNMARK_ALL}</a></p>
-		<input class="button1" type="submit" id="submit" name="submit" value="{L_SUBMIT}" />&nbsp;
-		<input class="button2" type="reset" id="reset" name="reset" value="{L_RESET}" />
+		<p class="small"><a href="#" onclick="marklist('acp_alforums', 'mark_autolinks_forum', true); return false;">{{ lang('MARK_ALL') }}</a> &bull; <a href="#" onclick="marklist('acp_alforums', 'mark_autolinks_forum', false); return false;">{{ lang('UNMARK_ALL') }}</a></p>
+		<input class="button1" type="submit" id="submit" name="submit" value="{{ lang('SUBMIT') }}" />&nbsp;
+		<input class="button2" type="reset" id="reset" name="reset" value="{{ lang('RESET') }}" />
 	</fieldset>
-{S_FORM_TOKEN}
+{{ S_FORM_TOKEN }}
 </form>
-<!-- ENDIF -->
+{% endif %}
 
 
-<!-- INCLUDE overall_footer.html -->
+{% INCLUDE 'overall_footer.html' %}
 
