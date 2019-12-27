@@ -16,10 +16,12 @@ class autolinks_module {
 
 	public function main ($id, $mode)
 	{
-		global $db, $user, $language, $template, $cache, $request;
+		global $db, $user, $template, $cache, $request;
 		global $config, $phpbb;
 		global $table_prefix, $phpbb_log;
+		global $phpbb_container;
 
+		$language = $phpbb_container->get('language');
 		$language->add_lang ('autolinks', 'lmdi/autolinks');
 		$this->tpl_name = 'acp_autolinks_body';
 		$this->page_title = $language->lang('ACP_AUTOLINKS_TITLE');
