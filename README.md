@@ -1,4 +1,4 @@
-# phpBB 3.1 Extension - LMDI Autolinks
+# phpBB 3.3 Extension - LMDI Autolinks
 
 ## Install
 

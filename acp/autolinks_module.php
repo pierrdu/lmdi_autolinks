@@ -17,11 +17,10 @@ class autolinks_module {
 	public function main ($id, $mode)
 	{
 		global $db, $user, $template, $cache, $request;
-		global $config, $phpbb;
+		global $config, $phpbb, $language;
 		global $table_prefix, $phpbb_log;
 		global $phpbb_container;
 
-		$language = $phpbb_container->get('language');
 		$language->add_lang ('autolinks', 'lmdi/autolinks');
 		$this->tpl_name = 'acp_autolinks_body';
 		$this->page_title = $language->lang('ACP_AUTOLINKS_TITLE');
@@ -152,7 +151,7 @@ class autolinks_module {
 						. $db->sql_build_array('UPDATE', $sql_array) . " 
 						WHERE al_id = $word_id";
 
-					$log_msg = sprintf($language->lang('LOG_AUTOLINK_WORD_EDIT'), $sql_array['al_word']);
+					$log_msg = $language->lang('LOG_AUTOLINK_WORD_EDIT', $sql_array['al_word']);
 
 					$errors = $this->input_check($sql_array, check_form_key('acp_autolinks'), $update_action);
 					if ($errors === true)
@@ -350,7 +349,7 @@ class autolinks_module {
 
 	function input_check($input_array, $key_error = false, $update = false)
 	{
-		global $db, $user;
+		global $db, $user, $language;
 		$table = $this->table;
 
 		if (!$key_error)
