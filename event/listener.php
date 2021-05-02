@@ -2,7 +2,7 @@
 /**
 *
 * @package phpBB Extension - LMDI Autolinks extension
-* @copyright (c) 2016-2019 LMDI - Pierre Duhem
+* @copyright (c) 2016-2021 LMDI - Pierre Duhem
 * @license http://opensource.org/licenses/gpl-2.0.php GNU General Public License v2
 *
 */
@@ -233,8 +233,8 @@ class listener implements EventSubscriberInterface
 			{
 				$script = false;
 			}
-			if (!($part{0} == '<' && $parts[$index + 1]{0} == '>') &&
-				!($part{0} == '[' && $parts[$index + 1]{0} == ']') &&
+			if (!($part[0] == '<' && $parts[$index + 1][0] == '>') &&
+				!($part[0] == '[' && $parts[$index + 1][0] == ']') &&
 				empty($img) && empty($code) && empty($alink) && empty($ulink) && empty($script))
 			{
 				if ($this->config['lmdi_autolinks'] == 2)

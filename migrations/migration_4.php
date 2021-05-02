@@ -1,7 +1,7 @@
 <?php
 /**
 *
-* @copyright (c) 2016-2018 Pierre Duhem - LMDI
+* @copyright (c) 2016-2021 Pierre Duhem - LMDI
 * @license http://opensource.org/licenses/gpl-2.0.php GNU General Public License v2
 **
 */
@@ -20,7 +20,7 @@ class migration_4 extends \phpbb\db\migration\migration
 		return array('\lmdi\autolinks\migrations\migration_3');
 	}
 
-	public function update_schema()
+	public function update_data()
 	{
 		return array(
 			array('config.add', array('lmdi_autolinks_sort', 0)),
@@ -28,7 +28,7 @@ class migration_4 extends \phpbb\db\migration\migration
 		);
 	}
 
-	public function revert_schema()
+	public function revert_data()
 	{
 		return array(
 			array('config.remove', array('lmdi_autolinks_sort')),

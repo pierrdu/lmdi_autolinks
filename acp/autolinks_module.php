@@ -1,7 +1,7 @@
 <?php
 /**
 * @package phpBB Extension - LMDI Autolinks
-* @copyright (c) 2016-2018 Pierre Duhem - LMDI
+* @copyright (c) 2016-2021 Pierre Duhem - LMDI
 * @license http://opensource.org/licenses/gpl-2.0.php GNU General Public License v2
 *
 */
@@ -14,20 +14,19 @@ class autolinks_module {
 	protected $action;
 	protected $table;
 
-	public function main ($id, $mode)
+	public function main($id, $mode)
 	{
 		global $db, $user, $template, $cache, $request;
 		global $config, $phpbb, $language;
 		global $table_prefix, $phpbb_log;
 		global $phpbb_container;
 
-		$language->add_lang ('autolinks', 'lmdi/autolinks');
+		$language->add_lang('autolinks', 'lmdi/autolinks');
 		$this->tpl_name = 'acp_autolinks_body';
 		$this->page_title = $language->lang('ACP_AUTOLINKS_TITLE');
 		$this->table = $table_prefix . 'autolinks';
-		$table = $this->table;
 
-		$action = $request->variable ('action', '');
+		$action = $request->variable('action', '');
 		$update_action = false;
 
 		// Sort default values
@@ -55,23 +54,23 @@ class autolinks_module {
 		switch ($action)
 		{
 			case 'sort' :
-				$sort_col = $request->variable ('col', 0);
-				$sort_order = $request->variable ('order', 0);
+				$sort_col = $request->variable('col', 0);
+				$sort_order = $request->variable('order', 0);
 				if ($sort_col && $sort_order)
 				{
-					$config->set ('lmdi_autolinks_sort', 3);
+					$config->set('lmdi_autolinks_sort', 3);
 				}
 				if ($sort_col && !$sort_order)
 				{
-					$config->set ('lmdi_autolinks_sort', 2);
+					$config->set('lmdi_autolinks_sort', 2);
 				}
 				if (!$sort_col && $sort_order)
 				{
-					$config->set ('lmdi_autolinks_sort', 1);
+					$config->set('lmdi_autolinks_sort', 1);
 				}
 				if (!$sort_col && !$sort_order)
 				{
-					$config->set ('lmdi_autolinks_sort', 0);
+					$config->set('lmdi_autolinks_sort', 0);
 				}
 			break;
 			case 'forums' :
@@ -82,10 +81,10 @@ class autolinks_module {
 				$enabled_forums = implode(',', $request->variable('mark_autolinks_forum', array(0), true));
 				$sql = 'UPDATE ' . FORUMS_TABLE . ' SET lmdi_autolinks = DEFAULT';
 				$db->sql_query($sql);
-				if (!empty ($enabled_forums))
+				if (!empty($enabled_forums))
 				{
-					$eforums = explode (',', $enabled_forums);
-					$nbf = count ($eforums);
+					$eforums = explode(',', $enabled_forums);
+					$nbf = count($eforums);
 					for ($i=0; $i<$nbf; $i++)
 					{
 						$numf = $eforums[$i];
@@ -106,27 +105,27 @@ class autolinks_module {
 				{
 					trigger_error('FORM_INVALID');
 				}
-				$recurs = $request->variable ('lmdi_recursive', 0);
+				$recurs = $request->variable('lmdi_recursive', 0);
 				$cfg_recurs = $config['lmdi_autolinks'] - 1;
-				$blank = $request->variable ('lmdi_blank', 0);
+				$blank = $request->variable('lmdi_blank', 0);
 				$cfg_blank = $config['lmdi_autolinks_blank'];
 				if ($recurs != $cfg_recurs || $blank != $cfg_blank)
 				{
-					$config->set ('lmdi_autolinks', $recurs + 1);
-					$config->set ('lmdi_autolinks_blank', $blank);
-					$cache->destroy ('_autolinks');
+					$config->set('lmdi_autolinks', $recurs + 1);
+					$config->set('lmdi_autolinks_blank', $blank);
+					$cache->destroy('_autolinks');
 					trigger_error($language->lang('LOG_AUTOLINK_CONFIG_UPDATED') . adm_back_link($this->u_action));
 
 				}
 			break;
 			case 'edit':
-				$word_id = $request->variable ('edit_id', 0);
+				$word_id = $request->variable('edit_id', 0);
 				if ($word_id == 0)
 				{
 					trigger_error($language->lang('AUTOLINK_INVALID_ID') . adm_back_link($this->u_action), E_USER_WARNING);
 				}
 
-				$sql = 'SELECT * FROM ' . $table . ' WHERE al_id = ' . $word_id;
+				$sql = 'SELECT * FROM ' . $this->table . ' WHERE al_id = ' . $word_id;
 				$result = $db->sql_query($sql);
 				$row = $db->sql_fetchrow($result);
 				$db->sql_freeresult($result);
@@ -147,7 +146,7 @@ class autolinks_module {
 						'al_url'	=> $request->variable('al_url', '', true)
 						);
 
-					$sql = 'UPDATE ' . $table . ' SET '
+					$sql = 'UPDATE ' . $this->table . ' SET '
 						. $db->sql_build_array('UPDATE', $sql_array) . " 
 						WHERE al_id = $word_id";
 
@@ -157,8 +156,8 @@ class autolinks_module {
 					if ($errors === true)
 					{
 						$db->sql_query($sql);
-						$phpbb_log->add ('admin', $user->data['user_id'], $user->ip, $log_msg);
-						$cache->destroy ('_autolinks');
+						$phpbb_log->add('admin', $user->data['user_id'], $user->ip, $log_msg);
+						$cache->destroy('_autolinks');
 						trigger_error($log_msg . adm_back_link($this->u_action));
 					}
 					else
@@ -188,14 +187,14 @@ class autolinks_module {
 
 					if ($action == 'edit')
 					{
-						$sql = 'UPDATE ' . $table . ' SET '
+						$sql = 'UPDATE ' . $this->table . ' SET '
 							. $db->sql_build_array('UPDATE', $sql_array) . " 
 							WHERE al_id = $word_id";
 						$log_msg = sprintf($language->lang('LOG_AUTOLINK_WORD_EDIT'), $sql_array['al_word']);
 					}
 					else
 					{
-						$sql = 'INSERT INTO ' . $table . ' ' . $db->sql_build_array('INSERT', $sql_array);
+						$sql = 'INSERT INTO ' . $this->table . ' ' . $db->sql_build_array('INSERT', $sql_array);
 						$log_msg = sprintf($language->lang('LOG_AUTOLINK_WORD_ADDED'), $sql_array['al_word']);
 					}
 
@@ -203,8 +202,8 @@ class autolinks_module {
 					if ($errors === true)
 					{
 						$db->sql_query($sql);
-						$phpbb_log->add ('admin', $user->data['user_id'], $user->ip, $log_msg);
-						$cache->destroy ('_autolinks');
+						$phpbb_log->add('admin', $user->data['user_id'], $user->ip, $log_msg);
+						$cache->destroy('_autolinks');
 						trigger_error($log_msg . adm_back_link($this->u_action));
 					}
 					else
@@ -229,17 +228,17 @@ class autolinks_module {
 				{
 					if (confirm_box(true))
 					{
-						$sql = 'SELECT * FROM ' . $table . ' WHERE al_id = ' . $word_id;
+						$sql = 'SELECT * FROM ' . $this->table . ' WHERE al_id = ' . $word_id;
 						$result = $db->sql_query($sql);
 						$row = $db->sql_fetchrow($result);
 						$db->sql_freeresult($result);
 
 						$log_msg = sprintf($language->lang('LOG_AUTOLIMK_WORD_DELETE'), $row['al_word']);
 
-						$sql = 'DELETE FROM ' . $table . ' WHERE al_id = ' . $word_id;
+						$sql = 'DELETE FROM ' . $this->table . ' WHERE al_id = ' . $word_id;
 						$db->sql_query($sql);
-						$phpbb_log->add ('admin', $user->data['user_id'], $user->ip, $log_msg);
-						$cache->destroy ('_autolinks');
+						$phpbb_log->add('admin', $user->data['user_id'], $user->ip, $log_msg);
+						$cache->destroy('_autolinks');
 						trigger_error($log_msg . adm_back_link($this->u_action));
 					}
 					else
@@ -261,17 +260,17 @@ class autolinks_module {
 		}
 
 		$form_key = 'acp_autolinks';
-		add_form_key ($form_key);
+		add_form_key($form_key);
 
 		$action_config = $this->u_action . "&action=recursion";
-		$sql = 'SELECT * FROM ' . $table;
+		$sql = 'SELECT * FROM ' . $this->table;
 		if ($sort_col)
 		{
-			$sql = 'SELECT * FROM ' . $table .' ORDER BY al_url' . (($sort_order) ? ' DESC' : ' ASC');
+			$sql = 'SELECT * FROM ' . $this->table .' ORDER BY al_url' . (($sort_order) ? ' DESC' : ' ASC');
 		}
 		else
 		{
-			$sql = 'SELECT * FROM ' . $table .' ORDER BY al_word' . (($sort_order) ? ' DESC' : ' ASC');
+			$sql = 'SELECT * FROM ' . $this->table .' ORDER BY al_word' . (($sort_order) ? ' DESC' : ' ASC');
 		}
 		$result = $db->sql_query($sql);
 		while ($row = $db->sql_fetchrow($result))
@@ -350,7 +349,6 @@ class autolinks_module {
 	function input_check($input_array, $key_error = false, $update = false)
 	{
 		global $db, $user, $language;
-		$table = $this->table;
 
 		if (!$key_error)
 		{
@@ -364,7 +362,7 @@ class autolinks_module {
 		else
 		{
 			$sql = 'SELECT COUNT(*) AS num 
-					FROM ' . $table . ' 
+					FROM ' . $this->table . ' 
 					WHERE lower(al_word) = "' . utf8_strtolower($db->sql_escape($input_array['al_word'])) . '"';
 			$result = $db->sql_query($sql);
 			$word_stored_num = (int) $db->sql_fetchfield('num');
