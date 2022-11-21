@@ -30,9 +30,11 @@ class autolinks_module {
 		$update_action = false;
 
 		// Sort default values
+		$sort_col = $sort_order = 0;
 		$sort = $config['lmdi_autolinks_sort'];
 		switch ($sort)
 		{
+			default :
 			case 0 :
 				$sort_col = 0;
 				$sort_order = 0;
