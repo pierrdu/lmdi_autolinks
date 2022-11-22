@@ -300,6 +300,7 @@ class autolinks_module {
 		$al_sort = $config['lmdi_autolinks_sort'] ;
 		switch ($al_sort)
 		{
+			default :
 			case 0 :
 				$th_term = '&amp;action=sort&amp;col=0&amp;order=1';
 				$th_url  = '&amp;action=sort&amp;col=1&amp;order=0';
@@ -331,7 +332,7 @@ class autolinks_module {
 			'BLANK_TARGET_NO'	=> $config['lmdi_autolinks_blank'] == 0 ? 'checked="checked"' : '',
 			'BLANK_TARGET_YES'	=> $config['lmdi_autolinks_blank'] == 1 ? 'checked="checked"' : '',
 			));
-	}	// Main
+	}	// main
 
 
 	protected function get_forum_list()
