@@ -2,7 +2,7 @@
 /**
 *
 * @package phpBB Extension - LMDI Autolinks extension
-* @copyright (c) 2016-2021 LMDI - Pierre Duhem
+* @copyright (c) 2016-2023 LMDI - Pierre Duhem
 * @license http://opensource.org/licenses/gpl-2.0.php GNU General Public License v2
 *
 */
@@ -195,17 +195,6 @@ class listener implements EventSubscriberInterface
 			{
 				$code = false;
 			}
-			// Images - Pictures
-			/*
-			if (strstr($part, '<img'))
-			{
-				$img = true;
-			}
-			if (!empty($img) && strstr($part, '</img'))
-			{
-				$img = false;
-			}
-			*/
 			// Liens <a> - <a> links
 			if (strstr($part, '<a '))
 			{
@@ -233,9 +222,10 @@ class listener implements EventSubscriberInterface
 			{
 				$script = false;
 			}
-			if (!($part[0] == '<' && $parts[$index + 1][0] == '>') &&
-				!($part[0] == '[' && $parts[$index + 1][0] == ']') &&
-				empty($img) && empty($code) && empty($alink) && empty($ulink) && empty($script))
+			if (empty($img) && empty($code) && empty($alink) && empty($ulink) && empty($script))
+				// !($part[0] == '<' && $parts[$index + 1][0] == '>') &&
+				// !($part[0] == '[' && $parts[$index + 1][0] == ']') &&
+				// )
 			{
 				if ($this->config['lmdi_autolinks'] == 2)
 				{
