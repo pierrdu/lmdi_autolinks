@@ -1,7 +1,7 @@
 <?php
 /**
 * @package phpBB Extension - LMDI Autolinks
-* @copyright (c) 2016-2023 Pierre Duhem - LMDI
+* @copyright (c) 2016-2026 Pierre Duhem - LMDI
 * @license http://opensource.org/licenses/gpl-2.0.php GNU General Public License v2
 *
 */
@@ -141,7 +141,7 @@ class autolinks_module {
 					'A_ACTION'	=> $this->u_action . '&amp;action=edit&amp;edit_id=' . $word_id,
 					'S_ADD_TERM'	=> true)
 					);
-				if (isset($_POST['submit']))
+				if ($request->is_set_post ('submit'))
 				{
 					$sql_array = array(
 						'al_word'	=> $request->variable('al_word', '', true),

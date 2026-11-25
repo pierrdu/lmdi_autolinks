@@ -8,7 +8,7 @@
 <fieldset>
 	<legend>{{ lang('ACP_AUTOLINKS_CONFIG') }}</legend>
 	<dl>
-		<dt><label>{{ lang('RECURS_FEATURE') }}{{ lang('COLON') }}</label><br />
+		<dt><label>{{ lang('RECURS_FEATURE') }}{{ lang('COLON') }}</label><br>
 		<span>{{ lang('RECURS_FEATURE_EXPLAIN') }}</span></dt>
 		<dd>
 		<label><input type="radio" id="lmdi_recursive" name="lmdi_recursive"
@@ -18,7 +18,7 @@
 		</dd>
 	</dl>
 	<dl>
-		<dt><label>{{ lang('AUTOLINK_BLANK') }}{{ lang('COLON') }}</label><br />
+		<dt><label>{{ lang('AUTOLINK_BLANK') }}{{ lang('COLON') }}</label><br>
 		<span>{{ lang('AUTOLINK_BLANK_EXPLAIN') }}</span></dt>
 		<dd>
 		<label><input type="radio" id="lmdi_blank" name="lmdi_blank"
@@ -29,7 +29,7 @@
 	</dl>
 	<p class="submit-buttons">
 		<input class="button1" type="submit" id="submit" name="config"
-		value="{{ lang('SUBMIT') }}" />&nbsp;
+		value="{{ lang('SUBMIT') }}">&nbsp;
 	</p>
 	{{ S_FORM_TOKEN }}
 </fieldset>
@@ -37,13 +37,13 @@
 <fieldset>
 	<legend>{{ lang('LEGEND_ADD_TERM') }}</legend>
 	<dl>
-		<dt><label>{{ lang('TERM_ADDITION') }}{{ lang('COLON') }}</label><br />
+		<dt><label>{{ lang('TERM_ADDITION') }}{{ lang('COLON') }}</label><br>
 		<span>{{ lang('TERM_ADDITION_EXPLAIN') }}</span></dt>
 		<dd>
 		<a href="{{ U_ADD }}">{{ lang('AUTOLINK_ADD_A_NEW_WORD') }}</a>
 		</dd>
 	</dl>
-<table cellspacing="1">
+<table class="deg">
 	<thead>
 		<tr>
 			<th><a href='{{ TH_TERM }}'>{{ lang('AUTOLINK_NAME') }}</a></th>
@@ -71,16 +71,16 @@
 		<legend>{{ lang('ACP_AUTOLINK_WORDS') }}</legend>
 		{% if S_ERROR_FORM %}<ul class="error">{% for error in loops.error %}<li>{{ error.ERROR_MSG }}</li>{% endfor %}</ul>{% endif %}
 		<dl>
-			<dt><label for="al_word">{{ lang('ACP_AUTOLINK_WORD') }}{{ lang('COLON') }}</label><br />{{ lang('ACP_AUTOLINK_WORD_NOTE') }}</dt>
-			<dd><input type="text" name="al_word" id="al_word" value="{{ S_WORD }}" /></dd>
+			<dt><label for="al_word">{{ lang('ACP_AUTOLINK_WORD') }}{{ lang('COLON') }}</label><br>{{ lang('ACP_AUTOLINK_WORD_NOTE') }}</dt>
+			<dd><input type="text" name="al_word" id="al_word" value="{{ S_WORD }}"></dd>
 		</dl>
 		<dl>
-			<dt><label for="al_url">{{ lang('ACP_AUTOLINK_URL') }}{{ lang('COLON') }}</label><br />{{ lang('ACP_AUTOLINK_URL_NOTE') }}</dt>
-			<dd><input type="text" name="al_url" id="al_url" value="{{ S_URL }}" /></dd>
+			<dt><label for="al_url">{{ lang('ACP_AUTOLINK_URL') }}{{ lang('COLON') }}</label><br>{{ lang('ACP_AUTOLINK_URL_NOTE') }}</dt>
+			<dd><input type="text" name="al_url" id="al_url" value="{{ S_URL }}"></dd>
 		</dl>
 		<p class="submit-buttons">
-			<input class="button1" type="submit" id="submit" name="submit" value="{{ lang('SUBMIT') }}" />&nbsp;
-			<input class="button2" type="reset" id="reset" name="reset" value="{{ lang('RESET') }}" />
+			<input class="button1" type="submit" id="submit" name="submit" value="{{ lang('SUBMIT') }}">&nbsp;
+			<input class="button2" type="reset" id="reset" name="reset" value="{{ lang('RESET') }}">
 		</p>
 	</fieldset>
 	{{ S_FORM_TOKEN }}
@@ -105,7 +105,7 @@
 				<strong>{{ forums.FORUM_NAME }}</strong>
 				</td>
 				<td style="width:20%; text-align: center;" title="{{ forums.FORUM_NAME }}">
-				<input type="checkbox" class="radio" name="mark_autolinks_forum[]" value="{{ forums.FORUM_ID }}" {{ forums.CHECKED_ENABLE_FORUM }} />
+				<input type="checkbox" class="radio" name="mark_autolinks_forum[]" value="{{ forums.FORUM_ID }}" {{ forums.CHECKED_ENABLE_FORUM }}>
 				</td>
 			</tr>
 			{% endfor %}
@@ -114,8 +114,8 @@
 	</fieldset>
 	<fieldset class="quick">
 		<p class="small"><a href="#" onclick="marklist('acp_alforums', 'mark_autolinks_forum', true); return false;">{{ lang('MARK_ALL') }}</a> &bull; <a href="#" onclick="marklist('acp_alforums', 'mark_autolinks_forum', false); return false;">{{ lang('UNMARK_ALL') }}</a></p>
-		<input class="button1" type="submit" id="submit" name="submit" value="{{ lang('SUBMIT') }}" />&nbsp;
-		<input class="button2" type="reset" id="reset" name="reset" value="{{ lang('RESET') }}" />
+		<input class="button1" type="submit" id="submit" name="submit" value="{{ lang('SUBMIT') }}">&nbsp;
+		<input class="button2" type="reset" id="reset" name="reset" value="{{ lang('RESET') }}">
 	</fieldset>
 {{ S_FORM_TOKEN }}
 </form>
